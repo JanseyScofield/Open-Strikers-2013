@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "players": [
+    {
+      "player_index": 0,
+      "profile_name": "Player 1 (Keyboard WASD + Gamepad 0)",
+      "enable_keyboard": true,
+      "enable_gamepad": true,
+      "gamepad_device_index": 0,
+      "analog_deadzone": 0.18,
+      "trigger_threshold": 0.35,
+      "keyboard": {
+        "move_up": ["W"],
+        "move_down": ["S"],
+        "move_left": ["A"],
+        "move_right": ["D"],
+        "pass_switch": ["J"],
+        "shoot_slide": ["K"],
+        "dribble_special": ["L", "U"],
+        "dash_sprint": ["L", "Left Shift"],
+        "tactic_switch": ["O", "Tab"],
+        "hissatsu_level": ["I", "E"],
+        "pause_menu": ["Space", "Return"],
+        "confirm": ["J", "Return"],
+        "cancel": ["K", "Escape"]
+      },
+      "gamepad": {
+        "move_axis_x": "leftx",
+        "move_axis_y": "lefty",
+        "buttons": {
+          "move_up": ["dpup"],
+          "move_down": ["dpdown"],
+          "move_left": ["dpleft"],
+          "move_right": ["dpright"],
+          "pass_switch": ["a"],
+          "shoot_slide": ["b", "x"],
+          "dribble_special": ["y"],
+          "dash_sprint": ["rightshoulder"],
+          "tactic_switch": ["back", "leftstick"],
+          "hissatsu_level": ["leftshoulder"],
+          "pause_menu": ["start"],
+          "confirm": ["a"],
+          "cancel": ["b"]
+        }
+      }
+    },
+    {
+      "player_index": 1,
+      "profile_name": "Player 2 (Arrows/Numpad + Gamepad 1)",
+      "enable_keyboard": true,
+      "enable_gamepad": true,
+      "gamepad_device_index": 1,
+      "analog_deadzone": 0.18,
+      "trigger_threshold": 0.35,
+      "keyboard": {
+        "move_up": ["Up"],
+        "move_down": ["Down"],
+        "move_left": ["Left"],
+        "move_right": ["Right"],
+        "pass_switch": ["Keypad 1"],
+        "shoot_slide": ["Keypad 2"],
+        "dribble_special": ["Keypad 3"],
+        "dash_sprint": ["Keypad 0", "Right Shift"],
+        "tactic_switch": ["Keypad 5"],
+        "hissatsu_level": ["Keypad 4"],
+        "pause_menu": ["Keypad Enter"],
+        "confirm": ["Keypad 1"],
+        "cancel": ["Keypad 2"]
+      },
+      "gamepad": {
+        "move_axis_x": "leftx",
+        "move_axis_y": "lefty",
+        "buttons": {
+          "move_up": ["dpup"],
+          "move_down": ["dpdown"],
+          "move_left": ["dpleft"],
+          "move_right": ["dpright"],
+          "pass_switch": ["a"],
+          "shoot_slide": ["b", "x"],
+          "dribble_special": ["y"],
+          "dash_sprint": ["rightshoulder"],
+          "tactic_switch": ["back", "leftstick"],
+          "hissatsu_level": ["leftshoulder"],
+          "pause_menu": ["start"],
+          "confirm": ["a"],
+          "cancel": ["b"]
+        }
+      }
+    },
+    {
+      "player_index": 2,
+      "profile_name": "Player 3 (Gamepad 2)",
+      "enable_keyboard": false,
+      "enable_gamepad": true,
+      "gamepad_device_index": 2,
+      "analog_deadzone": 0.18,
+      "trigger_threshold": 0.35,
+      "keyboard": {},
+      "gamepad": {
+        "move_axis_x": "leftx",
+        "move_axis_y": "lefty",
+        "buttons": {
+          "move_up": ["dpup"],
+          "move_down": ["dpdown"],
+          "move_left": ["dpleft"],
+          "move_right": ["dpright"],
+          "pass_switch": ["a"],
+          "shoot_slide": ["b", "x"],
+          "dribble_special": ["y"],
+          "dash_sprint": ["rightshoulder"],
+          "tactic_switch": ["back", "leftstick"],
+          "hissatsu_level": ["leftshoulder"],
+          "pause_menu": ["start"],
+          "confirm": ["a"],
+          "cancel": ["b"]
+        }
+      }
+    },
+    {
+      "player_index": 3,
+      "profile_name": "Player 4 (Gamepad 3)",
+      "enable_keyboard": false,
+      "enable_gamepad": true,
+      "gamepad_device_index": 3,
+      "analog_deadzone": 0.18,
+      "trigger_threshold": 0.35,
+      "keyboard": {},
+      "gamepad": {
+        "move_axis_x": "leftx",
+        "move_axis_y": "lefty",
+        "buttons": {
+          "move_up": ["dpup"],
+          "move_down": ["dpdown"],
+          "move_left": ["dpleft"],
+          "move_right": ["dpright"],
+          "pass_switch": ["a"],
+          "shoot_slide": ["b", "x"],
+          "dribble_special": ["y"],
+          "dash_sprint": ["rightshoulder"],
+          "tactic_switch": ["back", "leftstick"],
+          "hissatsu_level": ["leftshoulder"],
+          "pause_menu": ["start"],
+          "confirm": ["a"],
+          "cancel": ["b"]
+        }
+      }
+    }
+  ]
+}

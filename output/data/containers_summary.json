@@ -1,0 +1,4650 @@
+{
+  "metadata": {
+    "project": "Inazuma Eleven GO Strikers 2013 (Nintendo Wii - S5SJHF)",
+    "agent_role": "@format-parser",
+    "endianness_convention": "Big-Endian (>)",
+    "scanned_root": "/home/jansey/strikers-ai-core/extracted/files",
+    "target_extensions_scanned": [
+      ".arc",
+      ".bin",
+      ".bln",
+      ".bnr",
+      ".brsar",
+      ".dlf",
+      ".dol",
+      ".elf",
+      ".g4b",
+      ".img",
+      ".mo",
+      ".pack",
+      ".tpl",
+      "[no_ext]"
+    ],
+    "total_target_files_analyzed": 49,
+    "total_level5_primary_files": 11,
+    "skipped_non_container_extensions": {
+      ".txt": 1,
+      ".csv": 2,
+      ".brstm": 8416
+    }
+  },
+  "architectural_findings": {
+    "level5_shade_bin_container_spec": {
+      "files": [
+        "dat.bin",
+        "grp.bin",
+        "scn.bin",
+        "scn_sh.bin",
+        "strap.bin",
+        "ui.bin"
+      ],
+      "header_size_bytes": 20,
+      "layout": {
+        "0x00": "entry_count (uint32) - Quantidade total de sub-arquivos no contêiner",
+        "0x04": "offset_alignment (uint32) - Unidade de bloco para cálculo de offset (0x20, 0x800, 0x4000)",
+        "0x08": "size_multiplier (uint32) - Multiplicador do tamanho alocado (0x04, 0x10, 0x11, 0x20)",
+        "0x0C": "bit_shift (uint32) - Deslocamento de bits do offset dentro do descritor (17 ou 18 bits)",
+        "0x10": "bit_mask (uint32) - Máscara de extração do tamanho ((1 << bit_shift) - 1, ex: 0x1FFFF ou 0x3FFFF)",
+        "0x14..N": "Tabela de `entry_count` descritores uint32: offset = (entry >> bit_shift) * offset_alignment; size = (entry & bit_mask) * size_multiplier"
+      }
+    },
+    "level5_shade_bln_pair_spec": {
+      "files": [
+        "mcb0.bln",
+        "mcb1.bln"
+      ],
+      "description": "Par Índice/Dados: mcb0.bln armazena registros de 12 bytes (ID/grupo, offset alinhado a 0x800, tamanho) que indexam sub-contêineres dentro de mcb1.bln (1.22 GB)."
+    },
+    "compression_signatures_found": {
+      "shade_lzss_magic_0xFCAA55A7": "Assinatura Big-Endian `0xFCAA55A7` (`fc aa 55 a7`) presente nos blocos de `grp.bin`, `scn.bin`, `scn_sh.bin`, `strap.bin`, `ui.bin` e `mcb1.bln` (em +0x0C). Cabeçalho de 12 bytes: [Magic BE 0xFCAA55A7][decompressed_size][compressed_size], seguido por stream LZSS/RLE onde bytes < 0x20 indicam cópia literal (revelando assinaturas internas como `SHTXFF`, `SHTXFS`, `REF`, `!brres`).",
+      "dat_bin_paired_headerless_lzss": "Em `dat.bin` (130 entradas = 65 pares), os sub-arquivos usam o mesmo stream LZSS/RLE sem o prefixo `0xFCAA55A7`. Cada par `(2k, 2k+1)` representa a mesma tabela de jogo: índices pares (`2k`) estão em Little-Endian e índices ímpares (`2k+1`) estão em Big-Endian (`>`) nativo do Wii (iniciando com byte literal `0x0C` ou `0x14` seguido por `>3I`: block_count, decompressed_size, first_block_offset)."
+    }
+  },
+  "magic_numbers_summary": [
+    {
+      "magic_4b_be_hex": "0x52534152",
+      "magic_ascii": "RSAR",
+      "format_family": "Nintendo Wii Binary Revolution Sound Archive (.brsar)",
+      "file_count": 1,
+      "files": [
+        "InazmaWii.brsar"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x76322E30",
+      "magic_ascii": "v2.0",
+      "format_family": "Wii Disc Layout Map (.dlf)",
+      "file_count": 1,
+      "files": [
+        "InazumaWii.dlf"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x7F454C46",
+      "magic_ascii": ".ELF",
+      "format_family": "PowerPC 32-bit Big-Endian ELF Executable (.elf)",
+      "file_count": 1,
+      "files": [
+        "InazumaWii.elf"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x82000000",
+      "magic_ascii": "...",
+      "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+      "file_count": 1,
+      "files": [
+        "dat.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x6D130000",
+      "magic_ascii": "m...",
+      "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+      "file_count": 1,
+      "files": [
+        "grp.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x00003F00",
+      "magic_ascii": "..?.",
+      "format_family": "Level-5 / Shade Paired Index Table (mcb0.bln -> mcb1.bln)",
+      "file_count": 1,
+      "files": [
+        "mcb0.bln"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x03000000",
+      "magic_ascii": "....",
+      "format_family": "Level-5 / Shade Bulk Asset Bank (mcb1.bln)",
+      "file_count": 1,
+      "files": [
+        "mcb1.bln"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x00000000",
+      "magic_ascii": "....",
+      "format_family": "Nintendo Wii Opening Banner (.bnr / IMET)",
+      "file_count": 1,
+      "files": [
+        "opening.bnr"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x25030000",
+      "magic_ascii": "%...",
+      "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+      "file_count": 1,
+      "files": [
+        "scn.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0xB0020000",
+      "magic_ascii": "ｰ...",
+      "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+      "file_count": 1,
+      "files": [
+        "scn_sh.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x02000000",
+      "magic_ascii": "....",
+      "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+      "file_count": 1,
+      "files": [
+        "strap.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0xC8100000",
+      "magic_ascii": "ﾈ...",
+      "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+      "file_count": 1,
+      "files": [
+        "ui.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x55AA382D",
+      "magic_ascii": "Uｪ8-",
+      "format_family": "Nintendo U8 Archive (.arc)",
+      "file_count": 11,
+      "files": [
+        "HomeButton2/HomeButtonSe.arc",
+        "HomeButton2/SpeakerSe.arc",
+        "HomeButton2/homeBtn.arc",
+        "HomeButton2/homeBtn_CHN.arc",
+        "HomeButton2/homeBtn_ENG.arc",
+        "HomeButton2/homeBtn_FRA.arc",
+        "HomeButton2/homeBtn_GER.arc",
+        "HomeButton2/homeBtn_ITA.arc",
+        "HomeButton2/homeBtn_KOR.arc",
+        "HomeButton2/homeBtn_NED.arc",
+        "HomeButton2/homeBtn_SPA.arc"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x0020AF30",
+      "magic_ascii": ". ｯ0",
+      "format_family": "Nintendo Wii Texture Palette Library (.tpl)",
+      "file_count": 1,
+      "files": [
+        "HomeButton2/homeBtnIcon.tpl"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x4D4F4335",
+      "magic_ascii": "MOC5",
+      "format_family": "Mobiclip Wii Video Container (.mo)",
+      "file_count": 20,
+      "files": [
+        "movie/IEGS_OP_Wii_normal.mo",
+        "movie/IEGS_OP_Wii_wide.mo",
+        "movie/L5_logo_normal.mo",
+        "movie/L5_logo_wide.mo",
+        "movie/ZKN_001_DF_THE_WALL.mo",
+        "movie/ZKN_001_GK_GOD_HAND.mo",
+        "movie/ZKN_001_MF_SIPPU_DASH.mo",
+        "movie/ZKN_001_SH_FIRE_TORNADO.mo",
+        "movie/ZKN_002_DF_SPIRAL_DRAW.mo",
+        "movie/ZKN_002_GK_BURNING_CATCH.mo",
+        "movie/ZKN_002_MF_PRESTO_TURN.mo",
+        "movie/ZKN_002_SH_DEATH_SWORD.mo",
+        "movie/ZKN_003_DF_SHINKUMA.mo",
+        "movie/ZKN_003_GK_MAJIN_THE_HAND.mo",
+        "movie/ZKN_003_MF_ILLUSION_BALL.mo",
+        "movie/ZKN_003_SH_TIGER_DRIVE.mo",
+        "movie/ZKN_004_DF_FRACTALE_HOUSE.mo",
+        "movie/ZKN_004_GK_EXCELLENT_BREAST.mo",
+        "movie/ZKN_004_MF_AGGRESSIVE_BEAT.mo",
+        "movie/ZKN_004_SH_BOUNCER_RABBIT.mo"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x32303130",
+      "magic_ascii": "2010",
+      "format_family": "Generic / Unknown (.img)",
+      "file_count": 1,
+      "files": [
+        "sys/apploader.img"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x00000000",
+      "magic_ascii": "....",
+      "format_family": "Nintendo Wii Disc Info Header (bi2.bin)",
+      "file_count": 1,
+      "files": [
+        "sys/bi2.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x5335534A",
+      "magic_ascii": "S5SJ",
+      "format_family": "Nintendo Wii Disc Header (boot.bin)",
+      "file_count": 1,
+      "files": [
+        "sys/boot.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x01000000",
+      "magic_ascii": "....",
+      "format_family": "Nintendo Wii File System Table (fst.bin)",
+      "file_count": 1,
+      "files": [
+        "sys/fst.bin"
+      ]
+    },
+    {
+      "magic_4b_be_hex": "0x00000100",
+      "magic_ascii": "....",
+      "format_family": "Nintendo GameCube/Wii DOL Executable (main.dol)",
+      "file_count": 1,
+      "files": [
+        "sys/main.dol"
+      ]
+    }
+  ],
+  "compression_summary": [
+    {
+      "scheme": "None (Uncompressed Header)",
+      "file_count": 21,
+      "files": [
+        "InazmaWii.brsar",
+        "InazumaWii.dlf",
+        "InazumaWii.elf",
+        "opening.bnr",
+        "HomeButton2/HomeButtonSe.arc",
+        "HomeButton2/SpeakerSe.arc",
+        "HomeButton2/homeBtn.arc",
+        "HomeButton2/homeBtnIcon.tpl",
+        "HomeButton2/homeBtn_CHN.arc",
+        "HomeButton2/homeBtn_ENG.arc",
+        "HomeButton2/homeBtn_FRA.arc",
+        "HomeButton2/homeBtn_GER.arc",
+        "HomeButton2/homeBtn_ITA.arc",
+        "HomeButton2/homeBtn_KOR.arc",
+        "HomeButton2/homeBtn_NED.arc",
+        "HomeButton2/homeBtn_SPA.arc",
+        "sys/apploader.img",
+        "sys/bi2.bin",
+        "sys/boot.bin",
+        "sys/fst.bin",
+        "sys/main.dol"
+      ],
+      "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+    },
+    {
+      "scheme": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+      "file_count": 1,
+      "files": [
+        "dat.bin"
+      ],
+      "notes": "Byte inicial 0x0C (run literal LZSS/RLE) seguido por cabeçalho de tabela em Big-Endian (>3I): count=2, decomp_size=0x6A5E0, offset=0x1C."
+    },
+    {
+      "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+      "file_count": 6,
+      "files": [
+        "grp.bin",
+        "mcb1.bln",
+        "scn.bin",
+        "scn_sh.bin",
+        "strap.bin",
+        "ui.bin"
+      ],
+      "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+    },
+    {
+      "scheme": "None (External Index Table for mcb1.bln)",
+      "file_count": 1,
+      "files": [
+        "mcb0.bln"
+      ],
+      "notes": "Tabela pura de índices de 12 bytes por entrada apontando para blocos comprimidos em mcb1.bln."
+    },
+    {
+      "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+      "file_count": 20,
+      "files": [
+        "movie/IEGS_OP_Wii_normal.mo",
+        "movie/IEGS_OP_Wii_wide.mo",
+        "movie/L5_logo_normal.mo",
+        "movie/L5_logo_wide.mo",
+        "movie/ZKN_001_DF_THE_WALL.mo",
+        "movie/ZKN_001_GK_GOD_HAND.mo",
+        "movie/ZKN_001_MF_SIPPU_DASH.mo",
+        "movie/ZKN_001_SH_FIRE_TORNADO.mo",
+        "movie/ZKN_002_DF_SPIRAL_DRAW.mo",
+        "movie/ZKN_002_GK_BURNING_CATCH.mo",
+        "movie/ZKN_002_MF_PRESTO_TURN.mo",
+        "movie/ZKN_002_SH_DEATH_SWORD.mo",
+        "movie/ZKN_003_DF_SHINKUMA.mo",
+        "movie/ZKN_003_GK_MAJIN_THE_HAND.mo",
+        "movie/ZKN_003_MF_ILLUSION_BALL.mo",
+        "movie/ZKN_003_SH_TIGER_DRIVE.mo",
+        "movie/ZKN_004_DF_FRACTALE_HOUSE.mo",
+        "movie/ZKN_004_GK_EXCELLENT_BREAST.mo",
+        "movie/ZKN_004_MF_AGGRESSIVE_BEAT.mo",
+        "movie/ZKN_004_SH_BOUNCER_RABBIT.mo"
+      ],
+      "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+    }
+  ],
+  "level5_primary_containers": [
+    {
+      "relative_path": "dat.bin",
+      "file_name": "dat.bin",
+      "extension": ".bin",
+      "file_size_bytes": 2166784,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "82000000000800002000000011000000",
+        "raw_hex_32": "82000000000800002000000011000000ffff01009f1602009f16b80016006e01",
+        "magic_4b_hex": "0x82000000",
+        "magic_4b_u32_be": 2181038080,
+        "magic_ascii": "...",
+        "words_be_u32": [
+          "0x82000000",
+          "0x00080000",
+          "0x20000000",
+          "0x11000000",
+          "0xFFFF0100",
+          "0x9F160200",
+          "0x9F16B800",
+          "0x16006E01"
+        ],
+        "halfwords_be_u16": [
+          "0x8200",
+          "0x0000",
+          "0x0008",
+          "0x0000",
+          "0x2000",
+          "0x0000",
+          "0x1100",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+        "signature_offset": "0x0002E000",
+        "signature_bytes_be": "0c000000",
+        "decompressed_size": 435680,
+        "compressed_size": 185312,
+        "inner_payload_magic": "blocks=2, tbl_off=0x1C (BE >3I)",
+        "notes": "Byte inicial 0x0C (run literal LZSS/RLE) seguido por cabeçalho de tabela em Big-Endian (>3I): count=2, decomp_size=0x6A5E0, offset=0x1C."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 130,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00000800",
+        "offset_alignment": 2048,
+        "size_multiplier": 32,
+        "bit_shift": 17,
+        "bit_mask": "0x0001FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 130 entradas na tabela (0x14..0x21C). Última entrada termina em 0x210960 <= tamanho físico 0x211000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0002169F",
+            "offset_hex": "0x00000800",
+            "allocated_size_bytes": 185312,
+            "first_16b_hex": "0b02000000e0a506001c0000a0040e31",
+            "first_4_words_be": [
+              "0x0B020000",
+              "0x00E0A506",
+              "0x001C0000",
+              "0xA0040E31"
+            ],
+            "sub_compression": "None (Uncompressed Header)",
+            "decompressed_size": null,
+            "inner_magic": null
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00B8169F",
+            "offset_hex": "0x0002E000",
+            "allocated_size_bytes": 185312,
+            "first_16b_hex": "0c000000020006a5e00000001ce0040d",
+            "first_4_words_be": [
+              "0x0C000000",
+              "0x020006A5",
+              "0xE0000000",
+              "0x1CE0040D"
+            ],
+            "sub_compression": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+            "decompressed_size": 435680,
+            "inner_magic": "blocks=2, tbl_off=0x1C (BE >3I)"
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x016E0016",
+            "offset_hex": "0x0005B800",
+            "allocated_size_bytes": 704,
+            "first_16b_hex": "0a01000000cc0300001400c004204612",
+            "first_4_words_be": [
+              "0x0A010000",
+              "0x00CC0300",
+              "0x001400C0",
+              "0x04204612"
+            ],
+            "sub_compression": "None (Uncompressed Header)",
+            "decompressed_size": null,
+            "inner_magic": null
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x01700016",
+            "offset_hex": "0x0005C000",
+            "allocated_size_bytes": 704,
+            "first_16b_hex": "0c00000001000003cc00000014e00420",
+            "first_4_words_be": [
+              "0x0C000000",
+              "0x01000003",
+              "0xCC000000",
+              "0x14E00420"
+            ],
+            "sub_compression": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+            "decompressed_size": 972,
+            "inner_magic": "blocks=1, tbl_off=0x14 (BE >3I)"
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "grp.bin",
+      "file_name": "grp.bin",
+      "extension": ".bin",
+      "file_size_bytes": 261799936,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "6d130000004000001100000011000000",
+        "raw_hex_32": "6d130000004000001100000011000000ffff0100560604003208080037000e00",
+        "magic_4b_hex": "0x6D130000",
+        "magic_4b_u32_be": 1829961728,
+        "magic_ascii": "m...",
+        "words_be_u32": [
+          "0x6D130000",
+          "0x00400000",
+          "0x11000000",
+          "0x11000000",
+          "0xFFFF0100",
+          "0x56060400",
+          "0x32080800",
+          "0x37000E00"
+        ],
+        "halfwords_be_u16": [
+          "0x6D13",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1100",
+          "0x0000",
+          "0x1100",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00008000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 162240,
+        "compressed_size": 27567,
+        "inner_payload_magic": "REFFþÿ..",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 4973,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00008000",
+        "offset_alignment": 16384,
+        "size_multiplier": 17,
+        "bit_shift": 17,
+        "bit_mask": "0x0001FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 4973 entradas na tabela (0x14..0x4DC8). Última entrada termina em 0xF9A8451 <= tamanho físico 0xF9AC000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x00040656",
+            "offset_hex": "0x00008000",
+            "allocated_size_bytes": 27574,
+            "first_16b_hex": "fcaa55a7c0790200af6b000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0xC0790200",
+              "0xAF6B0000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 162240,
+            "inner_magic": "REFFþÿ.."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00080832",
+            "offset_hex": "0x00010000",
+            "allocated_size_bytes": 35666,
+            "first_16b_hex": "fcaa55a7604f0100528b000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x604F0100",
+              "0x528B0000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 85856,
+            "inner_magic": "REFTþÿ.."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x000E0037",
+            "offset_hex": "0x0001C000",
+            "allocated_size_bytes": 935,
+            "first_16b_hex": "fcaa55a764100000a303000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x64100000",
+              "0xA3030000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 4196,
+            "inner_magic": "REFFþÿ.."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x00100083",
+            "offset_hex": "0x00020000",
+            "allocated_size_bytes": 2227,
+            "first_16b_hex": "fcaa55a720110000ad08000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x20110000",
+              "0xAD080000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 4384,
+            "inner_magic": "REFTþÿ.."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "mcb0.bln",
+      "file_name": "mcb0.bln",
+      "extension": ".bln",
+      "file_size_bytes": 49152,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "00003f000000000000b02e0001003f00",
+        "raw_hex_32": "00003f000000000000b02e0001003f0000b02e0000b8040002003f0000683300",
+        "magic_4b_hex": "0x00003F00",
+        "magic_4b_u32_be": 16128,
+        "magic_ascii": "..?.",
+        "words_be_u32": [
+          "0x00003F00",
+          "0x00000000",
+          "0x00B02E00",
+          "0x01003F00",
+          "0x00B02E00",
+          "0x00B80400",
+          "0x02003F00",
+          "0x00683300"
+        ],
+        "halfwords_be_u16": [
+          "0x0000",
+          "0x3F00",
+          "0x0000",
+          "0x0000",
+          "0x00B0",
+          "0x2E00",
+          "0x0100",
+          "0x3F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (External Index Table for mcb1.bln)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "00003f00",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Tabela pura de índices de 12 bytes por entrada apontando para blocos comprimidos em mcb1.bln."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Paired Index Table (mcb0.bln -> mcb1.bln)",
+        "header_endianness": "Registros de 12 bytes (ID/Flag, Offset, Size)",
+        "entry_count": 3236,
+        "table_offset": "0x00000000",
+        "data_start_offset": "0x00000000 (em mcb1.bln)",
+        "offset_alignment": 2048,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "3236 registros ativos de 12 bytes mapeando mcb1.bln.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "group_id_hex": "0x003F0000",
+            "offset_in_mcb1_hex": "0x00000000",
+            "size_in_mcb1_bytes": 3059712,
+            "raw_words_be": [
+              "0x00003F00",
+              "0x00000000",
+              "0x00B02E00"
+            ]
+          },
+          {
+            "index": 1,
+            "group_id_hex": "0x003F0001",
+            "offset_in_mcb1_hex": "0x002EB000",
+            "size_in_mcb1_bytes": 309248,
+            "raw_words_be": [
+              "0x01003F00",
+              "0x00B02E00",
+              "0x00B80400"
+            ]
+          },
+          {
+            "index": 2,
+            "group_id_hex": "0x003F0002",
+            "offset_in_mcb1_hex": "0x00336800",
+            "size_in_mcb1_bytes": 755712,
+            "raw_words_be": [
+              "0x02003F00",
+              "0x00683300",
+              "0x00880B00"
+            ]
+          },
+          {
+            "index": 3,
+            "group_id_hex": "0x003E0040",
+            "offset_in_mcb1_hex": "0x003EF000",
+            "size_in_mcb1_bytes": 280576,
+            "raw_words_be": [
+              "0x40003E00",
+              "0x00F03E00",
+              "0x00480400"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "mcb1.bln",
+      "file_name": "mcb1.bln",
+      "extension": ".bln",
+      "file_size_bytes": 1221117952,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "0300000000c01e0000800000fcaa55a7",
+        "raw_hex_32": "0300000000c01e0000800000fcaa55a70c0401009c4200000c53485458465300",
+        "magic_4b_hex": "0x03000000",
+        "magic_4b_u32_be": 50331648,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x03000000",
+          "0x00C01E00",
+          "0x00800000",
+          "0xFCAA55A7",
+          "0x0C040100",
+          "0x9C420000",
+          "0x0C534854",
+          "0x58465300"
+        ],
+        "halfwords_be_u16": [
+          "0x0300",
+          "0x0000",
+          "0x00C0",
+          "0x1E00",
+          "0x0080",
+          "0x0000",
+          "0xFCAA",
+          "0x55A7"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x0000000C",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 66572,
+        "compressed_size": 17052,
+        "inner_payload_magic": "",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bulk Asset Bank (mcb1.bln)",
+        "header_endianness": "Sub-cabeçalho de 12 bytes + Stream Shade LZSS (Magic BE 0xFCAA55A7 em 0x0C)",
+        "entry_count": null,
+        "table_offset": "Externo (mcb0.bln)",
+        "data_start_offset": "0x0000000C",
+        "offset_alignment": 2048,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Banco de dados binário indexado por mcb0.bln; primeiro bloco em 0x0C contém assinatura 0xFCAA55A7 e textura SHTXFS.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "scn.bin",
+      "file_name": "scn.bin",
+      "extension": ".bin",
+      "file_size_bytes": 210485248,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "25030000004000001000000012000000",
+        "raw_hex_32": "25030000004000001000000012000000ffff03000bb004009d81b800acf53c01",
+        "magic_4b_hex": "0x25030000",
+        "magic_4b_u32_be": 620953600,
+        "magic_ascii": "%...",
+        "words_be_u32": [
+          "0x25030000",
+          "0x00400000",
+          "0x10000000",
+          "0x12000000",
+          "0xFFFF0300",
+          "0x0BB00400",
+          "0x9D81B800",
+          "0xACF53C01"
+        ],
+        "halfwords_be_u16": [
+          "0x2503",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1000",
+          "0x0000",
+          "0x1200",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00004000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 1617792,
+        "compressed_size": 721061,
+        "inner_payload_magic": "!bresþÿ.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 805,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00004000",
+        "offset_alignment": 16384,
+        "size_multiplier": 16,
+        "bit_shift": 18,
+        "bit_mask": "0x0003FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 805 entradas na tabela (0x14..0xCA8). Última entrada termina em 0xC8B81D0 <= tamanho físico 0xC8BC000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0004B00B",
+            "offset_hex": "0x00004000",
+            "allocated_size_bytes": 721072,
+            "first_16b_hex": "fcaa55a780af1800a5000b0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80AF1800",
+              "0xA5000B00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1617792,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00B8819D",
+            "offset_hex": "0x000B8000",
+            "allocated_size_bytes": 530896,
+            "first_16b_hex": "fcaa55a700db1100c619080020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x00DB1100",
+              "0xC6190800",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1170176,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x013CF5AC",
+            "offset_hex": "0x0013C000",
+            "allocated_size_bytes": 1006272,
+            "first_16b_hex": "fcaa55a7806c2000b45a0f0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x806C2000",
+              "0xB45A0F00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 2124928,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x02352B10",
+            "offset_hex": "0x00234000",
+            "allocated_size_bytes": 1224960,
+            "first_16b_hex": "fcaa55a7002d2200f9b0120020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x002D2200",
+              "0xF9B01200",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 2239744,
+            "inner_magic": "!bresþÿ."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "scn_sh.bin",
+      "file_name": "scn_sh.bin",
+      "extension": ".bin",
+      "file_size_bytes": 202833920,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "b0020000004000001000000012000000",
+        "raw_hex_32": "b0020000004000001000000012000000ffff030088fd0400c9a60401e066ad01",
+        "magic_4b_hex": "0xB0020000",
+        "magic_4b_u32_be": 2952921088,
+        "magic_ascii": "ｰ...",
+        "words_be_u32": [
+          "0xB0020000",
+          "0x00400000",
+          "0x10000000",
+          "0x12000000",
+          "0xFFFF0300",
+          "0x88FD0400",
+          "0xC9A60401",
+          "0xE066AD01"
+        ],
+        "halfwords_be_u16": [
+          "0xB002",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1000",
+          "0x0000",
+          "0x1200",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00004000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 2870400,
+        "compressed_size": 1038460,
+        "inner_payload_magic": "!bresþÿ.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 688,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00004000",
+        "offset_alignment": 16384,
+        "size_multiplier": 16,
+        "bit_shift": 18,
+        "bit_mask": "0x0003FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 688 entradas na tabela (0x14..0xAD4). Última entrada termina em 0xC16C670 <= tamanho físico 0xC170000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0004FD88",
+            "offset_hex": "0x00004000",
+            "allocated_size_bytes": 1038464,
+            "first_16b_hex": "fcaa55a780cc2b007cd80f0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80CC2B00",
+              "0x7CD80F00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 2870400,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x0104A6C9",
+            "offset_hex": "0x00104000",
+            "allocated_size_bytes": 683152,
+            "first_16b_hex": "fcaa55a7003b1600826c0a0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x003B1600",
+              "0x826C0A00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1456896,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x01AD66E0",
+            "offset_hex": "0x001AC000",
+            "allocated_size_bytes": 1469952,
+            "first_16b_hex": "fcaa55a780fa3000f86d160020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80FA3000",
+              "0xF86D1600",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 3209856,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x03149DAA",
+            "offset_hex": "0x00314000",
+            "allocated_size_bytes": 645792,
+            "first_16b_hex": "fcaa55a780a7160091da090020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80A71600",
+              "0x91DA0900",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1484672,
+            "inner_magic": "!bresþÿ."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "strap.bin",
+      "file_name": "strap.bin",
+      "extension": ".bin",
+      "file_size_bytes": 271264,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "02000000200000000400000011000000",
+        "raw_hex_32": "02000000200000000400000011000000ffff0100117d0200c68b481f00000000",
+        "magic_4b_hex": "0x02000000",
+        "magic_4b_u32_be": 33554432,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x02000000",
+          "0x20000000",
+          "0x04000000",
+          "0x11000000",
+          "0xFFFF0100",
+          "0x117D0200",
+          "0xC68B481F",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x0200",
+          "0x0000",
+          "0x2000",
+          "0x0000",
+          "0x0400",
+          "0x0000",
+          "0x1100",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00000020",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 1228812,
+        "compressed_size": 128068,
+        "inner_payload_magic": "SHTXFF.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 2,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00000020",
+        "offset_alignment": 32,
+        "size_multiplier": 4,
+        "bit_shift": 17,
+        "bit_mask": "0x0001FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 2 entradas na tabela (0x14..0x1C). Última entrada termina em 0x42398 <= tamanho físico 0x423A0.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x00027D11",
+            "offset_hex": "0x00000020",
+            "allocated_size_bytes": 128068,
+            "first_16b_hex": "fcaa55a70cc0120044f401000c534854",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x0CC01200",
+              "0x44F40100",
+              "0x0C534854"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1228812,
+            "inner_magic": "SHTXFF."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x1F488BC6",
+            "offset_hex": "0x0001F480",
+            "allocated_size_bytes": 143128,
+            "first_16b_hex": "fcaa55a70cc01200182f02000c534854",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x0CC01200",
+              "0x182F0200",
+              "0x0C534854"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1228812,
+            "inner_magic": "SHTXFF."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "ui.bin",
+      "file_name": "ui.bin",
+      "extension": ".bin",
+      "file_size_bytes": 107315200,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "c8100000004000001000000012000000",
+        "raw_hex_32": "c8100000004000001000000012000000ffff03007fb6080059b1c00056757401",
+        "magic_4b_hex": "0xC8100000",
+        "magic_4b_u32_be": 3356491776,
+        "magic_ascii": "ﾈ...",
+        "words_be_u32": [
+          "0xC8100000",
+          "0x00400000",
+          "0x10000000",
+          "0x12000000",
+          "0xFFFF0300",
+          "0x7FB60800",
+          "0x59B1C000",
+          "0x56757401"
+        ],
+        "halfwords_be_u16": [
+          "0xC810",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1000",
+          "0x0000",
+          "0x1200",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00008000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 806218,
+        "compressed_size": 747493,
+        "inner_payload_magic": "ｲ%...ﾘD.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 4296,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00008000",
+        "offset_alignment": 16384,
+        "size_multiplier": 16,
+        "bit_shift": 18,
+        "bit_mask": "0x0003FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 4296 entradas na tabela (0x14..0x4334). Última entrada termina em 0x6654370 <= tamanho físico 0x6658000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0008B67F",
+            "offset_hex": "0x00008000",
+            "allocated_size_bytes": 747504,
+            "first_16b_hex": "fcaa55a74a4d0c00e5670b0021b22511",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x4A4D0C00",
+              "0xE5670B00",
+              "0x21B22511"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 806218,
+            "inner_magic": "ｲ%...ﾘD."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00C0B159",
+            "offset_hex": "0x000C0000",
+            "allocated_size_bytes": 726416,
+            "first_16b_hex": "fcaa55a765170c0081150b0021b22511",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x65170C00",
+              "0x81150B00",
+              "0x21B22511"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 792421,
+            "inner_magic": "ｲ%...ﾘD."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x01747556",
+            "offset_hex": "0x00174000",
+            "allocated_size_bytes": 480608,
+            "first_16b_hex": "fcaa55a71b8e08005a55070021b23a11",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x1B8E0800",
+              "0x5A550700",
+              "0x21B23A11"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 560667,
+            "inner_magic": "ｲ:...,E."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x01EC042A",
+            "offset_hex": "0x001EC000",
+            "allocated_size_bytes": 17056,
+            "first_16b_hex": "fcaa55a70c0401009c4200000c534854",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x0C040100",
+              "0x9C420000",
+              "0x0C534854"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 66572,
+            "inner_magic": "SHTXFS.."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "sys/bi2.bin",
+      "file_name": "bi2.bin",
+      "extension": ".bin",
+      "file_size_bytes": 8192,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "00000000000000000000000000000000",
+        "raw_hex_32": "0000000000000000000000000000000000000000000000000000000000000001",
+        "magic_4b_hex": "0x00000000",
+        "magic_4b_u32_be": 0,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000001"
+        ],
+        "halfwords_be_u16": [
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "00000000",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Disc Info Header (bi2.bin)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Estrutura BI2 de 8192 bytes (0x2000) em Big-Endian.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/boot.bin",
+      "file_name": "boot.bin",
+      "extension": ".bin",
+      "file_size_bytes": 1088,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "5335534a484600000000000000000000",
+        "raw_hex_32": "5335534a48460000000000000000000000000000000000005d1c9ea300000000",
+        "magic_4b_hex": "0x5335534A",
+        "magic_4b_u32_be": 1396003658,
+        "magic_ascii": "S5SJ",
+        "words_be_u32": [
+          "0x5335534A",
+          "0x48460000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x5D1C9EA3",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x5335",
+          "0x534A",
+          "0x4846",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "5335534a",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Disc Header (boot.bin)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "GameID='S5SJHF', Wii Magic BE=0x5D1C9EA3, Title='InazumaElevenGOStrikers2013'.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/fst.bin",
+      "file_name": "fst.bin",
+      "extension": ".bin",
+      "file_size_bytes": 824696,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "0100000000000000000043a500000000",
+        "raw_hex_32": "0100000000000000000043a500000000342c800000211000000000083434e000",
+        "magic_4b_hex": "0x01000000",
+        "magic_4b_u32_be": 16777216,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x01000000",
+          "0x00000000",
+          "0x000043A5",
+          "0x00000000",
+          "0x342C8000",
+          "0x00211000",
+          "0x00000008",
+          "0x3434E000"
+        ],
+        "halfwords_be_u16": [
+          "0x0100",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x43A5",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "01000000",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii File System Table (fst.bin)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": 17317,
+        "table_offset": "0x00000000",
+        "data_start_offset": "0x00032BBC (String Table)",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "17317 nós FST de 12 bytes (Big-Endian) + tabela de nomes ASCII/Shift-JIS.",
+        "sample_entries": []
+      }
+    }
+  ],
+  "all_analyzed_files": [
+    {
+      "relative_path": "InazmaWii.brsar",
+      "file_name": "InazmaWii.brsar",
+      "extension": ".brsar",
+      "file_size_bytes": 25613984,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "52534152feff01040186d6a000400003",
+        "raw_hex_32": "52534152feff01040186d6a0004000030000004000147d2000147d60002a5c00",
+        "magic_4b_hex": "0x52534152",
+        "magic_4b_u32_be": 1381187922,
+        "magic_ascii": "RSAR",
+        "words_be_u32": [
+          "0x52534152",
+          "0xFEFF0104",
+          "0x0186D6A0",
+          "0x00400003",
+          "0x00000040",
+          "0x00147D20",
+          "0x00147D60",
+          "0x002A5C00"
+        ],
+        "halfwords_be_u16": [
+          "0x5253",
+          "0x4152",
+          "0xFEFF",
+          "0x0104",
+          "0x0186",
+          "0xD6A0",
+          "0x0040",
+          "0x0003"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "52534152",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Binary Revolution Sound Archive (.brsar)",
+        "header_endianness": "Big-Endian (>) BOM 0xFEFF",
+        "entry_count": 0,
+        "table_offset": "0x00400003",
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic 'RSAR' BE, BOM=0xFEFF, versão 1.4, tamanho no cabeçalho=25613984 bytes (idêntico ao arquivo físico), 0 seções (SYMB/INFO/FILE).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "InazumaWii.dlf",
+      "file_name": "InazumaWii.dlf",
+      "extension": ".dlf",
+      "file_size_bytes": 1170955,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "76322e30300d0a52564c5f434f4e4649",
+        "raw_hex_32": "76322e30300d0a52564c5f434f4e4649475f46494c452c22496e617a756d6157",
+        "magic_4b_hex": "0x76322E30",
+        "magic_4b_u32_be": 1983000112,
+        "magic_ascii": "v2.0",
+        "words_be_u32": [
+          "0x76322E30",
+          "0x300D0A52",
+          "0x564C5F43",
+          "0x4F4E4649",
+          "0x475F4649",
+          "0x4C452C22",
+          "0x496E617A",
+          "0x756D6157"
+        ],
+        "halfwords_be_u16": [
+          "0x7632",
+          "0x2E30",
+          "0x300D",
+          "0x0A52",
+          "0x564C",
+          "0x5F43",
+          "0x4F4E",
+          "0x4649"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "76322e30",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Wii Disc Layout Map (.dlf)",
+        "header_endianness": "Texto ASCII / Shift-JIS",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Mapa de endereçamento físico dos arquivos no disco (RVL_CONFIG_FILE).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "InazumaWii.elf",
+      "file_name": "InazumaWii.elf",
+      "extension": ".elf",
+      "file_size_bytes": 6610512,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "7f454c46010201000000000000000000",
+        "raw_hex_32": "7f454c4601020100000000000000000000020014000000018000405000000034",
+        "magic_4b_hex": "0x7F454C46",
+        "magic_4b_u32_be": 2135247942,
+        "magic_ascii": ".ELF",
+        "words_be_u32": [
+          "0x7F454C46",
+          "0x01020100",
+          "0x00000000",
+          "0x00000000",
+          "0x00020014",
+          "0x00000001",
+          "0x80004050",
+          "0x00000034"
+        ],
+        "halfwords_be_u16": [
+          "0x7F45",
+          "0x4C46",
+          "0x0102",
+          "0x0100",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "7f454c46",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "PowerPC 32-bit Big-Endian ELF Executable (.elf)",
+        "header_endianness": "Big-Endian (>) ELFDATA2MSB",
+        "entry_count": null,
+        "table_offset": "0x00000034",
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "ELF32 Big-Endian (PowerPC e_machine=20), entry_point=0x80004050, program_header_offset=0x34.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "dat.bin",
+      "file_name": "dat.bin",
+      "extension": ".bin",
+      "file_size_bytes": 2166784,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "82000000000800002000000011000000",
+        "raw_hex_32": "82000000000800002000000011000000ffff01009f1602009f16b80016006e01",
+        "magic_4b_hex": "0x82000000",
+        "magic_4b_u32_be": 2181038080,
+        "magic_ascii": "...",
+        "words_be_u32": [
+          "0x82000000",
+          "0x00080000",
+          "0x20000000",
+          "0x11000000",
+          "0xFFFF0100",
+          "0x9F160200",
+          "0x9F16B800",
+          "0x16006E01"
+        ],
+        "halfwords_be_u16": [
+          "0x8200",
+          "0x0000",
+          "0x0008",
+          "0x0000",
+          "0x2000",
+          "0x0000",
+          "0x1100",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+        "signature_offset": "0x0002E000",
+        "signature_bytes_be": "0c000000",
+        "decompressed_size": 435680,
+        "compressed_size": 185312,
+        "inner_payload_magic": "blocks=2, tbl_off=0x1C (BE >3I)",
+        "notes": "Byte inicial 0x0C (run literal LZSS/RLE) seguido por cabeçalho de tabela em Big-Endian (>3I): count=2, decomp_size=0x6A5E0, offset=0x1C."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 130,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00000800",
+        "offset_alignment": 2048,
+        "size_multiplier": 32,
+        "bit_shift": 17,
+        "bit_mask": "0x0001FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 130 entradas na tabela (0x14..0x21C). Última entrada termina em 0x210960 <= tamanho físico 0x211000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0002169F",
+            "offset_hex": "0x00000800",
+            "allocated_size_bytes": 185312,
+            "first_16b_hex": "0b02000000e0a506001c0000a0040e31",
+            "first_4_words_be": [
+              "0x0B020000",
+              "0x00E0A506",
+              "0x001C0000",
+              "0xA0040E31"
+            ],
+            "sub_compression": "None (Uncompressed Header)",
+            "decompressed_size": null,
+            "inner_magic": null
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00B8169F",
+            "offset_hex": "0x0002E000",
+            "allocated_size_bytes": 185312,
+            "first_16b_hex": "0c000000020006a5e00000001ce0040d",
+            "first_4_words_be": [
+              "0x0C000000",
+              "0x020006A5",
+              "0xE0000000",
+              "0x1CE0040D"
+            ],
+            "sub_compression": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+            "decompressed_size": 435680,
+            "inner_magic": "blocks=2, tbl_off=0x1C (BE >3I)"
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x016E0016",
+            "offset_hex": "0x0005B800",
+            "allocated_size_bytes": 704,
+            "first_16b_hex": "0a01000000cc0300001400c004204612",
+            "first_4_words_be": [
+              "0x0A010000",
+              "0x00CC0300",
+              "0x001400C0",
+              "0x04204612"
+            ],
+            "sub_compression": "None (Uncompressed Header)",
+            "decompressed_size": null,
+            "inner_magic": null
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x01700016",
+            "offset_hex": "0x0005C000",
+            "allocated_size_bytes": 704,
+            "first_16b_hex": "0c00000001000003cc00000014e00420",
+            "first_4_words_be": [
+              "0x0C000000",
+              "0x01000003",
+              "0xCC000000",
+              "0x14E00420"
+            ],
+            "sub_compression": "Shade Headerless LZSS/RLE Stream (Big-Endian Payload)",
+            "decompressed_size": 972,
+            "inner_magic": "blocks=1, tbl_off=0x14 (BE >3I)"
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "grp.bin",
+      "file_name": "grp.bin",
+      "extension": ".bin",
+      "file_size_bytes": 261799936,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "6d130000004000001100000011000000",
+        "raw_hex_32": "6d130000004000001100000011000000ffff0100560604003208080037000e00",
+        "magic_4b_hex": "0x6D130000",
+        "magic_4b_u32_be": 1829961728,
+        "magic_ascii": "m...",
+        "words_be_u32": [
+          "0x6D130000",
+          "0x00400000",
+          "0x11000000",
+          "0x11000000",
+          "0xFFFF0100",
+          "0x56060400",
+          "0x32080800",
+          "0x37000E00"
+        ],
+        "halfwords_be_u16": [
+          "0x6D13",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1100",
+          "0x0000",
+          "0x1100",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00008000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 162240,
+        "compressed_size": 27567,
+        "inner_payload_magic": "REFFþÿ..",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 4973,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00008000",
+        "offset_alignment": 16384,
+        "size_multiplier": 17,
+        "bit_shift": 17,
+        "bit_mask": "0x0001FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 4973 entradas na tabela (0x14..0x4DC8). Última entrada termina em 0xF9A8451 <= tamanho físico 0xF9AC000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x00040656",
+            "offset_hex": "0x00008000",
+            "allocated_size_bytes": 27574,
+            "first_16b_hex": "fcaa55a7c0790200af6b000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0xC0790200",
+              "0xAF6B0000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 162240,
+            "inner_magic": "REFFþÿ.."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00080832",
+            "offset_hex": "0x00010000",
+            "allocated_size_bytes": 35666,
+            "first_16b_hex": "fcaa55a7604f0100528b000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x604F0100",
+              "0x528B0000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 85856,
+            "inner_magic": "REFTþÿ.."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x000E0037",
+            "offset_hex": "0x0001C000",
+            "allocated_size_bytes": 935,
+            "first_16b_hex": "fcaa55a764100000a303000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x64100000",
+              "0xA3030000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 4196,
+            "inner_magic": "REFFþÿ.."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x00100083",
+            "offset_hex": "0x00020000",
+            "allocated_size_bytes": 2227,
+            "first_16b_hex": "fcaa55a720110000ad08000010524546",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x20110000",
+              "0xAD080000",
+              "0x10524546"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 4384,
+            "inner_magic": "REFTþÿ.."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "mcb0.bln",
+      "file_name": "mcb0.bln",
+      "extension": ".bln",
+      "file_size_bytes": 49152,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "00003f000000000000b02e0001003f00",
+        "raw_hex_32": "00003f000000000000b02e0001003f0000b02e0000b8040002003f0000683300",
+        "magic_4b_hex": "0x00003F00",
+        "magic_4b_u32_be": 16128,
+        "magic_ascii": "..?.",
+        "words_be_u32": [
+          "0x00003F00",
+          "0x00000000",
+          "0x00B02E00",
+          "0x01003F00",
+          "0x00B02E00",
+          "0x00B80400",
+          "0x02003F00",
+          "0x00683300"
+        ],
+        "halfwords_be_u16": [
+          "0x0000",
+          "0x3F00",
+          "0x0000",
+          "0x0000",
+          "0x00B0",
+          "0x2E00",
+          "0x0100",
+          "0x3F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (External Index Table for mcb1.bln)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "00003f00",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Tabela pura de índices de 12 bytes por entrada apontando para blocos comprimidos em mcb1.bln."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Paired Index Table (mcb0.bln -> mcb1.bln)",
+        "header_endianness": "Registros de 12 bytes (ID/Flag, Offset, Size)",
+        "entry_count": 3236,
+        "table_offset": "0x00000000",
+        "data_start_offset": "0x00000000 (em mcb1.bln)",
+        "offset_alignment": 2048,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "3236 registros ativos de 12 bytes mapeando mcb1.bln.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "group_id_hex": "0x003F0000",
+            "offset_in_mcb1_hex": "0x00000000",
+            "size_in_mcb1_bytes": 3059712,
+            "raw_words_be": [
+              "0x00003F00",
+              "0x00000000",
+              "0x00B02E00"
+            ]
+          },
+          {
+            "index": 1,
+            "group_id_hex": "0x003F0001",
+            "offset_in_mcb1_hex": "0x002EB000",
+            "size_in_mcb1_bytes": 309248,
+            "raw_words_be": [
+              "0x01003F00",
+              "0x00B02E00",
+              "0x00B80400"
+            ]
+          },
+          {
+            "index": 2,
+            "group_id_hex": "0x003F0002",
+            "offset_in_mcb1_hex": "0x00336800",
+            "size_in_mcb1_bytes": 755712,
+            "raw_words_be": [
+              "0x02003F00",
+              "0x00683300",
+              "0x00880B00"
+            ]
+          },
+          {
+            "index": 3,
+            "group_id_hex": "0x003E0040",
+            "offset_in_mcb1_hex": "0x003EF000",
+            "size_in_mcb1_bytes": 280576,
+            "raw_words_be": [
+              "0x40003E00",
+              "0x00F03E00",
+              "0x00480400"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "mcb1.bln",
+      "file_name": "mcb1.bln",
+      "extension": ".bln",
+      "file_size_bytes": 1221117952,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "0300000000c01e0000800000fcaa55a7",
+        "raw_hex_32": "0300000000c01e0000800000fcaa55a70c0401009c4200000c53485458465300",
+        "magic_4b_hex": "0x03000000",
+        "magic_4b_u32_be": 50331648,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x03000000",
+          "0x00C01E00",
+          "0x00800000",
+          "0xFCAA55A7",
+          "0x0C040100",
+          "0x9C420000",
+          "0x0C534854",
+          "0x58465300"
+        ],
+        "halfwords_be_u16": [
+          "0x0300",
+          "0x0000",
+          "0x00C0",
+          "0x1E00",
+          "0x0080",
+          "0x0000",
+          "0xFCAA",
+          "0x55A7"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x0000000C",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 66572,
+        "compressed_size": 17052,
+        "inner_payload_magic": "",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bulk Asset Bank (mcb1.bln)",
+        "header_endianness": "Sub-cabeçalho de 12 bytes + Stream Shade LZSS (Magic BE 0xFCAA55A7 em 0x0C)",
+        "entry_count": null,
+        "table_offset": "Externo (mcb0.bln)",
+        "data_start_offset": "0x0000000C",
+        "offset_alignment": 2048,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Banco de dados binário indexado por mcb0.bln; primeiro bloco em 0x0C contém assinatura 0xFCAA55A7 e textura SHTXFS.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "opening.bnr",
+      "file_name": "opening.bnr",
+      "extension": ".bnr",
+      "file_size_bytes": 494760,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "00000000000000000000000000000000",
+        "raw_hex_32": "0000000000000000000000000000000000000000000000000000000000000000",
+        "magic_4b_hex": "0x00000000",
+        "magic_4b_u32_be": 0,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "00000000",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Opening Banner (.bnr / IMET)",
+        "header_endianness": "Big-Endian (>) + UTF-16BE Strings",
+        "entry_count": null,
+        "table_offset": "0x00000040",
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Assinatura 'IMET' em 0x40; título UTF-16BE extraído: '\u0000\u0000\u00002013\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000Inazuma Eleven GO'.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "scn.bin",
+      "file_name": "scn.bin",
+      "extension": ".bin",
+      "file_size_bytes": 210485248,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "25030000004000001000000012000000",
+        "raw_hex_32": "25030000004000001000000012000000ffff03000bb004009d81b800acf53c01",
+        "magic_4b_hex": "0x25030000",
+        "magic_4b_u32_be": 620953600,
+        "magic_ascii": "%...",
+        "words_be_u32": [
+          "0x25030000",
+          "0x00400000",
+          "0x10000000",
+          "0x12000000",
+          "0xFFFF0300",
+          "0x0BB00400",
+          "0x9D81B800",
+          "0xACF53C01"
+        ],
+        "halfwords_be_u16": [
+          "0x2503",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1000",
+          "0x0000",
+          "0x1200",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00004000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 1617792,
+        "compressed_size": 721061,
+        "inner_payload_magic": "!bresþÿ.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 805,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00004000",
+        "offset_alignment": 16384,
+        "size_multiplier": 16,
+        "bit_shift": 18,
+        "bit_mask": "0x0003FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 805 entradas na tabela (0x14..0xCA8). Última entrada termina em 0xC8B81D0 <= tamanho físico 0xC8BC000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0004B00B",
+            "offset_hex": "0x00004000",
+            "allocated_size_bytes": 721072,
+            "first_16b_hex": "fcaa55a780af1800a5000b0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80AF1800",
+              "0xA5000B00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1617792,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00B8819D",
+            "offset_hex": "0x000B8000",
+            "allocated_size_bytes": 530896,
+            "first_16b_hex": "fcaa55a700db1100c619080020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x00DB1100",
+              "0xC6190800",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1170176,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x013CF5AC",
+            "offset_hex": "0x0013C000",
+            "allocated_size_bytes": 1006272,
+            "first_16b_hex": "fcaa55a7806c2000b45a0f0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x806C2000",
+              "0xB45A0F00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 2124928,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x02352B10",
+            "offset_hex": "0x00234000",
+            "allocated_size_bytes": 1224960,
+            "first_16b_hex": "fcaa55a7002d2200f9b0120020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x002D2200",
+              "0xF9B01200",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 2239744,
+            "inner_magic": "!bresþÿ."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "scn_sh.bin",
+      "file_name": "scn_sh.bin",
+      "extension": ".bin",
+      "file_size_bytes": 202833920,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "b0020000004000001000000012000000",
+        "raw_hex_32": "b0020000004000001000000012000000ffff030088fd0400c9a60401e066ad01",
+        "magic_4b_hex": "0xB0020000",
+        "magic_4b_u32_be": 2952921088,
+        "magic_ascii": "ｰ...",
+        "words_be_u32": [
+          "0xB0020000",
+          "0x00400000",
+          "0x10000000",
+          "0x12000000",
+          "0xFFFF0300",
+          "0x88FD0400",
+          "0xC9A60401",
+          "0xE066AD01"
+        ],
+        "halfwords_be_u16": [
+          "0xB002",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1000",
+          "0x0000",
+          "0x1200",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00004000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 2870400,
+        "compressed_size": 1038460,
+        "inner_payload_magic": "!bresþÿ.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 688,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00004000",
+        "offset_alignment": 16384,
+        "size_multiplier": 16,
+        "bit_shift": 18,
+        "bit_mask": "0x0003FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 688 entradas na tabela (0x14..0xAD4). Última entrada termina em 0xC16C670 <= tamanho físico 0xC170000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0004FD88",
+            "offset_hex": "0x00004000",
+            "allocated_size_bytes": 1038464,
+            "first_16b_hex": "fcaa55a780cc2b007cd80f0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80CC2B00",
+              "0x7CD80F00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 2870400,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x0104A6C9",
+            "offset_hex": "0x00104000",
+            "allocated_size_bytes": 683152,
+            "first_16b_hex": "fcaa55a7003b1600826c0a0020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x003B1600",
+              "0x826C0A00",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1456896,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x01AD66E0",
+            "offset_hex": "0x001AC000",
+            "allocated_size_bytes": 1469952,
+            "first_16b_hex": "fcaa55a780fa3000f86d160020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80FA3000",
+              "0xF86D1600",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 3209856,
+            "inner_magic": "!bresþÿ."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x03149DAA",
+            "offset_hex": "0x00314000",
+            "allocated_size_bytes": 645792,
+            "first_16b_hex": "fcaa55a780a7160091da090020216272",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x80A71600",
+              "0x91DA0900",
+              "0x20216272"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1484672,
+            "inner_magic": "!bresþÿ."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "strap.bin",
+      "file_name": "strap.bin",
+      "extension": ".bin",
+      "file_size_bytes": 271264,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "02000000200000000400000011000000",
+        "raw_hex_32": "02000000200000000400000011000000ffff0100117d0200c68b481f00000000",
+        "magic_4b_hex": "0x02000000",
+        "magic_4b_u32_be": 33554432,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x02000000",
+          "0x20000000",
+          "0x04000000",
+          "0x11000000",
+          "0xFFFF0100",
+          "0x117D0200",
+          "0xC68B481F",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x0200",
+          "0x0000",
+          "0x2000",
+          "0x0000",
+          "0x0400",
+          "0x0000",
+          "0x1100",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00000020",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 1228812,
+        "compressed_size": 128068,
+        "inner_payload_magic": "SHTXFF.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 2,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00000020",
+        "offset_alignment": 32,
+        "size_multiplier": 4,
+        "bit_shift": 17,
+        "bit_mask": "0x0001FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 2 entradas na tabela (0x14..0x1C). Última entrada termina em 0x42398 <= tamanho físico 0x423A0.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x00027D11",
+            "offset_hex": "0x00000020",
+            "allocated_size_bytes": 128068,
+            "first_16b_hex": "fcaa55a70cc0120044f401000c534854",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x0CC01200",
+              "0x44F40100",
+              "0x0C534854"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1228812,
+            "inner_magic": "SHTXFF."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x1F488BC6",
+            "offset_hex": "0x0001F480",
+            "allocated_size_bytes": 143128,
+            "first_16b_hex": "fcaa55a70cc01200182f02000c534854",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x0CC01200",
+              "0x182F0200",
+              "0x0C534854"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 1228812,
+            "inner_magic": "SHTXFF."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "ui.bin",
+      "file_name": "ui.bin",
+      "extension": ".bin",
+      "file_size_bytes": 107315200,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "c8100000004000001000000012000000",
+        "raw_hex_32": "c8100000004000001000000012000000ffff03007fb6080059b1c00056757401",
+        "magic_4b_hex": "0xC8100000",
+        "magic_4b_u32_be": 3356491776,
+        "magic_ascii": "ﾈ...",
+        "words_be_u32": [
+          "0xC8100000",
+          "0x00400000",
+          "0x10000000",
+          "0x12000000",
+          "0xFFFF0300",
+          "0x7FB60800",
+          "0x59B1C000",
+          "0x56757401"
+        ],
+        "halfwords_be_u16": [
+          "0xC810",
+          "0x0000",
+          "0x0040",
+          "0x0000",
+          "0x1000",
+          "0x0000",
+          "0x1200",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+        "signature_offset": "0x00008000",
+        "signature_bytes_be": "fcaa55a7",
+        "decompressed_size": 806218,
+        "compressed_size": 747493,
+        "inner_payload_magic": "ｲ%...ﾘD.",
+        "notes": "Cabeçalho de compressão de 12 bytes (Magic BE 0xFCAA55A7 + tamanho descomprimido + tamanho comprimido), seguido por stream LZSS/RLE."
+      },
+      "structure": {
+        "format_family": "Level-5 / Shade Bit-Packed Archive Container (.bin)",
+        "header_endianness": "Tabela de Índice Empacotada (32-bit); Payloads Big-Endian (>) / Pares Híbridos",
+        "entry_count": 4296,
+        "table_offset": "0x00000014",
+        "data_start_offset": "0x00008000",
+        "offset_alignment": 16384,
+        "size_multiplier": 16,
+        "bit_shift": 18,
+        "bit_mask": "0x0003FFFF",
+        "bounds_validated": true,
+        "validation_details": "Validado: 4296 entradas na tabela (0x14..0x4334). Última entrada termina em 0x6654370 <= tamanho físico 0x6658000.",
+        "sample_entries": [
+          {
+            "index": 0,
+            "packed_descriptor_hex": "0x0008B67F",
+            "offset_hex": "0x00008000",
+            "allocated_size_bytes": 747504,
+            "first_16b_hex": "fcaa55a74a4d0c00e5670b0021b22511",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x4A4D0C00",
+              "0xE5670B00",
+              "0x21B22511"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 806218,
+            "inner_magic": "ｲ%...ﾘD."
+          },
+          {
+            "index": 1,
+            "packed_descriptor_hex": "0x00C0B159",
+            "offset_hex": "0x000C0000",
+            "allocated_size_bytes": 726416,
+            "first_16b_hex": "fcaa55a765170c0081150b0021b22511",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x65170C00",
+              "0x81150B00",
+              "0x21B22511"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 792421,
+            "inner_magic": "ｲ%...ﾘD."
+          },
+          {
+            "index": 2,
+            "packed_descriptor_hex": "0x01747556",
+            "offset_hex": "0x00174000",
+            "allocated_size_bytes": 480608,
+            "first_16b_hex": "fcaa55a71b8e08005a55070021b23a11",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x1B8E0800",
+              "0x5A550700",
+              "0x21B23A11"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 560667,
+            "inner_magic": "ｲ:...,E."
+          },
+          {
+            "index": 3,
+            "packed_descriptor_hex": "0x01EC042A",
+            "offset_hex": "0x001EC000",
+            "allocated_size_bytes": 17056,
+            "first_16b_hex": "fcaa55a70c0401009c4200000c534854",
+            "first_4_words_be": [
+              "0xFCAA55A7",
+              "0x0C040100",
+              "0x9C420000",
+              "0x0C534854"
+            ],
+            "sub_compression": "Shade/Level-5 LZSS (Magic 0xFCAA55A7)",
+            "decompressed_size": 66572,
+            "inner_magic": "SHTXFS.."
+          }
+        ]
+      }
+    },
+    {
+      "relative_path": "HomeButton2/HomeButtonSe.arc",
+      "file_name": "HomeButtonSe.arc",
+      "extension": ".arc",
+      "file_size_bytes": 367542,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d000000200000036c000003a0",
+        "raw_hex_32": "55aa382d000000200000036c000003a000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x0000036C",
+          "0x000003A0",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x036C",
+          "0x0000",
+          "0x03A0"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x000003A0",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0x36C, data_offset=0x3A0 (< 0x59BB6).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/SpeakerSe.arc",
+      "file_name": "SpeakerSe.arc",
+      "extension": ".arc",
+      "file_size_bytes": 59424,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d000000200000008d000000c0",
+        "raw_hex_32": "55aa382d000000200000008d000000c000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x0000008D",
+          "0x000000C0",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x008D",
+          "0x0000",
+          "0x00C0"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x000000C0",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0x8D, data_offset=0xC0 (< 0xE820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn.arc",
+      "file_name": "homeBtn.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtnIcon.tpl",
+      "file_name": "homeBtnIcon.tpl",
+      "extension": ".tpl",
+      "file_size_bytes": 6336,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "0020af30000000010000000c00000014",
+        "raw_hex_32": "0020af30000000010000000c0000001400000000003800380000000500000040",
+        "magic_4b_hex": "0x0020AF30",
+        "magic_4b_u32_be": 2142000,
+        "magic_ascii": ". ｯ0",
+        "words_be_u32": [
+          "0x0020AF30",
+          "0x00000001",
+          "0x0000000C",
+          "0x00000014",
+          "0x00000000",
+          "0x00380038",
+          "0x00000005",
+          "0x00000040"
+        ],
+        "halfwords_be_u16": [
+          "0x0020",
+          "0xAF30",
+          "0x0000",
+          "0x0001",
+          "0x0000",
+          "0x000C",
+          "0x0000",
+          "0x0014"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "0020af30",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Texture Palette Library (.tpl)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": 1,
+        "table_offset": "0x0000000C",
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x0020AF30, 1 textura(s), offset da tabela=0xC.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_CHN.arc",
+      "file_name": "homeBtn_CHN.arc",
+      "extension": ".arc",
+      "file_size_bytes": 390816,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x5F6A0).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_ENG.arc",
+      "file_name": "homeBtn_ENG.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_FRA.arc",
+      "file_name": "homeBtn_FRA.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_GER.arc",
+      "file_name": "homeBtn_GER.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_ITA.arc",
+      "file_name": "homeBtn_ITA.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_KOR.arc",
+      "file_name": "homeBtn_KOR.arc",
+      "extension": ".arc",
+      "file_size_bytes": 399072,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x616E0).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_NED.arc",
+      "file_name": "homeBtn_NED.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "HomeButton2/homeBtn_SPA.arc",
+      "file_name": "homeBtn_SPA.arc",
+      "extension": ".arc",
+      "file_size_bytes": 432160,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "55aa382d0000002000000ecb00000f00",
+        "raw_hex_32": "55aa382d0000002000000ecb00000f0000000000000000000000000000000000",
+        "magic_4b_hex": "0x55AA382D",
+        "magic_4b_u32_be": 1437218861,
+        "magic_ascii": "Uｪ8-",
+        "words_be_u32": [
+          "0x55AA382D",
+          "0x00000020",
+          "0x00000ECB",
+          "0x00000F00",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x55AA",
+          "0x382D",
+          "0x0000",
+          "0x0020",
+          "0x0000",
+          "0x0ECB",
+          "0x0000",
+          "0x0F00"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "55aa382d",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo U8 Archive (.arc)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000020",
+        "data_start_offset": "0x00000F00",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Magic BE 0x55AA382D; root_node_offset=0x20, header_size=0xECB, data_offset=0xF00 (< 0x69820).",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/IEGS_OP_Wii_normal.mo",
+      "file_name": "IEGS_OP_Wii_normal.mo",
+      "extension": ".mo",
+      "file_size_bytes": 99196044,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433544020000544c030000180000",
+        "raw_hex_32": "4d4f433544020000544c030000180000c0090000249a02005632020080020000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x44020000",
+          "0x544C0300",
+          "0x00180000",
+          "0xC0090000",
+          "0x249A0200",
+          "0x56320200",
+          "0x80020000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x4402",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x0018",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/IEGS_OP_Wii_wide.mo",
+      "file_name": "IEGS_OP_Wii_wide.mo",
+      "extension": ".mo",
+      "file_size_bytes": 103266232,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433584060000544c030000180000",
+        "raw_hex_32": "4d4f433584060000544c030000180000c00900001c9102005632020080020000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x84060000",
+          "0x544C0300",
+          "0x00180000",
+          "0xC0090000",
+          "0x1C910200",
+          "0x56320200",
+          "0x80020000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x8406",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x0018",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/L5_logo_normal.mo",
+      "file_name": "L5_logo_normal.mo",
+      "extension": ".mo",
+      "file_size_bytes": 2654296,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f43353c010000544c0300001e0000",
+        "raw_hex_32": "4d4f43353c010000544c0300001e0000de000000706700005632020080020000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x3C010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0xDE000000",
+          "0x70670000",
+          "0x56320200",
+          "0x80020000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x3C01",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/L5_logo_wide.mo",
+      "file_name": "L5_logo_wide.mo",
+      "extension": ".mo",
+      "file_size_bytes": 2794016,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433584010000544c0300001e0000",
+        "raw_hex_32": "4d4f433584010000544c0300001e0000de000000a06700005632020080020000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x84010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0xDE000000",
+          "0xA0670000",
+          "0x56320200",
+          "0x80020000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x8401",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_001_DF_THE_WALL.mo",
+      "file_name": "ZKN_001_DF_THE_WALL.mo",
+      "extension": ".mo",
+      "file_size_bytes": 294920,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433538010000544c0300001e0000",
+        "raw_hex_32": "4d4f433538010000544c0300001e00001d0100001c17000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x38010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x1D010000",
+          "0x1C170000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x3801",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_001_GK_GOD_HAND.mo",
+      "file_name": "ZKN_001_GK_GOD_HAND.mo",
+      "extension": ".mo",
+      "file_size_bytes": 715848,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433558010000544c0300001e0000",
+        "raw_hex_32": "4d4f433558010000544c0300001e00000d0200009022000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x58010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x0D020000",
+          "0x90220000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x5801",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_001_MF_SIPPU_DASH.mo",
+      "file_name": "ZKN_001_MF_SIPPU_DASH.mo",
+      "extension": ".mo",
+      "file_size_bytes": 213580,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433530010000544c0300001e0000",
+        "raw_hex_32": "4d4f433530010000544c0300001e0000590100007010000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x30010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x59010000",
+          "0x70100000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x3001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_001_SH_FIRE_TORNADO.mo",
+      "file_name": "ZKN_001_SH_FIRE_TORNADO.mo",
+      "extension": ".mo",
+      "file_size_bytes": 368876,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f4335d0010000544c0300001e0000",
+        "raw_hex_32": "4d4f4335d0010000544c0300001e0000710100007c20000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0xD0010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x71010000",
+          "0x7C200000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0xD001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_002_DF_SPIRAL_DRAW.mo",
+      "file_name": "ZKN_002_DF_SPIRAL_DRAW.mo",
+      "extension": ".mo",
+      "file_size_bytes": 511168,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433540010000544c0300001e0000",
+        "raw_hex_32": "4d4f433540010000544c0300001e0000aa010000d018000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x40010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0xAA010000",
+          "0xD0180000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x4001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_002_GK_BURNING_CATCH.mo",
+      "file_name": "ZKN_002_GK_BURNING_CATCH.mo",
+      "extension": ".mo",
+      "file_size_bytes": 401072,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433510020000544c0300001e0000",
+        "raw_hex_32": "4d4f433510020000544c0300001e0000710100009813000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x10020000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x71010000",
+          "0x98130000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x1002",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_002_MF_PRESTO_TURN.mo",
+      "file_name": "ZKN_002_MF_PRESTO_TURN.mo",
+      "extension": ".mo",
+      "file_size_bytes": 313336,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433528010000544c0300001e0000",
+        "raw_hex_32": "4d4f433528010000544c0300001e00003b010000001a000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x28010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x3B010000",
+          "0x001A0000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x2801",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_002_SH_DEATH_SWORD.mo",
+      "file_name": "ZKN_002_SH_DEATH_SWORD.mo",
+      "extension": ".mo",
+      "file_size_bytes": 337712,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433548010000544c0300001e0000",
+        "raw_hex_32": "4d4f433548010000544c0300001e000056010000941d000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x48010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x56010000",
+          "0x941D0000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x4801",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_003_DF_SHINKUMA.mo",
+      "file_name": "ZKN_003_DF_SHINKUMA.mo",
+      "extension": ".mo",
+      "file_size_bytes": 423652,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433540010000544c0300001e0000",
+        "raw_hex_32": "4d4f433540010000544c0300001e0000050100007422000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x40010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x05010000",
+          "0x74220000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x4001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_003_GK_MAJIN_THE_HAND.mo",
+      "file_name": "ZKN_003_GK_MAJIN_THE_HAND.mo",
+      "extension": ".mo",
+      "file_size_bytes": 866272,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433570010000544c0300001e0000",
+        "raw_hex_32": "4d4f433570010000544c0300001e0000d10100003c28000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x70010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0xD1010000",
+          "0x3C280000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x7001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_003_MF_ILLUSION_BALL.mo",
+      "file_name": "ZKN_003_MF_ILLUSION_BALL.mo",
+      "extension": ".mo",
+      "file_size_bytes": 322168,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433540010000544c0300001e0000",
+        "raw_hex_32": "4d4f433540010000544c0300001e000020010000a819000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x40010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x20010000",
+          "0xA8190000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x4001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_003_SH_TIGER_DRIVE.mo",
+      "file_name": "ZKN_003_SH_TIGER_DRIVE.mo",
+      "extension": ".mo",
+      "file_size_bytes": 675076,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433550010000544c0300001e0000",
+        "raw_hex_32": "4d4f433550010000544c0300001e00001f020000d81c000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x50010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x1F020000",
+          "0xD81C0000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x5001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_004_DF_FRACTALE_HOUSE.mo",
+      "file_name": "ZKN_004_DF_FRACTALE_HOUSE.mo",
+      "extension": ".mo",
+      "file_size_bytes": 574968,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433550010000544c0300001e0000",
+        "raw_hex_32": "4d4f433550010000544c0300001e00002b020000dc1a000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x50010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x2B020000",
+          "0xDC1A0000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x5001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_004_GK_EXCELLENT_BREAST.mo",
+      "file_name": "ZKN_004_GK_EXCELLENT_BREAST.mo",
+      "extension": ".mo",
+      "file_size_bytes": 348892,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433550010000544c0300001e0000",
+        "raw_hex_32": "4d4f433550010000544c0300001e00001a010000981f000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x50010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x1A010000",
+          "0x981F0000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x5001",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_004_MF_AGGRESSIVE_BEAT.mo",
+      "file_name": "ZKN_004_MF_AGGRESSIVE_BEAT.mo",
+      "extension": ".mo",
+      "file_size_bytes": 371704,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433548010000544c0300001e0000",
+        "raw_hex_32": "4d4f433548010000544c0300001e00009b010000d416000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x48010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x9B010000",
+          "0xD4160000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x4801",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "movie/ZKN_004_SH_BOUNCER_RABBIT.mo",
+      "file_name": "ZKN_004_SH_BOUNCER_RABBIT.mo",
+      "extension": ".mo",
+      "file_size_bytes": 459604,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "4d4f433578010000544c0300001e0000",
+        "raw_hex_32": "4d4f433578010000544c0300001e0000190200009819000056320200a0000000",
+        "magic_4b_hex": "0x4D4F4335",
+        "magic_4b_u32_be": 1297040181,
+        "magic_ascii": "MOC5",
+        "words_be_u32": [
+          "0x4D4F4335",
+          "0x78010000",
+          "0x544C0300",
+          "0x001E0000",
+          "0x19020000",
+          "0x98190000",
+          "0x56320200",
+          "0xA0000000"
+        ],
+        "halfwords_be_u16": [
+          "0x4D4F",
+          "0x4335",
+          "0x7801",
+          "0x0000",
+          "0x544C",
+          "0x0300",
+          "0x001E",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": true,
+        "scheme": "Mobiclip Video/Audio Codec (MOC5)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "4d4f4335",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Contêiner de vídeo Mobiclip para Nintendo Wii."
+      },
+      "structure": {
+        "format_family": "Mobiclip Wii Video Container (.mo)",
+        "header_endianness": "Misto (Tags ASCII Big-Endian 'MOC5', 'TL', 'V2' + Parâmetros LE)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho MOC5 validado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/apploader.img",
+      "file_name": "apploader.img",
+      "extension": ".img",
+      "file_size_bytes": 252580,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "323031302f30382f3233000000000000",
+        "raw_hex_32": "323031302f30382f3233000000000000812004d000001d040003bd8000000000",
+        "magic_4b_hex": "0x32303130",
+        "magic_4b_u32_be": 842019120,
+        "magic_ascii": "2010",
+        "words_be_u32": [
+          "0x32303130",
+          "0x2F30382F",
+          "0x32330000",
+          "0x00000000",
+          "0x812004D0",
+          "0x00001D04",
+          "0x0003BD80",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x3230",
+          "0x3130",
+          "0x2F30",
+          "0x382F",
+          "0x3233",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "32303130",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Generic / Unknown (.img)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Cabeçalho de 32 bytes lido e catalogado.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/bi2.bin",
+      "file_name": "bi2.bin",
+      "extension": ".bin",
+      "file_size_bytes": 8192,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "00000000000000000000000000000000",
+        "raw_hex_32": "0000000000000000000000000000000000000000000000000000000000000001",
+        "magic_4b_hex": "0x00000000",
+        "magic_4b_u32_be": 0,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000001"
+        ],
+        "halfwords_be_u16": [
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "00000000",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Disc Info Header (bi2.bin)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "Estrutura BI2 de 8192 bytes (0x2000) em Big-Endian.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/boot.bin",
+      "file_name": "boot.bin",
+      "extension": ".bin",
+      "file_size_bytes": 1088,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "5335534a484600000000000000000000",
+        "raw_hex_32": "5335534a48460000000000000000000000000000000000005d1c9ea300000000",
+        "magic_4b_hex": "0x5335534A",
+        "magic_4b_u32_be": 1396003658,
+        "magic_ascii": "S5SJ",
+        "words_be_u32": [
+          "0x5335534A",
+          "0x48460000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x5D1C9EA3",
+          "0x00000000"
+        ],
+        "halfwords_be_u16": [
+          "0x5335",
+          "0x534A",
+          "0x4846",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "5335534a",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii Disc Header (boot.bin)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": null,
+        "data_start_offset": null,
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "GameID='S5SJHF', Wii Magic BE=0x5D1C9EA3, Title='InazumaElevenGOStrikers2013'.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/fst.bin",
+      "file_name": "fst.bin",
+      "extension": ".bin",
+      "file_size_bytes": 824696,
+      "is_level5_primary_target": true,
+      "header_be": {
+        "raw_hex_16": "0100000000000000000043a500000000",
+        "raw_hex_32": "0100000000000000000043a500000000342c800000211000000000083434e000",
+        "magic_4b_hex": "0x01000000",
+        "magic_4b_u32_be": 16777216,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x01000000",
+          "0x00000000",
+          "0x000043A5",
+          "0x00000000",
+          "0x342C8000",
+          "0x00211000",
+          "0x00000008",
+          "0x3434E000"
+        ],
+        "halfwords_be_u16": [
+          "0x0100",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x43A5",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "01000000",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo Wii File System Table (fst.bin)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": 17317,
+        "table_offset": "0x00000000",
+        "data_start_offset": "0x00032BBC (String Table)",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": true,
+        "validation_details": "17317 nós FST de 12 bytes (Big-Endian) + tabela de nomes ASCII/Shift-JIS.",
+        "sample_entries": []
+      }
+    },
+    {
+      "relative_path": "sys/main.dol",
+      "file_name": "main.dol",
+      "extension": ".dol",
+      "file_size_bytes": 5299360,
+      "is_level5_primary_target": false,
+      "header_be": {
+        "raw_hex_16": "00000100000028200000000000000000",
+        "raw_hex_32": "0000010000002820000000000000000000000000000000000000000000461da0",
+        "magic_4b_hex": "0x00000100",
+        "magic_4b_u32_be": 256,
+        "magic_ascii": "....",
+        "words_be_u32": [
+          "0x00000100",
+          "0x00002820",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00461DA0"
+        ],
+        "halfwords_be_u16": [
+          "0x0000",
+          "0x0100",
+          "0x0000",
+          "0x2820",
+          "0x0000",
+          "0x0000",
+          "0x0000",
+          "0x0000"
+        ]
+      },
+      "compression": {
+        "detected": false,
+        "scheme": "None (Uncompressed Header)",
+        "signature_offset": "0x00000000",
+        "signature_bytes_be": "00000100",
+        "decompressed_size": null,
+        "compressed_size": null,
+        "inner_payload_magic": null,
+        "notes": "Sem assinatura direta de compressão nos primeiros 4 bytes do arquivo."
+      },
+      "structure": {
+        "format_family": "Nintendo GameCube/Wii DOL Executable (main.dol)",
+        "header_endianness": "Big-Endian (>)",
+        "entry_count": null,
+        "table_offset": "0x00000000",
+        "data_start_offset": "0x00000100",
+        "offset_alignment": null,
+        "size_multiplier": null,
+        "bit_shift": null,
+        "bit_mask": null,
+        "bounds_validated": false,
+        "validation_details": "Cabeçalho DOL de 0x100 bytes Big-Endian; Text0=0x100, Text1=0x2820, EntryPoint=0x00000000, BSS=0x80004050 (size=0x0).",
+        "sample_entries": []
+      }
+    }
+  ]
+}
