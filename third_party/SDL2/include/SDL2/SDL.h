@@ -4,6 +4,7 @@
 #include "SDL_stdinc.h"
 #include "SDL_scancode.h"
 #include "SDL_gamecontroller.h"
+#include "SDL_video.h"
 #include "SDL_events.h"
 
 extern "C" {

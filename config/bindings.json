@@ -20,9 +20,9 @@
         "dash_sprint": ["L", "Left Shift"],
         "tactic_switch": ["O", "Tab"],
         "hissatsu_level": ["I", "E"],
-        "pause_menu": ["Space", "Return"],
+        "pause_menu": ["Space", "Return", "Escape"],
         "confirm": ["J", "Return"],
-        "cancel": ["K", "Escape"]
+        "cancel": ["Escape"]
       },
       "gamepad": {
         "move_axis_x": "leftx",
@@ -63,9 +63,9 @@
         "dash_sprint": ["Keypad 0", "Right Shift"],
         "tactic_switch": ["Keypad 5"],
         "hissatsu_level": ["Keypad 4"],
-        "pause_menu": ["Keypad Enter"],
+        "pause_menu": ["Keypad Enter", "Escape"],
         "confirm": ["Keypad 1"],
-        "cancel": ["Keypad 2"]
+        "cancel": ["Escape"]
       },
       "gamepad": {
         "move_axis_x": "leftx",

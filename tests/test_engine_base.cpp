@@ -3,6 +3,8 @@
 #include "input/input_manager.hpp"
 #include "input/input_state.hpp"
 #include "loader/character_loader.hpp"
+#include "physics/kinematic_body.hpp"
+#include "render/camera.hpp"
 
 #include <SDL2/SDL.h>
 #include <cmath>
@@ -270,7 +272,24 @@ int main() {
         input_mgr.Shutdown();
         SDL_Quit();
 
-        std::cout << "\n[SUCESSO] Todos os testes de dominio e subsistema de entrada SDL2 passaram sem erros!\n";
+        // ------------------------------------------------------------------
+        // Etapa E: Verificação Determinística de Cinemática e Limites de Campo
+        // ------------------------------------------------------------------
+        std::cout << "\n[4/4] Verificando cinematica (KinematicBody) e limites do gramado (105m x 68m)...\n";
+        strikers::physics::KinematicBody endo_body({0.0f, 0.0f, 0.0f}, 20);
+        constexpr float kDt = 1.0f / 60.0f;
+        for (int i = 0; i < 600; ++i) {
+            endo_body.Update(1.0f, -1.0f, true, kDt);
+        }
+        const auto& clamped_pos = endo_body.GetPosition();
+        std::cout << "  - Posicao apos corrida diagonal longa : ("
+                  << clamped_pos.x << "m, " << clamped_pos.z << "m)\n";
+        if (std::fabs(clamped_pos.x - strikers::physics::PitchDimensions::kHalfLengthX) > 1e-3f ||
+            std::fabs(clamped_pos.z + strikers::physics::PitchDimensions::kHalfWidthZ) > 1e-3f) {
+            throw std::runtime_error("Falha no clamping de limites do gramado (105m x 68m).");
+        }
+
+        std::cout << "\n[SUCESSO] Todos os testes de dominio, cinematica e entrada SDL2 passaram sem erros!\n";
         return EXIT_SUCCESS;
 
     } catch (const std::exception& ex) {

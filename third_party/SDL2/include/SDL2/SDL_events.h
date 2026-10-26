@@ -23,6 +23,9 @@ typedef enum SDL_EventType {
     SDL_FIRSTEVENT = 0,
     SDL_QUIT = 0x100,
 
+    SDL_WINDOWEVENT = 0x200,
+    SDL_SYSWMEVENT = 0x201,
+
     SDL_KEYDOWN = 0x300,
     SDL_KEYUP = 0x301,
 
@@ -54,6 +57,18 @@ typedef struct SDL_QuitEvent {
     Uint32 type;
     Uint32 timestamp;
 } SDL_QuitEvent;
+
+typedef struct SDL_WindowEvent {
+    Uint32 type;
+    Uint32 timestamp;
+    Uint32 windowID;
+    Uint8 event;
+    Uint8 padding1;
+    Uint8 padding2;
+    Uint8 padding3;
+    Sint32 data1;
+    Sint32 data2;
+} SDL_WindowEvent;
 
 typedef struct SDL_KeyboardEvent {
     Uint32 type;
@@ -97,6 +112,7 @@ typedef struct SDL_ControllerDeviceEvent {
 typedef union SDL_Event {
     Uint32 type;
     SDL_CommonEvent common;
+    SDL_WindowEvent window;
     SDL_KeyboardEvent key;
     SDL_ControllerAxisEvent caxis;
     SDL_ControllerButtonEvent cbutton;

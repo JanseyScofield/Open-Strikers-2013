@@ -168,9 +168,9 @@ InputBindingsConfig ConfigLoader::CreateDefaultConfig() {
         {LogicalAction::DashSprint,     {SDL_SCANCODE_L, SDL_SCANCODE_LSHIFT}},
         {LogicalAction::TacticSwitch,   {SDL_SCANCODE_O, SDL_SCANCODE_TAB}},
         {LogicalAction::HissatsuLevel,  {SDL_SCANCODE_I, SDL_SCANCODE_E}},
-        {LogicalAction::PauseMenu,      {SDL_SCANCODE_SPACE, SDL_SCANCODE_RETURN}},
+        {LogicalAction::PauseMenu,      {SDL_SCANCODE_SPACE, SDL_SCANCODE_RETURN, SDL_SCANCODE_ESCAPE}},
         {LogicalAction::Confirm,        {SDL_SCANCODE_J, SDL_SCANCODE_RETURN}},
-        {LogicalAction::Cancel,         {SDL_SCANCODE_K, SDL_SCANCODE_ESCAPE}},
+        {LogicalAction::Cancel,         {SDL_SCANCODE_ESCAPE}},
     };
 
     // Jogador 2: Setas Direcionais + Teclado Numérico
@@ -185,9 +185,9 @@ InputBindingsConfig ConfigLoader::CreateDefaultConfig() {
         {LogicalAction::DashSprint,     {SDL_SCANCODE_KP_0, SDL_SCANCODE_RSHIFT}},
         {LogicalAction::TacticSwitch,   {SDL_SCANCODE_KP_5}},
         {LogicalAction::HissatsuLevel,  {SDL_SCANCODE_KP_4}},
-        {LogicalAction::PauseMenu,      {SDL_SCANCODE_KP_ENTER}},
+        {LogicalAction::PauseMenu,      {SDL_SCANCODE_KP_ENTER, SDL_SCANCODE_ESCAPE}},
         {LogicalAction::Confirm,        {SDL_SCANCODE_KP_1}},
-        {LogicalAction::Cancel,         {SDL_SCANCODE_KP_2}},
+        {LogicalAction::Cancel,         {SDL_SCANCODE_ESCAPE}},
     };
 
     return cfg;

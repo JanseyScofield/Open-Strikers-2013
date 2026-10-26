@@ -146,6 +146,12 @@ bool InputManager::PumpEvents() {
                 quit_requested_ = true;
                 break;
 
+            case SDL_WINDOWEVENT:
+                if (ev.window.event == SDL_WINDOWEVENT_CLOSE) {
+                    quit_requested_ = true;
+                }
+                break;
+
             case SDL_KEYDOWN:
                 if (ev.key.keysym.scancode >= 0 && ev.key.keysym.scancode < SDL_NUM_SCANCODES) {
                     event_key_state_[static_cast<std::size_t>(ev.key.keysym.scancode)] = true;
