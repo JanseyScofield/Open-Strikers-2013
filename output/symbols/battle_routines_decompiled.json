@@ -1,0 +1,540 @@
+{
+  "functions": [
+    {
+      "name": "FUN_800410e8",
+      "address": "0x800410E8",
+      "file_offset": "0x022E08",
+      "signature": "void FUN_800410e8(undefined1 *param_1);",
+      "decompiled_c": "\nvoid FUN_800410e8(undefined1 *param_1)\n\n{\n  undefined1 *puVar1;\n  int iVar2;\n  int iVar3;\n  \n  iVar3 = 0xce;\n  iVar2 = -0x7facf18c;\n  do {\n    *(undefined1 *)(iVar2 + 8) = *param_1;\n    *(undefined1 *)(iVar2 + 10) = param_1[2];\n    *(undefined1 *)(iVar2 + 0xc) = param_1[4];\n    *(undefined1 *)(iVar2 + 0xe) = param_1[6];\n    *(undefined1 *)(iVar2 + 0x10) = param_1[8];\n    *(undefined1 *)(iVar2 + 0x12) = param_1[10];\n    *(undefined1 *)(iVar2 + 0x14) = param_1[0xc];\n    *(undefined1 *)(iVar2 + 9) = param_1[1];\n    *(undefined1 *)(iVar2 + 0xb) = param_1[3];\n    *(undefined1 *)(iVar2 + 0xd) = param_1[5];\n    *(undefined1 *)(iVar2 + 0xf) = param_1[7];\n    *(undefined1 *)(iVar2 + 0x11) = param_1[9];\n    *(undefined1 *)(iVar2 + 0x13) = param_1[0xb];\n    *(undefined1 *)(iVar2 + 0x15) = param_1[0xd];\n    *(undefined1 *)(iVar2 + 0x16) = param_1[0xe];\n    *(undefined1 *)(iVar2 + 0x17) = param_1[0xf];\n    *(undefined1 *)(iVar2 + 0x18) = param_1[0x10];\n    *(undefined1 *)(iVar2 + 0x44) = param_1[0x14];\n    *(undefined1 *)(iVar2 + 0x46) = param_1[0x16];\n    *(undefined1 *)(iVar2 + 0x48) = param_1[0x18];\n    *(undefined1 *)(iVar2 + 0x4a) = param_1[0x1a];\n    *(undefined1 *)(iVar2 + 0x4c) = param_1[0x1c];\n    *(undefined1 *)(iVar2 + 0x4e) = param_1[0x1e];\n    *(undefined1 *)(iVar2 + 0x50) = param_1[0x20];\n    *(undefined1 *)(iVar2 + 0x45) = param_1[0x15];\n    *(undefined1 *)(iVar2 + 0x47) = param_1[0x17];\n    *(undefined1 *)(iVar2 + 0x49) = param_1[0x19];\n    *(undefined1 *)(iVar2 + 0x4b) = param_1[0x1b];\n    *(undefined1 *)(iVar2 + 0x4d) = param_1[0x1d];\n    *(undefined1 *)(iVar2 + 0x4f) = param_1[0x1f];\n    *(undefined1 *)(iVar2 + 0x51) = param_1[0x21];\n    *(undefined1 *)(iVar2 + 0x52) = param_1[0x22];\n    *(undefined1 *)(iVar2 + 0x53) = param_1[0x23];\n    puVar1 = param_1 + 0x24;\n    param_1 = param_1 + 0x28;\n    *(undefined1 *)(iVar2 + 0x54) = *puVar1;\n    iVar2 = iVar2 + 0x78;\n    iVar3 = iVar3 + -1;\n  } while (iVar3 != 0);\n  uRam80535500 = uRam80535500 | 0x10;\n  uRam8053607c = uRam8053607c | 0x10;\n  return;\n}\n\n",
+      "disassembly": "0x800410E8: lis r4,-0x7fae\n0x800410EC: li r0,0xce\n0x800410F0: addi r4,r4,0x6100\n0x800410F4: addis r5,r4,0x1\n0x800410F8: li r4,0x0\n0x800410FC: mtspr CTR,r0\n0x80041100: subi r5,r5,0x528c\n0x80041104: lbz r0,0x0(r3)\n0x80041108: addi r4,r4,0x1\n0x8004110C: stb r0,0x8(r5)\n0x80041110: lbz r0,0x2(r3)\n0x80041114: stb r0,0xa(r5)\n0x80041118: lbz r0,0x4(r3)\n0x8004111C: stb r0,0xc(r5)\n0x80041120: lbz r0,0x6(r3)\n0x80041124: stb r0,0xe(r5)\n0x80041128: lbz r0,0x8(r3)\n0x8004112C: stb r0,0x10(r5)\n0x80041130: lbz r0,0xa(r3)\n0x80041134: stb r0,0x12(r5)\n0x80041138: lbz r0,0xc(r3)\n0x8004113C: stb r0,0x14(r5)\n0x80041140: lbz r0,0x1(r3)\n0x80041144: stb r0,0x9(r5)\n0x80041148: lbz r0,0x3(r3)\n0x8004114C: stb r0,0xb(r5)\n0x80041150: lbz r0,0x5(r3)\n0x80041154: stb r0,0xd(r5)\n0x80041158: lbz r0,0x7(r3)\n0x8004115C: stb r0,0xf(r5)\n0x80041160: lbz r0,0x9(r3)\n0x80041164: stb r0,0x11(r5)\n0x80041168: lbz r0,0xb(r3)\n0x8004116C: stb r0,0x13(r5)\n0x80041170: lbz r0,0xd(r3)\n0x80041174: stb r0,0x15(r5)\n0x80041178: lbz r0,0xe(r3)\n0x8004117C: stb r0,0x16(r5)\n0x80041180: lbz r0,0xf(r3)\n0x80041184: stb r0,0x17(r5)\n0x80041188: lbz r0,0x10(r3)\n0x8004118C: stb r0,0x18(r5)\n0x80041190: lbz r0,0x14(r3)\n0x80041194: stb r0,0x44(r5)\n0x80041198: lbz r0,0x16(r3)\n0x8004119C: stb r0,0x46(r5)\n0x800411A0: lbz r0,0x18(r3)\n0x800411A4: stb r0,0x48(r5)\n0x800411A8: lbz r0,0x1a(r3)\n0x800411AC: stb r0,0x4a(r5)\n0x800411B0: lbz r0,0x1c(r3)\n0x800411B4: stb r0,0x4c(r5)\n0x800411B8: lbz r0,0x1e(r3)\n0x800411BC: stb r0,0x4e(r5)\n0x800411C0: lbz r0,0x20(r3)\n0x800411C4: stb r0,0x50(r5)\n0x800411C8: lbz r0,0x15(r3)\n0x800411CC: stb r0,0x45(r5)\n0x800411D0: lbz r0,0x17(r3)\n0x800411D4: stb r0,0x47(r5)\n0x800411D8: lbz r0,0x19(r3)\n0x800411DC: stb r0,0x49(r5)\n0x800411E0: lbz r0,0x1b(r3)\n0x800411E4: stb r0,0x4b(r5)\n0x800411E8: lbz r0,0x1d(r3)\n0x800411EC: stb r0,0x4d(r5)\n0x800411F0: lbz r0,0x1f(r3)\n0x800411F4: stb r0,0x4f(r5)\n0x800411F8: lbz r0,0x21(r3)\n0x800411FC: stb r0,0x51(r5)\n0x80041200: lbz r0,0x22(r3)\n0x80041204: stb r0,0x52(r5)\n0x80041208: lbz r0,0x23(r3)\n0x8004120C: stb r0,0x53(r5)\n0x80041210: lbz r0,0x24(r3)\n0x80041214: addi r3,r3,0x28\n0x80041218: stb r0,0x54(r5)\n0x8004121C: addi r5,r5,0x78\n0x80041220: bdnz 0x80041104\n0x80041224: lis r3,-0x7fae\n0x80041228: addi r3,r3,0x6100\n0x8004122C: addis r4,r3,0x1\n0x80041230: lwz r3,-0xc00(r4)\n0x80041234: lwz r0,-0x84(r4)\n0x80041238: ori r3,r3,0x10\n0x8004123C: stw r3,-0xc00(r4)\n0x80041240: ori r0,r0,0x10\n0x80041244: stw r0,-0x84(r4)\n0x80041248: blr\n"
+    },
+    {
+      "name": "FUN_8004124c",
+      "address": "0x8004124C",
+      "file_offset": "0x022F6C",
+      "signature": "void FUN_8004124c(undefined2 *param_1);",
+      "decompiled_c": "\nvoid FUN_8004124c(undefined2 *param_1)\n\n{\n  undefined2 *puVar1;\n  undefined2 *puVar2;\n  int iVar3;\n  int iVar4;\n  \n  iVar3 = -0x7facf150;\n  puVar2 = (undefined2 *)0x8058a1ce;\n  iVar4 = 0x19b;\n  do {\n    *puVar2 = *param_1;\n    puVar2[4] = param_1[5];\n    puVar2[8] = param_1[9];\n    puVar2[0xc] = param_1[0xd];\n    puVar2[1] = param_1[1];\n    puVar2[5] = param_1[6];\n    puVar2[9] = param_1[10];\n    puVar2[0xd] = param_1[0xe];\n    puVar2[2] = param_1[2];\n    puVar2[6] = param_1[7];\n    puVar2[10] = param_1[0xb];\n    puVar2[0xe] = param_1[0xf];\n    puVar2[3] = param_1[3];\n    puVar2[7] = param_1[8];\n    puVar2[0xb] = param_1[0xc];\n    puVar2[0xf] = param_1[0x10];\n    puVar2[0x10] = param_1[4];\n    puVar2 = puVar2 + 0x11;\n    *(undefined2 *)(iVar3 + 0x2c) = param_1[0x11];\n    *(undefined2 *)(iVar3 + 0x2e) = param_1[0x12];\n    *(undefined2 *)(iVar3 + 0x34) = param_1[0x15];\n    *(undefined2 *)(iVar3 + 0x30) = param_1[0x13];\n    *(undefined2 *)(iVar3 + 0x36) = param_1[0x16];\n    *(undefined2 *)(iVar3 + 0x32) = param_1[0x14];\n    puVar1 = param_1 + 0x17;\n    param_1 = param_1 + 0x18;\n    *(undefined2 *)(iVar3 + 0x38) = *puVar1;\n    iVar3 = iVar3 + 0x3c;\n    iVar4 = iVar4 + -1;\n  } while (iVar4 != 0);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80075600",
+      "address": "0x80075600",
+      "file_offset": "0x057320",
+      "signature": "void FUN_80075600(int param_1);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_80075600(int param_1)\n\n{\n  float fVar1;\n  int iVar2;\n  double unaff_f30;\n  \n  fVar1 = *(float *)(param_1 + 0x70);\n  iVar2 = func_0x801b3310();\n  if (iVar2 != 0) {\n    fVar1 = ((float)((double)CONCAT44(0x43300000,*(uint *)(iRam8051d5ec + 0xa8) ^ 0x80000000) -\n                    4503601774854144.0) * 6.2831855) / 360.0;\n  }\n  func_0x80330358((double)((float)((double)fVar1 + unaff_f30) - 1.5707964));\n                    /* WARNING: Bad instruction - Truncating control flow here */\n  halt_baddata();\n}\n\n",
+      "disassembly": "0x80075600: lfs f31,0x70(r3)\n0x80075604: bl 0x801b3310\n0x80075608: cmpwi r3,0x0\n0x8007560C: beq 0x80075650\n0x80075610: lis r3,-0x7faf\n0x80075614: lis r0,0x4330\n0x80075618: addi r3,r3,0x30b8\n0x8007561C: stw r0,0x8(r1)\n0x80075620: addis r3,r3,0x1\n0x80075624: lfd f3,-0x7c70(r2)\n0x80075628: lwz r3,-0x5acc(r3)\n0x8007562C: lfs f1,-0x7c3c(r2)\n0x80075630: lwz r0,0xa8(r3)\n0x80075634: lfs f0,-0x7c38(r2)\n0x80075638: xoris r0,r0,0x8000\n0x8007563C: stw r0,0xc(r1)\n0x80075640: lfd f2,0x8(r1)\n0x80075644: fsubs f2,f2,f3\n0x80075648: fmuls f1,f1,f2\n0x8007564C: fdivs f31,f1,f0\n0x80075650: fadds f1,f31,f30\n0x80075654: lfs f0,-0x7c34(r2)\n0x80075658: fsubs f1,f1,f0\n0x8007565C: bl 0x80330358\n0x80075660: lwz r0,0x34(r1)\n"
+    },
+    {
+      "name": "FUN_80075680",
+      "address": "0x80075680",
+      "file_offset": "0x0573A0",
+      "signature": "int FUN_80075680(undefined8 param_1,undefined8 param_2,int param_3);",
+      "decompiled_c": "\nint FUN_80075680(undefined8 param_1,undefined8 param_2,int param_3)\n\n{\n  int iVar1;\n  double dVar2;\n  \n  if (param_3 == 0x1f) {\n    iVar1 = 0x44;\n  }\n  else if (param_3 == 0x43) {\n    iVar1 = 0x42;\n  }\n  else if (param_3 == 0x20) {\n    iVar1 = 0x45;\n  }\n  else if (param_3 == 0x39) {\n    iVar1 = 0x38;\n  }\n  else if (param_3 == 0x35) {\n    iVar1 = 0x34;\n  }\n  else if (param_3 == 0x37) {\n    iVar1 = 0x36;\n  }\n  else {\n    if (param_3 != 0x3c) {\n      return param_3;\n    }\n    iVar1 = 0x3b;\n  }\n  dVar2 = (double)func_0x8033045c(param_2,param_1);\n  if (0.0 <= dVar2) {\n    iVar1 = param_3;\n  }\n  return iVar1;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80075754",
+      "address": "0x80075754",
+      "file_offset": "0x057474",
+      "signature": "int FUN_80075754(int param_1,int param_2);",
+      "decompiled_c": "\nint FUN_80075754(int param_1,int param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  int iVar3;\n  uint uVar4;\n  int iVar5;\n  \n  if ((uRam805130c0 & 0x8000000) == 0) {\n    if ((uRam805130c0 & 0x10000000) == 0) {\n      iVar5 = (uint)*(byte *)(param_1 + 0x82) * 0x4c;\n      iVar2 = (uint)*(byte *)(param_2 + 0x82) * 0x4c;\n      iVar3 = FUN_80092b2c(param_1,*(undefined4 *)(iVar5 + -0x7f853a48),5);\n      iVar5 = FUN_80092b2c(param_1,*(undefined4 *)(iVar5 + -0x7f853a54),2);\n      iVar5 = iVar5 + iVar3 / 2;\n      iVar3 = FUN_80092b2c(param_2,*(undefined4 *)(iVar2 + -0x7f853a48),5);\n      iVar2 = FUN_80092b2c(param_2,*(undefined4 *)(iVar2 + -0x7f853a50),3);\n      iVar2 = iVar2 + iVar3 / 2;\n      iVar3 = FUN_8009f4c0(*(undefined1 *)(param_1 + 0x4e),*(undefined1 *)(param_2 + 0x4e));\n      uVar4 = FUN_8008ef20(0,100,&STR_80499330,0x302f);\n      if (iVar3 == 1) {\n        iVar5 = iVar5 + 0x14;\n      }\n      else if (iVar3 == -1) {\n        iVar2 = iVar2 + 0x14;\n      }\n      iVar5 = iVar5 - iVar2;\n      if (iVar5 < 0x1a) {\n        if (iVar5 < 6) {\n          if (iVar5 < -5) {\n            uVar1 = 0x2d;\n          }\n          else {\n            uVar1 = 0x32;\n          }\n        }\n        else if (iVar5 < 0x10) {\n          uVar1 = 0x37;\n        }\n        else {\n          uVar1 = 0x3c;\n        }\n      }\n      else if (iVar5 < 0x2e) {\n        if (iVar5 < 0x24) {\n          uVar1 = 0x41;\n        }\n        else {\n          uVar1 = 0x46;\n        }\n      }\n      else if (iVar5 < 0x38) {\n        uVar1 = 0x4b;\n      }\n      else {\n        uVar1 = 0x50;\n      }\n      iVar2 = (uint)(uVar4 <= uVar1) - ((int)uVar4 >> 0x1f);\n    }\n    else {\n      iVar2 = 0;\n    }\n  }\n  else {\n    iVar2 = 1;\n  }\n  return iVar2;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007590c",
+      "address": "0x8007590C",
+      "file_offset": "0x05762C",
+      "signature": "void FUN_8007590c(void);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_8007590c(void)\n\n{\n                    /* WARNING: Bad instruction - Truncating control flow here */\n  halt_baddata();\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80075a10",
+      "address": "0x80075A10",
+      "file_offset": "0x057730",
+      "signature": "void FUN_80075a10(void);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_80075a10(void)\n\n{\n                    /* WARNING: Bad instruction - Truncating control flow here */\n  halt_baddata();\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80075e9c",
+      "address": "0x80075E9C",
+      "file_offset": "0x057BBC",
+      "signature": "void FUN_80075e9c(int param_1,int param_2,undefined4 *param_3);",
+      "decompiled_c": "\nvoid FUN_80075e9c(int param_1,int param_2,undefined4 *param_3)\n\n{\n  if (param_2 == 10) {\n    switch(*(undefined1 *)(param_1 + 0x81)) {\n    case 0:\n      *param_3 = 0x41400000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 900U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 1:\n      *param_3 = 0x41400000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 500U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 2:\n      *param_3 = 0x41400000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 100U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 3:\n      *param_3 = 0x41000000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 100U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 4:\n      *param_3 = 0x40800000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,*(uint *)(iRam8051d5ec + 0x18) ^ 0x80000000)\n                           - 4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 5:\n      *param_3 = 0;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 100U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 6:\n      *param_3 = 0xc0800000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,*(uint *)(iRam8051d5ec + 0x18) ^ 0x80000000)\n                           - 4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 7:\n      *param_3 = 0xc1000000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 100U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 8:\n      *param_3 = 0xc1400000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 100U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    case 9:\n      *param_3 = 0xc1400000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 500U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n      break;\n    default:\n      *param_3 = 0xc1400000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 900U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db58);\n    }\n  }\n  else {\n    switch(*(undefined1 *)(param_1 + 0x81)) {\n    case 0:\n      *param_3 = 0x41100000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 900U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 1:\n      *param_3 = 0x41100000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 500U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 2:\n      *param_3 = 0x41200000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 200U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 3:\n      *param_3 = 0x41000000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 300U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 4:\n      *param_3 = 0x40800000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 200U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 5:\n      *param_3 = 0;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 300U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 6:\n      *param_3 = 0xc0800000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 200U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 7:\n      *param_3 = 0xc1000000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 300U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 8:\n      *param_3 = 0xc1200000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 200U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    case 9:\n      *param_3 = 0xc1100000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 500U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n      break;\n    default:\n      *param_3 = 0xc1100000;\n      param_3[1] = ((float)((double)CONCAT44(0x43300000,\n                                             *(int *)(iRam8051d5ec + 0x18) + 900U ^ 0x80000000) -\n                           4503601774854144.0) / 100.0) *\n                   *(float *)((uint)*(byte *)(param_1 + 0x80) * 0x10 + -0x7f85db54);\n    }\n  }\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007b400",
+      "address": "0x8007B400",
+      "file_offset": "0x05D120",
+      "signature": "void FUN_8007b400(void);",
+      "decompiled_c": "\nvoid FUN_8007b400(void)\n\n{\n  func_0x80330ed4(&stack0x0000002c);\n  return;\n}\n\n",
+      "disassembly": "0x8007B400: addi r3,r1,0x2c\n0x8007B404: bl 0x80330ed4\n0x8007B408: lwz r0,0x64(r1)\n0x8007B40C: mtspr LR,r0\n0x8007B410: addi r1,r1,0x60\n0x8007B414: blr\n"
+    },
+    {
+      "name": "FUN_8007b418",
+      "address": "0x8007B418",
+      "file_offset": "0x05D138",
+      "signature": "undefined4 FUN_8007b418(int param_1,int param_2);",
+      "decompiled_c": "\nundefined4 FUN_8007b418(int param_1,int param_2)\n\n{\n  if (*(float *)(param_2 + 4) < *(float *)(param_1 + 4)) {\n    return 1;\n  }\n  return 0xffffffff;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007b430",
+      "address": "0x8007B430",
+      "file_offset": "0x05D150",
+      "signature": "undefined4 FUN_8007b430(void);",
+      "decompiled_c": "\nundefined4 FUN_8007b430(void)\n\n{\n  return 0xffffffff;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007b438",
+      "address": "0x8007B438",
+      "file_offset": "0x05D158",
+      "signature": "int FUN_8007b438(uint param_1);",
+      "decompiled_c": "\nint FUN_8007b438(uint param_1)\n\n{\n  byte bVar1;\n  int iVar2;\n  byte *pbVar3;\n  int iVar4;\n  int iVar5;\n  \n  if (*(int *)((param_1 & 0xff) * 4 + -0x7f85dbe4) == 0) {\n    if (((uRam807acf00 & 0x200) == 0) ||\n       (((sRam807ae890 != 5 && (sRam807ae890 != 4)) && (sRam807ae890 != 7)))) {\n      iVar2 = (int)cRam807acf03;\n      if ((sRam807ae890 == 5) || (sRam807ae890 == 7)) {\n        pbVar3 = (byte *)func_0x80099f80(param_1,0);\n        bVar1 = *pbVar3;\n        pbVar3 = (byte *)func_0x80099f80(1 - param_1 & 0xff,0);\n        if (iVar2 + 2U < 2) {\n          iVar4 = -4;\n          iVar5 = -8;\n        }\n        else {\n          iVar4 = -3;\n          iVar5 = -6;\n        }\n        if (iVar5 < (int)((uint)bVar1 - (uint)*pbVar3)) {\n          if ((int)((uint)bVar1 - (uint)*pbVar3) <= iVar4) {\n            iVar2 = iVar2 + 1;\n          }\n        }\n        else {\n          iVar2 = iVar2 + 2;\n        }\n        if (iVar2 < -2) {\n          iVar2 = -2;\n        }\n        else if (2 < iVar2) {\n          iVar2 = 2;\n        }\n      }\n    }\n    else {\n      iVar2 = -3;\n    }\n  }\n  else {\n    iVar2 = 0;\n  }\n  return iVar2;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007b56c",
+      "address": "0x8007B56C",
+      "file_offset": "0x05D28C",
+      "signature": "void FUN_8007b56c(void);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_8007b56c(void)\n\n{\n                    /* WARNING: Bad instruction - Truncating control flow here */\n  halt_baddata();\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007c400",
+      "address": "0x8007C400",
+      "file_offset": "0x05E120",
+      "signature": "void FUN_8007c400(void);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_8007c400(void)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  int unaff_r27;\n  int unaff_r28;\n  int unaff_r29;\n  int unaff_r30;\n  int unaff_r31;\n  double unaff_f31;\n  \n  do {\n    uVar2 = func_0x8017e4dc(0,unaff_r31 + 0x32,unaff_r29 + 0x7c);\n    *(undefined4 *)(unaff_r29 + 0x88) = uVar2;\n    while( true ) {\n      do {\n        unaff_r27 = unaff_r27 + 1;\n        unaff_r28 = unaff_r28 + 100;\n        if (1 < unaff_r27) {\n                    /* WARNING: Bad instruction - Truncating control flow here */\n          halt_baddata();\n        }\n        unaff_r29 = iRam8050c4b8 + unaff_r28;\n        if ((unaff_f31 < (double)*(float *)(unaff_r29 + 0x4c)) &&\n           (iVar1 = func_0x8033def8(*(undefined4 *)(unaff_r29 + 0x5c)), iVar1 == 0)) {\n          if (unaff_r27 == 0) {\n            uVar2 = func_0x8017e4dc(0,unaff_r30 + -0x6ae8,unaff_r29 + 0x50);\n            *(undefined4 *)(unaff_r29 + 0x5c) = uVar2;\n          }\n          else {\n            uVar2 = func_0x8017e4dc(0,unaff_r31 + 0x11,unaff_r29 + 0x50);\n            *(undefined4 *)(unaff_r29 + 0x5c) = uVar2;\n          }\n          func_0x8033dca0(0x4014000000000000,0x4014000000000000,0x3ff0000000000000,\n                          *(undefined4 *)(unaff_r29 + 0x5c));\n        }\n      } while (((double)*(float *)(unaff_r29 + 0x78) <= unaff_f31) ||\n              (iVar1 = func_0x8033def8(*(undefined4 *)(unaff_r29 + 0x88)), iVar1 != 0));\n      if (unaff_r27 != 0) break;\n      uVar2 = func_0x8017e4dc(0,unaff_r31 + 0x26,unaff_r29 + 0x7c);\n      *(undefined4 *)(unaff_r29 + 0x88) = uVar2;\n    }\n  } while( true );\n}\n\n",
+      "disassembly": "0x8007C400: lfs f1,-0x7a00(r2)\n0x8007C404: addi r3,r31,0x32\n0x8007C408: addi r4,r29,0x7c\n0x8007C40C: bl 0x8017e4dc\n0x8007C410: stw r3,0x88(r29)\n0x8007C414: addi r27,r27,0x1\n0x8007C418: addi r28,r28,0x64\n0x8007C41C: cmpwi r27,0x2\n0x8007C420: blt 0x8007c358\n0x8007C424: addi r11,r1,0x20\n"
+    },
+    {
+      "name": "FUN_8007c444",
+      "address": "0x8007C444",
+      "file_offset": "0x05E164",
+      "signature": "int FUN_8007c444(void);",
+      "decompiled_c": "\nint FUN_8007c444(void)\n\n{\n  uint uVar1;\n  int iVar2;\n  \n  uVar1 = func_0x80099e44();\n  if (((uRam805130c0 & 0x10000) == 0) || (*(short *)((uVar1 & 0xff) * 0xc9c + -0x7f8530ee) == 0)) {\n    uVar1 = *(uint *)(iRam8050c4b8 + (uVar1 & 0xff) * 100 + 0x34);\n    iVar2 = ((int)uVar1 >> 0x1f) + (uint)(9 < uVar1);\n  }\n  else {\n    iVar2 = 1;\n  }\n  return iVar2;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007c4c4",
+      "address": "0x8007C4C4",
+      "file_offset": "0x05E1E4",
+      "signature": "undefined4 FUN_8007c4c4(uint param_1,int param_2);",
+      "decompiled_c": "\nundefined4 FUN_8007c4c4(uint param_1,int param_2)\n\n{\n  if (param_2 == 0) {\n    param_1 = func_0x80099e44();\n    param_1 = param_1 & 0xff;\n  }\n  return *(undefined4 *)(iRam8050c4b8 + param_1 * 100 + 0x6c);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8007c504",
+      "address": "0x8007C504",
+      "file_offset": "0x05E224",
+      "signature": "bool FUN_8007c504(undefined4 param_1,undefined4 param_2);",
+      "decompiled_c": "\nbool FUN_8007c504(undefined4 param_1,undefined4 param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  bool bVar3;\n  \n  uVar1 = func_0x80099e44();\n  iVar2 = iRam8050c4b8 + (uVar1 & 0xff) * 100;\n  bVar3 = 0.0 < *(float *)(iVar2 + 0x78);\n  if (bVar3) {\n    func_0x80330e00(param_2,iVar2 + 0x7c);\n  }\n  return bVar3;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8008ef20",
+      "address": "0x8008EF20",
+      "file_offset": "0x070C40",
+      "signature": "int FUN_8008ef20(int param_1,int param_2,undefined4 param_3,undefined4 param_4);",
+      "decompiled_c": "\nint FUN_8008ef20(int param_1,int param_2,undefined4 param_3,undefined4 param_4)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  uint uVar3;\n  \n  iVar1 = func_0x801b3310();\n  if (iVar1 == 0) {\n    param_1 = FUN_80330d14(param_1,param_2);\n  }\n  else {\n    iVar1 = func_0x80237954();\n    if ((iVar1 != 0) && (iRam8050d788 = iRam8050d788 + 1, param_1 != param_2)) {\n      iVar1 = func_0x80237954();\n      if (iVar1 != 0) {\n        uRam8050d78c = func_0x80330cc8();\n      }\n      uVar3 = (param_2 - param_1) + 1;\n      param_1 = param_1 + (uRam8050d78c - (uRam8050d78c / uVar3) * uVar3);\n    }\n  }\n  iVar1 = func_0x801b3310();\n  if ((iVar1 != 0) && (iVar1 = func_0x80237954(), iVar1 != 0)) {\n    iVar1 = func_0x801b3310();\n    uVar2 = uRam809025d8;\n    if (iVar1 != 0) {\n      uVar2 = func_0x802377dc();\n    }\n    func_0x80239b38(&STR_804997FA,uVar2,param_1,param_3,param_4);\n  }\n  return param_1;\n}\n\n",
+      "disassembly": "0x8008EF20: stwu r1,-0x20(r1)\n0x8008EF24: mfspr r0,LR\n0x8008EF28: stw r0,0x24(r1)\n0x8008EF2C: stw r31,0x1c(r1)\n0x8008EF30: or r31,r6,r6\n0x8008EF34: stw r30,0x18(r1)\n0x8008EF38: or r30,r5,r5\n0x8008EF3C: stw r29,0x14(r1)\n0x8008EF40: or r29,r4,r4\n0x8008EF44: stw r28,0x10(r1)\n0x8008EF48: or r28,r3,r3\n0x8008EF4C: bl 0x801b3310\n0x8008EF50: cmpwi r3,0x0\n0x8008EF54: bne 0x8008ef6c\n0x8008EF58: or r3,r28,r28\n0x8008EF5C: or r4,r29,r29\n0x8008EF60: bl 0x80330d14\n0x8008EF64: or r28,r3,r3\n0x8008EF68: b 0x8008efcc\n0x8008EF6C: bl 0x80237954\n0x8008EF70: cntlzw r0,r3\n0x8008EF74: rlwinm. r0,r0,0x1b,0x5,0x1f\n0x8008EF78: beq 0x8008ef80\n0x8008EF7C: b 0x8008efcc\n0x8008EF80: lwz r3,-0x6c78(r13)\n0x8008EF84: cmpw r28,r29\n0x8008EF88: addi r0,r3,0x1\n0x8008EF8C: stw r0,-0x6c78(r13)\n0x8008EF90: bne 0x8008ef98\n0x8008EF94: b 0x8008efcc\n0x8008EF98: bl 0x80237954\n0x8008EF9C: cmpwi r3,0x0\n0x8008EFA0: beq 0x8008efb0\n0x8008EFA4: bl 0x80330cc8\n0x8008EFA8: stw r3,-0x6c74(r13)\n0x8008EFAC: b 0x8008efb4\n0x8008EFB0: lwz r3,-0x6c74(r13)\n0x8008EFB4: subf r4,r28,r29\n0x8008EFB8: addi r4,r4,0x1\n0x8008EFBC: divwu r0,r3,r4\n0x8008EFC0: mullw r0,r0,r4\n0x8008EFC4: subf r0,r0,r3\n0x8008EFC8: add r28,r28,r0\n0x8008EFCC: bl 0x801b3310\n0x8008EFD0: cmpwi r3,0x0\n0x8008EFD4: beq 0x8008f02c\n0x8008EFD8: bl 0x80237954\n0x8008EFDC: cntlzw r0,r3\n0x8008EFE0: rlwinm. r0,r0,0x1b,0x5,0x1f\n0x8008EFE4: bne 0x8008f02c\n0x8008EFE8: bl 0x801b3310\n0x8008EFEC: cmpwi r3,0x0\n0x8008EFF0: beq 0x8008effc\n0x8008EFF4: bl 0x802377dc\n0x8008EFF8: b 0x8008f008\n0x8008EFFC: lis r3,-0x7f70\n"
+    },
+    {
+      "name": "FUN_80092600",
+      "address": "0x80092600",
+      "file_offset": "0x074320",
+      "signature": "void FUN_80092600(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int *param_5,undefined4 *param_6);",
+      "decompiled_c": "\nvoid FUN_80092600(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int *param_5,\n                 undefined4 *param_6)\n\n{\n  int in_r0;\n  int iVar1;\n  int in_CTR;\n  double in_f0;\n  \n  while( true ) {\n    *(undefined4 *)(param_4 + in_r0) = param_2;\n    in_CTR = in_CTR + -1;\n    if (in_CTR == 0) break;\n    iVar1 = *param_5;\n    param_5 = param_5 + 1;\n    param_2 = *param_6;\n    param_6 = param_6 + 1;\n    *(float *)(param_4 + (uint)*(byte *)(iVar1 + 0x82) * 4 + 0x96a0) = (float)in_f0;\n    in_r0 = (uint)*(byte *)(iVar1 + 0x82) * 4 + 0x96f8;\n  }\n  func_0x802b2690();\n  return;\n}\n\n",
+      "disassembly": "0x80092600: stwx r4,r6,r0\n0x80092604: bdnz 0x800925cc\n0x80092608: addi r11,r1,0x20\n0x8009260C: bl 0x802b2690\n0x80092610: lwz r0,0x24(r1)\n0x80092614: mtspr LR,r0\n0x80092618: addi r1,r1,0x20\n0x8009261C: blr\n"
+    },
+    {
+      "name": "FUN_80092620",
+      "address": "0x80092620",
+      "file_offset": "0x074340",
+      "signature": "undefined4 FUN_80092620(undefined1 param_1);",
+      "decompiled_c": "\nundefined4 FUN_80092620(undefined1 param_1)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  \n  iVar1 = func_0x800af1fc(param_1);\n  if (((iVar1 == 0) ||\n      (iVar1 = (uint)*(byte *)(iVar1 + 0x82) * 4, *(float *)(iVar1 + -0x7f854558) <= 0.0)) ||\n     (0 < *(int *)(iVar1 + -0x7f854500))) {\n    uVar2 = 0;\n  }\n  else {\n    uVar2 = 1;\n  }\n  return uVar2;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009268c",
+      "address": "0x8009268C",
+      "file_offset": "0x0743AC",
+      "signature": "undefined1 FUN_8009268c(int param_1,int param_2);",
+      "decompiled_c": "\nundefined1 FUN_8009268c(int param_1,int param_2)\n\n{\n  int iVar1;\n  uint uVar2;\n  \n  uVar2 = 0;\n  while ((iVar1 = func_0x800af268(uVar2 & 0xff), *(short *)(iVar1 + 0x44) != param_1 ||\n         (*(char *)(iVar1 + 0x2e) != param_2))) {\n    uVar2 = uVar2 + 1;\n    if (0x15 < uVar2) {\n      return 0;\n    }\n  }\n  return *(undefined1 *)(iVar1 + 0x82);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80092708",
+      "address": "0x80092708",
+      "file_offset": "0x074428",
+      "signature": "void FUN_80092708(void);",
+      "decompiled_c": "\nvoid FUN_80092708(void)\n\n{\n  int iVar1;\n  int iVar2;\n  int iVar3;\n  uint uVar4;\n  \n  uVar4 = 0;\n  do {\n    iVar2 = func_0x800af268(uVar4 & 0xff);\n    iVar1 = (uVar4 & 0xff) * 0x4c;\n    iVar3 = func_0x800bbf0c((int)*(char *)(iVar2 + 0x2e),(int)*(short *)(iVar2 + 0x44));\n    *(uint *)(iVar1 + -0x7f853a5c) = (uint)*(byte *)(iVar3 + 0x70);\n    *(uint *)(iVar1 + -0x7f853a58) = (uint)*(byte *)(iVar3 + 0x71);\n    *(uint *)(iVar1 + -0x7f853a54) = (uint)*(byte *)(iVar3 + 0x72);\n    *(uint *)(iVar1 + -0x7f853a50) = (uint)*(byte *)(iVar3 + 0x73);\n    *(uint *)(iVar1 + -0x7f853a4c) = (uint)*(byte *)(iVar3 + 0x74);\n    *(uint *)(iVar1 + -0x7f853a48) = (uint)*(byte *)(iVar3 + 0x75);\n    *(uint *)(iVar1 + -0x7f853a44) = (uint)*(byte *)(iVar3 + 0x76);\n    *(uint *)(iVar1 + -0x7f853a40) = (uint)*(byte *)(iVar3 + 0x77);\n    *(uint *)(iVar1 + -0x7f853a3c) = (uint)*(byte *)(iVar3 + 0x78);\n    FUN_800929ac((uint *)(iVar1 + -0x7f853a5c));\n    *(undefined4 *)(iVar1 + -0x7f853a18) = 0;\n    if ((*(byte *)(iVar3 + 0x79) & 1) != 0) {\n      *(int *)(iVar1 + -0x7f853a18) = *(int *)(iVar1 + -0x7f853a18) + 1;\n    }\n    if ((*(byte *)(iVar3 + 0x79) & 0x10) == 0) {\n      if ((*(byte *)(iVar3 + 0x79) & 0x20) != 0) {\n        *(int *)(iVar1 + -0x7f853a18) = *(int *)(iVar1 + -0x7f853a18) + -1;\n      }\n    }\n    else {\n      *(int *)(iVar1 + -0x7f853a18) = *(int *)(iVar1 + -0x7f853a18) + 1;\n    }\n    if ((*(byte *)(iVar3 + 0x79) & 2) == 0) {\n      *(undefined1 *)(iVar1 + -0x7f853a14) = 0;\n    }\n    else {\n      *(undefined1 *)(iVar1 + -0x7f853a14) = 1;\n    }\n    if ((*(byte *)(iVar3 + 0x79) & 8) == 0) {\n      *(undefined1 *)(iVar2 + 0x85) = 0;\n    }\n    else {\n      *(undefined1 *)(iVar2 + 0x85) = 1;\n    }\n    uVar4 = uVar4 + 1;\n    *(char *)(iVar2 + 0x84) = (char)*(undefined4 *)(iVar3 + 0xc);\n  } while (uVar4 < 0x16);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80092854",
+      "address": "0x80092854",
+      "file_offset": "0x074574",
+      "signature": "void FUN_80092854(void);",
+      "decompiled_c": "\nvoid FUN_80092854(void)\n\n{\n  byte *pbVar1;\n  int iVar2;\n  int iVar3;\n  int *piVar4;\n  int iVar5;\n  int iVar6;\n  int iVar7;\n  undefined2 *puVar8;\n  \n  iVar5 = 0;\n  iVar7 = -0x7faecf48;\n  iVar6 = -0x7f8533d4;\n  do {\n    iVar3 = 0;\n    piVar4 = *(int **)(iVar7 + 0xa558);\n    do {\n      if (*piVar4 == 0) break;\n      pbVar1 = (byte *)func_0x800be968(*piVar4,iVar5);\n      puVar8 = (undefined2 *)(iVar6 + piVar4[1] * 0xc);\n      iVar2 = func_0x800bbf0c(iVar5,*piVar4);\n      iVar3 = iVar3 + 1;\n      *puVar8 = *(undefined2 *)(iVar2 + 0x6e);\n      piVar4 = piVar4 + 0x52;\n      puVar8[1] = *(undefined2 *)(iVar2 + 0x6c);\n      puVar8[2] = (ushort)*pbVar1;\n    } while (iVar3 < 0x10);\n    iVar5 = iVar5 + 1;\n    iVar6 = iVar6 + 0xc0;\n    iVar7 = iVar7 + 4;\n    if (1 < iVar5) {\n      return;\n    }\n  } while( true );\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009290c",
+      "address": "0x8009290C",
+      "file_offset": "0x07462C",
+      "signature": "void FUN_8009290c(void);",
+      "decompiled_c": "\nvoid FUN_8009290c(void)\n\n{\n  int iVar1;\n  int iVar2;\n  int *piVar3;\n  int iVar4;\n  int iVar5;\n  int iVar6;\n  undefined2 *puVar7;\n  \n  iVar4 = 0;\n  iVar6 = -0x7faecf48;\n  iVar5 = -0x7f8533d4;\n  do {\n    iVar2 = 0;\n    piVar3 = *(int **)(iVar6 + 0xa558);\n    do {\n      if (*piVar3 == 0) break;\n      puVar7 = (undefined2 *)(iVar5 + piVar3[1] * 0xc);\n      iVar1 = func_0x800bbf0c(iVar4);\n      iVar2 = iVar2 + 1;\n      *(undefined2 *)(iVar1 + 0x6e) = *puVar7;\n      piVar3 = piVar3 + 0x52;\n      *(undefined2 *)(iVar1 + 0x6c) = puVar7[1];\n    } while (iVar2 < 0x10);\n    iVar4 = iVar4 + 1;\n    iVar5 = iVar5 + 0xc0;\n    iVar6 = iVar6 + 4;\n    if (1 < iVar4) {\n      return;\n    }\n  } while( true );\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800929ac",
+      "address": "0x800929AC",
+      "file_offset": "0x0746CC",
+      "signature": "void FUN_800929ac(int param_1);",
+      "decompiled_c": "\nvoid FUN_800929ac(int param_1)\n\n{\n  int iVar1;\n  \n  iVar1 = *(int *)(param_1 + 0x14);\n  if (iVar1 < 0x3c) {\n    if (iVar1 < 0x28) {\n      if (iVar1 < 0x14) {\n        iVar1 = 0;\n      }\n      else {\n        iVar1 = 1;\n      }\n    }\n    else {\n      iVar1 = 2;\n    }\n  }\n  else if (iVar1 < 100) {\n    if (iVar1 < 0x50) {\n      iVar1 = 3;\n    }\n    else {\n      iVar1 = 4;\n    }\n  }\n  else {\n    iVar1 = 5;\n  }\n  if (iVar1 == 5) {\n    *(float *)(param_1 + 0x24) = fRam8050c4fc * 1.1;\n    *(float *)(param_1 + 0x28) = fRam8050c4f8 * 1.05;\n  }\n  else if (iVar1 == 4) {\n    *(float *)(param_1 + 0x24) = fRam8050c4fc * 1.04;\n    *(float *)(param_1 + 0x28) = fRam8050c4f8 * 1.02;\n  }\n  else if (iVar1 == 3) {\n    *(float *)(param_1 + 0x24) = fRam8050c4fc;\n    *(float *)(param_1 + 0x28) = fRam8050c4f8;\n  }\n  else if (iVar1 == 2) {\n    *(float *)(param_1 + 0x24) = fRam8050c4fc * 0.94;\n    *(float *)(param_1 + 0x28) = fRam8050c4f8 * 0.95;\n  }\n  else if (iVar1 == 1) {\n    *(float *)(param_1 + 0x24) = fRam8050c4fc * 0.9;\n    *(float *)(param_1 + 0x28) = fRam8050c4f8 * 0.92;\n  }\n  else {\n    *(float *)(param_1 + 0x24) = fRam8050c4fc * 0.85;\n    *(float *)(param_1 + 0x28) = fRam8050c4f8 * 0.9;\n  }\n  *(undefined4 *)(param_1 + 0x2c) = uRam8050c500;\n  *(undefined4 *)(param_1 + 0x30) = uRam8050c504;\n  *(undefined4 *)(param_1 + 0x34) = uRam8050c508;\n  *(undefined4 *)(param_1 + 0x38) = uRam8050c50c;\n  *(undefined4 *)(param_1 + 0x3c) = uRam8050c510;\n  *(undefined4 *)(param_1 + 0x40) = uRam8050c514;\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80092b2c",
+      "address": "0x80092B2C",
+      "file_offset": "0x07484C",
+      "signature": "void FUN_80092b2c(void);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_80092b2c(void)\n\n{\n                    /* WARNING: Bad instruction - Truncating control flow here */\n  halt_baddata();\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800999b0",
+      "address": "0x800999B0",
+      "file_offset": "0x07B6D0",
+      "signature": "void FUN_800999b0(void);",
+      "decompiled_c": "\nvoid FUN_800999b0(void)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  uint uVar3;\n  int iVar4;\n  int unaff_r25;\n  int unaff_r26;\n  int unaff_r28;\n  int iVar5;\n  byte *unaff_r30;\n  int unaff_r31;\n  \n  iVar5 = 10;\n  do {\n    if (*unaff_r30 != 4) {\n      iVar1 = func_0x800af1fc();\n      iVar4 = unaff_r31 + 0x10000 + (uint)*(byte *)(iVar1 + 0x82) * 0x4c;\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0x53,*unaff_r30 + 1);\n      func_0x80032b18(&stack0x00000128,iVar5,0x96,100);\n      func_0x80032b18(*(undefined4 *)\n                       (*(int *)(unaff_r26 + 0x108) +\n                       *(int *)(*(int *)(unaff_r26 + 0xa554) + *(short *)(iVar1 + 0x44) * 0x148 +\n                               0xc) * 4),iVar5,0xb4,100);\n      uVar2 = FUN_80092b2c(iVar1,*(undefined4 *)(iVar4 + -0x5e64),0);\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0x66,uVar2);\n      func_0x80032b18(&stack0x00000128,iVar5,0xe6,100);\n      uVar2 = FUN_80092b2c(iVar1,*(undefined4 *)(iVar4 + -0x5e60),1);\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0x7b,uVar2);\n      func_0x80032b18(&stack0x00000128,iVar5,0xff,100);\n      uVar2 = FUN_80092b2c(iVar1,*(undefined4 *)(iVar4 + -0x5e5c),2);\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0x90,uVar2);\n      func_0x80032b18(&stack0x00000128,iVar5,0x118,100);\n      uVar2 = FUN_80092b2c(iVar1,*(undefined4 *)(iVar4 + -0x5e58),3);\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0xa5,uVar2);\n      func_0x80032b18(&stack0x00000128,iVar5,0x131,100);\n      uVar2 = FUN_80092b2c(iVar1,*(undefined4 *)(iVar4 + -0x5e54),4);\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0xba,uVar2);\n      func_0x80032b18(&stack0x00000128,iVar5,0x14a,100);\n      uVar2 = FUN_80092b2c(iVar1,*(undefined4 *)(iVar4 + -0x5e50),5);\n      func_0x802bb0b0(&stack0x00000128,unaff_r25 + 0xcf,uVar2);\n      func_0x80032b18(&stack0x00000128,iVar5,0x163,100);\n    }\n    unaff_r28 = unaff_r28 + 1;\n    iVar5 = iVar5 + 200;\n    unaff_r30 = unaff_r30 + 1;\n  } while (unaff_r28 < 4);\n  if ((uRam805130c0 & 0x40000) != 0) {\n    uVar3 = 0;\n    do {\n      uVar2 = 0x226;\n      if ((uVar3 & 0xff) == 0) {\n        uVar2 = 10;\n      }\n      if (*(int *)((uVar3 & 0xff) * 4 + -0x7f85dbe4) == 0) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_8049999b);\n      }\n      else {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499984);\n      }\n      func_0x80032b18(&stack0x00000028,uVar2,100,100);\n      func_0x802bb0b0(&stack0x00000028,&UNK_804999b0);\n      func_0x80032b18(&stack0x00000028,uVar2,0x96,100);\n      if (cRam807acf03 == -3) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_804999bd);\n      }\n      else if (cRam807acf03 == -2) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_804999dd);\n      }\n      else if (cRam807acf03 == -1) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_804999fb);\n      }\n      else if (cRam807acf03 == '\\0') {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a13);\n      }\n      else if (cRam807acf03 == '\\x01') {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a2b);\n      }\n      else if (cRam807acf03 == '\\x02') {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a43);\n      }\n      else {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a61);\n      }\n      func_0x80032b18(&stack0x00000028,uVar2,0xaf,100);\n      func_0x802bb0b0(&stack0x00000028,&UNK_80499a83);\n      func_0x80032b18(&stack0x00000028,uVar2,0xe1,100);\n      iVar5 = FUN_8007b438(uVar3 & 0xff);\n      if (iVar5 == -3) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_804999bd);\n      }\n      else if (iVar5 == -2) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_804999dd);\n      }\n      else if (iVar5 == -1) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_804999fb);\n      }\n      else if (iVar5 == 0) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a13);\n      }\n      else if (iVar5 == 1) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a2b);\n      }\n      else if (iVar5 == 2) {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a43);\n      }\n      else {\n        func_0x802bb0b0(&stack0x00000028,&UNK_80499a61);\n      }\n      func_0x80032b18(&stack0x00000028,uVar2,0xfa,100);\n      uVar3 = uVar3 + 1;\n    } while (uVar3 < 2);\n  }\n  func_0x802b2684();\n  return;\n}\n\n",
+      "disassembly": "0x800999B0: li r29,0xa\n0x800999B4: lbz r3,0x0(r30)\n0x800999B8: cmplwi r3,0x4\n0x800999BC: beq 0x80099b88\n0x800999C0: bl 0x800af1fc\n0x800999C4: lbz r0,0x82(r3)\n0x800999C8: or r27,r3,r3\n0x800999CC: lbz r5,0x0(r30)\n0x800999D0: addis r6,r31,0x1\n0x800999D4: mulli r0,r0,0x4c\n0x800999D8: addi r3,r1,0x128\n0x800999DC: addi r4,r25,0x53\n0x800999E0: addi r5,r5,0x1\n0x800999E4: add r24,r6,r0\n0x800999E8: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x800999EC: bl 0x802bb0b0\n0x800999F0: or r4,r29,r29\n0x800999F4: addi r3,r1,0x128\n0x800999F8: li r5,0x96\n0x800999FC: li r6,0x64\n0x80099A00: bl 0x80032b18\n0x80099A04: lha r0,0x44(r27)\n0x80099A08: addis r3,r26,0x1\n0x80099A0C: lwz r3,-0x5aac(r3)\n0x80099A10: or r4,r29,r29\n0x80099A14: mulli r0,r0,0x148\n0x80099A18: lwz r7,0x108(r26)\n0x80099A1C: li r5,0xb4\n0x80099A20: li r6,0x64\n0x80099A24: add r3,r3,r0\n0x80099A28: lwz r0,0xc(r3)\n0x80099A2C: rlwinm r0,r0,0x2,0x0,0x1d\n0x80099A30: lwzx r3,r7,r0\n0x80099A34: bl 0x80032b18\n0x80099A38: lwz r4,-0x5e64(r24)\n0x80099A3C: or r3,r27,r27\n0x80099A40: li r5,0x0\n0x80099A44: bl 0x80092b2c\n0x80099A48: or r5,r3,r3\n0x80099A4C: addi r3,r1,0x128\n0x80099A50: addi r4,r25,0x66\n0x80099A54: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099A58: bl 0x802bb0b0\n0x80099A5C: or r4,r29,r29\n0x80099A60: addi r3,r1,0x128\n0x80099A64: li r5,0xe6\n0x80099A68: li r6,0x64\n0x80099A6C: bl 0x80032b18\n0x80099A70: lwz r4,-0x5e60(r24)\n0x80099A74: or r3,r27,r27\n0x80099A78: li r5,0x1\n0x80099A7C: bl 0x80092b2c\n0x80099A80: or r5,r3,r3\n0x80099A84: addi r3,r1,0x128\n0x80099A88: addi r4,r25,0x7b\n0x80099A8C: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099A90: bl 0x802bb0b0\n0x80099A94: or r4,r29,r29\n0x80099A98: addi r3,r1,0x128\n0x80099A9C: li r5,0xff\n0x80099AA0: li r6,0x64\n0x80099AA4: bl 0x80032b18\n0x80099AA8: lwz r4,-0x5e5c(r24)\n0x80099AAC: or r3,r27,r27\n0x80099AB0: li r5,0x2\n0x80099AB4: bl 0x80092b2c\n0x80099AB8: or r5,r3,r3\n0x80099ABC: addi r3,r1,0x128\n0x80099AC0: addi r4,r25,0x90\n0x80099AC4: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099AC8: bl 0x802bb0b0\n0x80099ACC: or r4,r29,r29\n0x80099AD0: addi r3,r1,0x128\n0x80099AD4: li r5,0x118\n0x80099AD8: li r6,0x64\n0x80099ADC: bl 0x80032b18\n0x80099AE0: lwz r4,-0x5e58(r24)\n0x80099AE4: or r3,r27,r27\n0x80099AE8: li r5,0x3\n0x80099AEC: bl 0x80092b2c\n0x80099AF0: or r5,r3,r3\n0x80099AF4: addi r3,r1,0x128\n0x80099AF8: addi r4,r25,0xa5\n0x80099AFC: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099B00: bl 0x802bb0b0\n0x80099B04: or r4,r29,r29\n0x80099B08: addi r3,r1,0x128\n0x80099B0C: li r5,0x131\n0x80099B10: li r6,0x64\n0x80099B14: bl 0x80032b18\n0x80099B18: lwz r4,-0x5e54(r24)\n0x80099B1C: or r3,r27,r27\n0x80099B20: li r5,0x4\n0x80099B24: bl 0x80092b2c\n0x80099B28: or r5,r3,r3\n0x80099B2C: addi r3,r1,0x128\n0x80099B30: addi r4,r25,0xba\n0x80099B34: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099B38: bl 0x802bb0b0\n0x80099B3C: or r4,r29,r29\n0x80099B40: addi r3,r1,0x128\n0x80099B44: li r5,0x14a\n0x80099B48: li r6,0x64\n0x80099B4C: bl 0x80032b18\n0x80099B50: lwz r4,-0x5e50(r24)\n0x80099B54: or r3,r27,r27\n0x80099B58: li r5,0x5\n0x80099B5C: bl 0x80092b2c\n0x80099B60: or r5,r3,r3\n0x80099B64: addi r3,r1,0x128\n0x80099B68: addi r4,r25,0xcf\n0x80099B6C: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099B70: bl 0x802bb0b0\n0x80099B74: or r4,r29,r29\n0x80099B78: addi r3,r1,0x128\n0x80099B7C: li r5,0x163\n0x80099B80: li r6,0x64\n0x80099B84: bl 0x80032b18\n0x80099B88: addi r28,r28,0x1\n0x80099B8C: addi r29,r29,0xc8\n0x80099B90: cmpwi r28,0x4\n0x80099B94: addi r30,r30,0x1\n0x80099B98: blt 0x800999b4\n0x80099B9C: lis r3,-0x7faf\n0x80099BA0: addi r3,r3,0x30b8\n0x80099BA4: lwz r0,0x8(r3)\n0x80099BA8: rlwinm. r0,r0,0x0,0xd,0xd\n0x80099BAC: beq 0x80099e2c\n0x80099BB0: lis r28,-0x7fb6\n0x80099BB4: lis r29,-0x7f86\n0x80099BB8: lis r27,-0x7f85\n0x80099BBC: li r23,0x0\n0x80099BC0: subi r28,r28,0x6760\n0x80099BC4: addi r29,r29,0x2408\n0x80099BC8: subi r27,r27,0x3100\n0x80099BCC: rlwinm. r0,r23,0x0,0x18,0x1f\n0x80099BD0: li r24,0x226\n0x80099BD4: bne 0x80099bdc\n0x80099BD8: li r24,0xa\n0x80099BDC: rlwinm r0,r23,0x2,0x16,0x1d\n0x80099BE0: add r3,r29,r0\n0x80099BE4: lwz r0,0x14(r3)\n0x80099BE8: cmpwi r0,0x0\n0x80099BEC: beq 0x80099c04\n0x80099BF0: addi r3,r1,0x28\n0x80099BF4: addi r4,r28,0xe4\n0x80099BF8: crxor 4*cr1+eq,4*cr1+eq,4*cr1+eq\n0x80099BFC: bl 0x802bb0b0\n"
+    },
+    {
+      "name": "FUN_8009e360",
+      "address": "0x8009E360",
+      "file_offset": "0x080080",
+      "signature": "void FUN_8009e360(void);",
+      "decompiled_c": "\nvoid FUN_8009e360(void)\n\n{\n  return;\n}\n\n",
+      "disassembly": "0x8009E360: mtspr LR,r0\n0x8009E364: addi r1,r1,0x80\n0x8009E368: blr\n"
+    },
+    {
+      "name": "FUN_8009e36c",
+      "address": "0x8009E36C",
+      "file_offset": "0x08008C",
+      "signature": "void FUN_8009e36c(void);",
+      "decompiled_c": "\nvoid FUN_8009e36c(void)\n\n{\n  byte bVar1;\n  float fVar2;\n  short sVar3;\n  uint uVar4;\n  ushort uVar5;\n  int iVar6;\n  int iVar7;\n  int iVar8;\n  int iVar9;\n  uint uVar10;\n  int iVar11;\n  int iVar12;\n  int iVar13;\n  short *psVar14;\n  double dVar15;\n  double dVar16;\n  undefined4 uStack_48;\n  float fStack_44;\n  undefined4 uStack_40;\n  uint uStack_3c;\n  undefined4 uStack_38;\n  uint uStack_34;\n  longlong lStack_30;\n  \n  iVar6 = func_0x802b263c();\n  iVar9 = iRam807ace4c;\n  uRam807ac57c = 0;\n  iVar11 = -0x7f853a94;\n  uStack_40 = 0x43300000;\n  uStack_38 = 0x43300000;\n  if ((cRam807ace54 == '\\0') && ((cRam807ace5a == '\\0' || (cRam807ace5b != '\\0')))) {\n    bVar1 = *(byte *)(iRam807ace4c + 0x82);\n    psVar14 = (short *)(iRam8051ebd8 + sRam807ace56 * 0x8c);\n    sVar3 = psVar14[1];\n    iVar12 = iRam8051ebd4 + sRam807ace56 * 100;\n    iVar7 = FUN_800b8c04(iRam807ace4c);\n    iVar13 = (int)sVar3;\n    if ((iVar7 != 0) && (0 < psVar14[2])) {\n      iVar13 = (int)psVar14[2];\n    }\n    if (iVar6 == 0) {\n      dVar16 = (double)FUN_800afab8(iVar9);\n      fVar2 = 0.0;\n      if (0.0 < dVar16) {\n        dVar16 = (double)FUN_800afab8(iVar9);\n        if (dVar16 < 0.8999999761581421) {\n          dVar16 = (double)FUN_800afab8(iVar9);\n          fVar2 = (float)(dVar16 / 0.8999999761581421) * 20.0;\n        }\n        else {\n          fVar2 = 20.0;\n        }\n      }\n      iVar6 = (int)fVar2;\n      lStack_30 = (longlong)iVar6;\n    }\n    else {\n      if (iRam807ac578 < 0) {\n        iRam807ac578 = 0;\n      }\n      iVar6 = iRam807ac578 * *(int *)(iRam8051d5ec + 0x213c);\n      iVar6 = iVar6 / 100 + (iVar6 >> 0x1f);\n      iVar6 = (iVar6 - (iVar6 >> 0x1f)) + (int)cRam807ace59 * *(int *)(iRam8051d5ec + 0x2140);\n      if (iVar6 < 0) {\n        iVar6 = 0;\n      }\n    }\n    iVar7 = FUN_80092b2c(iVar9,*(undefined4 *)((uint)bVar1 * 0x4c + -0x7f853a5c),0);\n    iVar8 = FUN_8009f3e0(iVar9,0);\n    uStack_48 = 0;\n    uStack_3c = *(uint *)(iRam8051d5ec + 0x10) ^ 0x80000000;\n    fStack_44 = ((float)((double)(CONCAT44(uStack_40,*(uint *)(iRam8051d5ec + 0x10)) ^ 0x80000000) -\n                        4503601774854144.0) / 100.0) *\n                *(float *)((uint)*(byte *)(iVar9 + 0x80) * 0x10 + -0x7f85db58);\n    dVar16 = (double)func_0x803300a0(&uStack_48,iVar9 + 8);\n    if ((psVar14[0x43] & 3U) != 0) {\n      iVar6 = 0;\n    }\n    if (psVar14[5] == 1) {\n      uStack_34 = *(uint *)(iRam8051d5ec + 0x2134) ^ 0x80000000;\n      dVar15 = (double)(float)((double)(CONCAT44(uStack_38,*(uint *)(iRam8051d5ec + 0x2134)) ^\n                                       0x80000000) - 4503601774854144.0);\n      if (dVar15 < dVar16) {\n        if (dVar16 < 200.0) {\n          uStack_34 = *(uint *)(iRam8051d5ec + 0x2138) ^ 0x80000000;\n          fVar2 = ((float)(dVar16 - dVar15) / (float)(200.0 - dVar15)) *\n                  (((float)(200.0 - dVar15) *\n                   (float)((double)(CONCAT44(uStack_38,*(uint *)(iRam8051d5ec + 0x2138)) ^\n                                   0x80000000) - 4503601774854144.0)) / 100.0);\n        }\n        else {\n          uStack_3c = *(uint *)(iRam8051d5ec + 0x2138) ^ 0x80000000;\n          fVar2 = ((float)(200.0 - dVar15) *\n                  (float)((double)(CONCAT44(uStack_40,*(uint *)(iRam8051d5ec + 0x2138)) ^ 0x80000000\n                                  ) - 4503601774854144.0)) / 100.0;\n        }\n      }\n      else {\n        fVar2 = 0.0;\n      }\n    }\n    else {\n      uStack_3c = *(uint *)(iRam8051d5ec + 0x212c) ^ 0x80000000;\n      dVar15 = (double)(float)((double)(CONCAT44(uStack_40,*(uint *)(iRam8051d5ec + 0x212c)) ^\n                                       0x80000000) - 4503601774854144.0);\n      if (dVar15 < dVar16) {\n        if (dVar16 < 200.0) {\n          uStack_3c = *(uint *)(iRam8051d5ec + 0x2130) ^ 0x80000000;\n          fVar2 = ((float)(dVar16 - dVar15) / (float)(200.0 - dVar15)) *\n                  (((float)(200.0 - dVar15) *\n                   (float)((double)(CONCAT44(uStack_40,*(uint *)(iRam8051d5ec + 0x2130)) ^\n                                   0x80000000) - 4503601774854144.0)) / 100.0);\n        }\n        else {\n          uStack_34 = *(uint *)(iRam8051d5ec + 0x2130) ^ 0x80000000;\n          fVar2 = ((float)(200.0 - dVar15) *\n                  (float)((double)(CONCAT44(uStack_38,*(uint *)(iRam8051d5ec + 0x2130)) ^ 0x80000000\n                                  ) - 4503601774854144.0)) / 100.0;\n        }\n      }\n      else {\n        fVar2 = 0.0;\n      }\n    }\n    lStack_30 = (longlong)(int)fVar2;\n    iRam807ac578 = (iVar8 + iVar7 / 2 + iVar6 + iVar13) - (int)fVar2;\n    uRam807ac581 = *(undefined1 *)(iVar9 + 0x4e);\n    uVar5 = psVar14[4];\n    if (uVar5 == 5) {\n      uVar5 = (ushort)*(byte *)(iVar9 + 0x4e);\n    }\n    uRam807ac580 = (undefined1)uVar5;\n    uRam807ac56c = (undefined1)*(undefined4 *)(iVar12 + 0x2c);\n    uRam807ac56d = (undefined1)*(undefined4 *)(iVar12 + 0x30);\n    uRam807ac570 = *(undefined4 *)(iVar12 + 0x3c);\n    uRam807ac574 = *(undefined4 *)(iVar12 + 0x40);\n    uRam807ac57c = 0;\n    iVar6 = func_0x801b32e8();\n    if ((iVar6 != 0) && ((*(uint *)((uint)bRam807a2408 * 4 + -0x7f85dbe4) & 0xf) == 0)) {\n      uRam807ac57c = 0xffffffff;\n    }\n    iRam807ac594 = (int)*psVar14;\n    uVar10 = 1 - *(byte *)(iVar9 + 0x80);\n    uVar4 = uVar10 & 0xff;\n    if (*(int *)((uVar10 * 4 & 0x3fc) + 0x807a241c) == 0) {\n      iVar6 = FUN_8007b438(uVar4);\n      if (iVar6 == -3) {\n        iVar6 = *(int *)(iRam8051d5ec + 0x26ac);\n        iVar13 = *(int *)(iRam8051d5ec + 0x26b0);\n        iVar7 = *(int *)(iRam8051d5ec + 0x26b4);\n      }\n      else if (iVar6 == -2) {\n        iVar6 = *(int *)(iRam8051d5ec + 0x26b8);\n        iVar13 = *(int *)(iRam8051d5ec + 0x26bc);\n        iVar7 = *(int *)(iRam8051d5ec + 0x26c0);\n      }\n      else if (iVar6 == -1) {\n        iVar6 = *(int *)(iRam8051d5ec + 0x26c4);\n        iVar13 = *(int *)(iRam8051d5ec + 0x26c8);\n        iVar7 = *(int *)(iRam8051d5ec + 0x26cc);\n      }\n      else if (iVar6 == 0) {\n        iVar6 = *(int *)(iRam8051d5ec + 0x26d0);\n        iVar13 = *(int *)(iRam8051d5ec + 0x26d4);\n        iVar7 = *(int *)(iRam8051d5ec + 0x26d8);\n      }\n      else if (iVar6 == 1) {\n        iVar6 = *(int *)(iRam8051d5ec + 0x26dc);\n        iVar13 = *(int *)(iRam8051d5ec + 0x26e0);\n        iVar7 = *(int *)(iRam8051d5ec + 0x26e4);\n      }\n      else {\n        iVar6 = *(int *)(iRam8051d5ec + 0x26e8);\n        iVar13 = *(int *)(iRam8051d5ec + 0x26ec);\n        iVar7 = *(int *)(iRam8051d5ec + 0x26f0);\n      }\n      iVar12 = FUN_8007b438(uVar4);\n      if (iVar12 < 0) {\n        iVar12 = FUN_8008ef20(0,99,&STR_804998A0,0x136d);\n        if (iVar12 < iVar7) {\n          iRam807ac594 = iRam807ac594 + -2;\n        }\n        else {\n          iVar7 = FUN_8008ef20(0,99,&STR_804998A0,0x1372);\n          if (iVar7 < iVar13) {\n            iRam807ac594 = iRam807ac594 + -1;\n          }\n          else {\n            iVar13 = FUN_8008ef20(0,99,&STR_804998A0,0x1377);\n            if (iVar13 < iVar6) {\n              iRam807ac594 = iRam807ac594 + 1;\n            }\n          }\n        }\n      }\n      else {\n        iVar12 = FUN_8008ef20(0,99,&STR_804998A0,0x135a);\n        if (iVar12 < iVar6) {\n          iRam807ac594 = iRam807ac594 + 1;\n        }\n        else {\n          iVar6 = FUN_8008ef20(0,99,&STR_804998A0,0x135f);\n          if (iVar6 < iVar13) {\n            iRam807ac594 = iRam807ac594 + -1;\n          }\n          else {\n            iVar6 = FUN_8008ef20(0,99,&STR_804998A0,0x1364);\n            if (iVar6 < iVar7) {\n              iRam807ac594 = iRam807ac594 + -2;\n            }\n          }\n        }\n      }\n      if (iRam807ac594 < 0) {\n        iRam807ac594 = 0;\n      }\n      else if (2 < iRam807ac594) {\n        iRam807ac594 = 2;\n      }\n    }\n    iVar6 = FUN_800af300('\\x01' - *(char *)(iVar9 + 0x80));\n    dVar16 = (double)func_0x80330238(iVar6 + 8,iVar9 + 8);\n    uRam807ac598 = dVar16 <= 25.0;\n    iRam807ac584 = (int)psVar14[10];\n    if (1 < iRam807ac584) {\n      iRam807ac584 = iRam807ac584 + -1;\n      iVar9 = (uint)*(byte *)(iVar9 + 0x82) * 0x14 + -0x7f854978;\n      for (iVar6 = 0; iVar6 < iRam807ac584; iVar6 = iVar6 + 1) {\n        *(undefined4 *)(iVar11 + 0x1c) = *(undefined4 *)(iVar9 + 8);\n        iVar11 = iVar11 + 4;\n        iVar9 = iVar9 + 4;\n      }\n    }\n  }\n  func_0x802b2688();\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009eac8",
+      "address": "0x8009EAC8",
+      "file_offset": "0x0807E8",
+      "signature": "void FUN_8009eac8(void);",
+      "decompiled_c": "\nvoid FUN_8009eac8(void)\n\n{\n  byte bVar1;\n  short sVar2;\n  ushort uVar3;\n  int iVar4;\n  int iVar5;\n  int iVar6;\n  int iVar7;\n  int iVar8;\n  int iVar9;\n  int iVar10;\n  \n  iVar7 = iRam807ace4c;\n  iVar4 = FUN_800b7c3c(*(undefined1 *)(iRam807ace4c + 0x82),(int)cRam807ace54,(int)cRam807ace55);\n  bVar1 = *(byte *)(iVar7 + 0x82);\n  iVar10 = 0;\n  iVar8 = iRam8051ebd8 + iVar4 * 0x8c;\n  iVar5 = FUN_8007c444(*(undefined1 *)(iVar7 + 0x80));\n  if (iVar5 != 0) {\n    iVar10 = 0x1e;\n  }\n  sVar2 = *(short *)(iVar8 + 2);\n  iVar5 = FUN_800b8c04(iVar7,iVar4);\n  iVar4 = (int)sVar2;\n  if ((iVar5 != 0) && (0 < *(short *)(iVar8 + 4))) {\n    iVar4 = (int)*(short *)(iVar8 + 4);\n  }\n  iVar5 = FUN_80092b2c(iVar7,*(undefined4 *)((uint)bVar1 * 0x4c + -0x7f853a5c),0);\n  iVar6 = FUN_8009f3e0(iVar7,0);\n  uVar3 = *(ushort *)(iVar8 + 8);\n  if (uVar3 == 5) {\n    uVar3 = (ushort)*(byte *)(iVar7 + 0x4e);\n  }\n  iVar8 = FUN_8009f4c0(uVar3 & 0xff,uRam807ac580);\n  if (iVar8 == 0) {\n    iVar9 = 0;\n  }\n  else {\n    iVar9 = -10;\n    if (iVar8 == 1) {\n      iVar9 = 10;\n    }\n  }\n  iVar7 = FUN_8009f4c0(*(undefined1 *)(iVar7 + 0x4e),uRam807ac581);\n  if (iVar7 == 0) {\n    iVar8 = 0;\n  }\n  else {\n    iVar8 = -10;\n    if (iVar7 == 1) {\n      iVar8 = 10;\n    }\n  }\n  iVar7 = iVar6 + iVar5 / 2 + iVar4 + iVar10 + iVar8 + iVar9;\n  if (iVar7 < iRam807ac578) {\n    uRam807ace5b = 0;\n    iVar7 = iVar7 / 3;\n    if (0 < iVar7) {\n      iRam807ac578 = iRam807ac578 - iVar7;\n    }\n  }\n  else {\n    uRam807ace5b = 1;\n  }\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009ec70",
+      "address": "0x8009EC70",
+      "file_offset": "0x080990",
+      "signature": "void FUN_8009ec70(void);",
+      "decompiled_c": "\nvoid FUN_8009ec70(void)\n\n{\n  byte bVar1;\n  short sVar2;\n  ushort uVar3;\n  int iVar4;\n  int iVar5;\n  int iVar6;\n  int iVar7;\n  int iVar8;\n  int iVar9;\n  int iVar10;\n  \n  iVar7 = iRam807ace4c;\n  iVar4 = FUN_800b7c3c(*(undefined1 *)(iRam807ace4c + 0x82),(int)cRam807ace54,(int)cRam807ace55);\n  bVar1 = *(byte *)(iVar7 + 0x82);\n  iVar10 = 0;\n  iVar8 = iRam8051ebd8 + iVar4 * 0x8c;\n  iVar5 = FUN_8007c444(*(undefined1 *)(iVar7 + 0x80));\n  if (iVar5 != 0) {\n    iVar10 = 0x1e;\n  }\n  sVar2 = *(short *)(iVar8 + 2);\n  iVar5 = FUN_800b8c04(iVar7,iVar4);\n  iVar4 = (int)sVar2;\n  if ((iVar5 != 0) && (0 < *(short *)(iVar8 + 4))) {\n    iVar4 = (int)*(short *)(iVar8 + 4);\n  }\n  iVar5 = FUN_80092b2c(iVar7,*(undefined4 *)((uint)bVar1 * 0x4c + -0x7f853a50),3);\n  iVar6 = FUN_8009f3e0(iVar7,0);\n  uVar3 = *(ushort *)(iVar8 + 8);\n  if (uVar3 == 5) {\n    uVar3 = (ushort)*(byte *)(iVar7 + 0x4e);\n  }\n  iVar8 = FUN_8009f4c0(uVar3 & 0xff,uRam807ac580);\n  if (iVar8 == 0) {\n    iVar9 = 0;\n  }\n  else {\n    iVar9 = -10;\n    if (iVar8 == 1) {\n      iVar9 = 10;\n    }\n  }\n  iVar7 = FUN_8009f4c0(*(undefined1 *)(iVar7 + 0x4e),uRam807ac581);\n  if (iVar7 == 0) {\n    iVar8 = 0;\n  }\n  else {\n    iVar8 = -10;\n    if (iVar7 == 1) {\n      iVar8 = 10;\n    }\n  }\n  iVar7 = iVar6 + iVar5 / 2 + iVar4 + iVar10 + iVar8 + iVar9;\n  if (iVar7 < iRam807ac578) {\n    uRam807ace5b = 0;\n    iVar7 = iVar7 / 3;\n    if (0 < iVar7) {\n      iRam807ac578 = iRam807ac578 - iVar7;\n    }\n  }\n  else {\n    uRam807ace5b = 1;\n  }\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009ee18",
+      "address": "0x8009EE18",
+      "file_offset": "0x080B38",
+      "signature": "void FUN_8009ee18(void);",
+      "decompiled_c": "\nvoid FUN_8009ee18(void)\n\n{\n  byte bVar1;\n  float fVar2;\n  short sVar3;\n  float fVar4;\n  int iVar5;\n  int iVar6;\n  int iVar7;\n  int iVar8;\n  int iVar9;\n  int iVar10;\n  ushort uVar12;\n  int iVar11;\n  int iVar13;\n  \n  iVar5 = func_0x802b2638();\n  iVar10 = iRam807ace4c;\n  if (iRam807a2414 == 9) {\n    iVar13 = 0;\n    bVar1 = *(byte *)(iRam807ace4c + 0x82);\n    iVar6 = FUN_8007c444(*(undefined1 *)(iRam807ace4c + 0x80));\n    if (iVar6 != 0) {\n      iVar13 = 0x1e;\n    }\n    if (cRam807ace55 == '\\x04') {\n      uVar12 = (ushort)*(byte *)(iVar10 + 0x4e);\n      iVar5 = 0;\n    }\n    else {\n      iVar6 = FUN_800b7c3c(*(undefined1 *)(iVar10 + 0x82),(int)cRam807ace54);\n      if (iVar5 != 0) {\n        iVar6 = iVar5;\n      }\n      iVar7 = iRam8051ebd8 + iVar6 * 0x8c;\n      sVar3 = *(short *)(iVar7 + 2);\n      iVar6 = FUN_800b8c04(iVar10);\n      iVar5 = (int)sVar3;\n      if ((iVar6 != 0) && (0 < *(short *)(iVar7 + 4))) {\n        iVar5 = (int)*(short *)(iVar7 + 4);\n      }\n      uVar12 = *(ushort *)(iVar7 + 8);\n      if (uVar12 == 5) {\n        uVar12 = (ushort)*(byte *)(iVar10 + 0x4e);\n      }\n      uVar12 = uVar12 & 0xff;\n    }\n    iVar6 = iRam807ac59c;\n    if (*(int *)((uint)*(byte *)(iVar10 + 0x80) * 4 + -0x7f85dbe4) != 0) {\n      fVar2 = *(float *)(iVar10 + 0x98);\n      fVar4 = 0.0;\n      if (0.0 < fVar2) {\n        if (fVar2 < 0.9) {\n          fVar4 = (fVar2 / 0.9) * 50.0;\n        }\n        else {\n          fVar4 = 50.0;\n        }\n      }\n      iVar6 = (int)fVar4;\n    }\n    iVar7 = FUN_80092b2c(iVar10,*(undefined4 *)((uint)bVar1 * 0x4c + -0x7f853a58),1);\n    iVar8 = FUN_8009f3e0(iVar10,uRam807ac598);\n    iVar9 = FUN_8009f4c0(uVar12,uRam807ac580);\n    if (iVar9 == 0) {\n      iVar11 = 0;\n    }\n    else {\n      iVar11 = -10;\n      if (iVar9 == 1) {\n        iVar11 = 10;\n      }\n    }\n    iVar10 = FUN_8009f4c0(*(undefined1 *)(iVar10 + 0x4e),uRam807ac581);\n    if (iVar10 == 0) {\n      iVar9 = 0;\n    }\n    else {\n      iVar9 = -10;\n      if (iVar10 == 1) {\n        iVar9 = 10;\n      }\n    }\n    iVar10 = iVar8 + iVar9 + iVar11 + iVar13 + iVar6 + iVar7 / 2 + iVar5;\n    if (iVar10 < iRam807ac578) {\n      uRam807ace5b = 0;\n      iVar10 = iVar10 / 3;\n      if (0 < iVar10) {\n        iRam807ac578 = iRam807ac578 - iVar10;\n      }\n    }\n    else {\n      uRam807ace5b = 1;\n    }\n  }\n  else {\n    uRam807ace5b = 1;\n  }\n  func_0x802b2684();\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f078",
+      "address": "0x8009F078",
+      "file_offset": "0x080D98",
+      "signature": "void FUN_8009f078(undefined4 param_1,undefined4 param_2,int param_3,int param_4);",
+      "decompiled_c": "\nvoid FUN_8009f078(undefined4 param_1,undefined4 param_2,int param_3,int param_4)\n\n{\n  float fVar1;\n  byte bVar2;\n  byte bVar3;\n  short sVar4;\n  ushort uVar7;\n  uint uVar5;\n  int iVar6;\n  undefined4 uVar8;\n  int iVar9;\n  int iVar10;\n  int iVar11;\n  int iVar12;\n  int iVar13;\n  int iVar14;\n  ushort uVar15;\n  short *psVar16;\n  int iVar17;\n  int iVar18;\n  short *psVar19;\n  int iVar20;\n  undefined8 uVar21;\n  \n  uVar21 = func_0x802b262c();\n  iVar14 = (int)((ulonglong)uVar21 >> 0x20);\n  iVar20 = (int)uVar21;\n  bVar2 = *(byte *)(iVar14 + 0x82);\n  bVar3 = *(byte *)(param_3 + 0x82);\n  psVar19 = (short *)(iRam8051ebd8 + iVar20 * 0x8c);\n  psVar16 = (short *)(iRam8051ebd8 + param_4 * 0x8c);\n  if ((iVar20 == 0) && (param_4 == 0)) {\n    uVar8 = 0;\n  }\n  else if (iVar20 == 0) {\n    uVar8 = 2;\n  }\n  else if (param_4 == 0) {\n    uVar8 = 1;\n  }\n  else {\n    uVar7 = psVar19[4];\n    if (uVar7 == 5) {\n      uVar7 = (ushort)*(byte *)(iVar14 + 0x4e);\n    }\n    uVar15 = psVar16[4];\n    if (uVar15 == 5) {\n      uVar15 = (ushort)*(byte *)(param_3 + 0x4e);\n    }\n    iVar9 = FUN_8009f4c0(uVar7 & 0xff,uVar15 & 0xff);\n    iVar10 = FUN_8009f4c0(*(undefined1 *)(iVar14 + 0x4e),*(undefined1 *)(param_3 + 0x4e));\n    sVar4 = psVar19[1];\n    iVar18 = (int)*psVar19 - (int)*psVar16;\n    iVar11 = FUN_800b8c04(iVar14,iVar20);\n    iVar20 = (int)sVar4;\n    if ((iVar11 != 0) && (0 < psVar19[2])) {\n      iVar20 = (int)psVar19[2];\n    }\n    sVar4 = psVar16[1];\n    iVar12 = FUN_800b8c04(param_3,param_4);\n    iVar11 = (int)sVar4;\n    if ((iVar12 != 0) && (0 < psVar16[2])) {\n      iVar11 = (int)psVar16[2];\n    }\n    uVar5 = iVar20 - iVar11;\n    if ((int)uVar5 < 0x15) {\n      if ((int)uVar5 < 1) {\n        if ((int)uVar5 < -0x13) {\n          iVar20 = -2;\n        }\n        else {\n          iVar20 = -(uint)!CARRY4(-uVar5 - 1,uVar5 ^ 0x80000000);\n        }\n      }\n      else {\n        iVar20 = 1;\n      }\n    }\n    else {\n      iVar20 = 2;\n    }\n    iVar11 = FUN_80092b2c(iVar14,*(undefined4 *)((uint)bVar2 * 0x4c + -0x7f853a54),2);\n    iVar12 = FUN_80092b2c(param_3,*(undefined4 *)((uint)bVar3 * 0x4c + -0x7f853a50),3);\n    uVar5 = iVar11 - iVar12;\n    if ((int)uVar5 < 0x15) {\n      if ((int)uVar5 < 1) {\n        if ((int)uVar5 < -0x13) {\n          iVar11 = -2;\n        }\n        else {\n          iVar11 = -(uint)!CARRY4(-uVar5 - 1,uVar5 ^ 0x80000000);\n        }\n      }\n      else {\n        iVar11 = 1;\n      }\n    }\n    else {\n      iVar11 = 2;\n    }\n    iVar17 = 0;\n    iVar12 = iVar20;\n    if ((iVar20 < 1) && (iVar12 = 0, iVar20 < 0)) {\n      iVar17 = -iVar20;\n    }\n    iVar6 = iVar9;\n    if ((iVar9 < 1) && (iVar6 = iVar12, iVar9 < 0)) {\n      iVar17 = -iVar9;\n    }\n    iVar12 = iVar10;\n    if ((iVar10 < 1) && (iVar12 = iVar6, iVar10 < 0)) {\n      iVar17 = -iVar10;\n    }\n    iVar6 = iVar18;\n    if ((iVar18 < 1) && (iVar6 = iVar12, iVar18 < 0)) {\n      iVar17 = -iVar18;\n    }\n    iVar12 = iVar11;\n    if ((iVar11 < 1) && (iVar12 = iVar6, iVar11 < 0)) {\n      iVar17 = -iVar11;\n    }\n    iVar6 = *(int *)(iRam8051d5ec + 0x2034) / 10 + (*(int *)(iRam8051d5ec + 0x2034) >> 0x1f);\n    iVar6 = iVar6 - (iVar6 >> 0x1f);\n    iVar13 = func_0x80094f20(iVar14);\n    if (iVar13 == 0) {\n      func_0x80094810(iVar14,iVar17 * iVar6,0);\n    }\n    iVar14 = func_0x80094f20(param_3);\n    if (iVar14 == 0) {\n      func_0x80094810(param_3,iVar12 * iVar6,0);\n    }\n    fVar1 = (float)((double)CONCAT44(0x43300000,\n                                     iVar11 + iVar18 + iVar9 + iVar10 + iVar20 ^ 0x80000000) -\n                   4503601774854144.0);\n    if (fVar1 < 1.0) {\n      if (-1.0 < fVar1) {\n        uVar8 = 0;\n      }\n      else {\n        uVar8 = 2;\n      }\n    }\n    else {\n      uVar8 = 1;\n    }\n  }\n  func_0x802b2678(uVar8);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f3e0",
+      "address": "0x8009F3E0",
+      "file_offset": "0x081100",
+      "signature": "void FUN_8009f3e0(int param_1,int param_2);",
+      "decompiled_c": "\nvoid FUN_8009f3e0(int param_1,int param_2)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  undefined4 uVar3;\n  \n  iVar1 = func_0x800bbf0c((int)*(char *)(param_1 + 0x2e),(int)*(short *)(param_1 + 0x44));\n  if ((*(byte *)(iVar1 + 0x79) & 0x10) == 0) {\n    if ((*(byte *)(iVar1 + 0x79) & 0x20) == 0) {\n      uVar2 = FUN_8008ef20(0,5,&STR_804998A0,0x1535);\n    }\n    else {\n      uVar2 = 0;\n    }\n  }\n  else {\n    uVar2 = FUN_8008ef20(0,10,&STR_804998A0,0x152d);\n  }\n  if (param_2 == 0) {\n    iVar1 = func_0x80093254(param_1);\n    uVar3 = 10;\n    if (iVar1 != 0) {\n      uVar3 = 0x13;\n    }\n  }\n  else {\n    uVar3 = 10;\n  }\n  FUN_8008ef20(uVar2,uVar3,&STR_804998A0,0x154b);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f4c0",
+      "address": "0x8009F4C0",
+      "file_offset": "0x0811E0",
+      "signature": "uint FUN_8009f4c0(int param_1,int param_2);",
+      "decompiled_c": "\nuint FUN_8009f4c0(int param_1,int param_2)\n\n{\n  if ((param_1 == 4) || (param_2 == 4)) {\n    return 0;\n  }\n  if (param_1 == 0) {\n    if (param_2 == 0) {\n      return 0;\n    }\n    if (param_2 == 1) {\n      return 0xffffffff;\n    }\n    return (2U - param_2 | param_2 - 2U) >> 0x1f;\n  }\n  if (param_1 == 1) {\n    if (param_2 == 0) {\n      return 1;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (int)~(param_2 - 2U | 2U - param_2) >> 0x1f;\n  }\n  if (param_1 != 2) {\n    if (param_2 == 0) {\n      return 0xffffffff;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (uint)(param_2 == 2);\n  }\n  if (param_2 == 0) {\n    return 0;\n  }\n  if (param_2 == 1) {\n    return 1;\n  }\n  return (int)(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f4d8",
+      "address": "0x8009F4D8",
+      "file_offset": "0x0811F8",
+      "signature": "uint FUN_8009f4d8(int param_1,int param_2);",
+      "decompiled_c": "\nuint FUN_8009f4d8(int param_1,int param_2)\n\n{\n  if (param_1 == 0) {\n    if (param_2 == 0) {\n      return 0;\n    }\n    if (param_2 == 1) {\n      return 0xffffffff;\n    }\n    return (2U - param_2 | param_2 - 2U) >> 0x1f;\n  }\n  if (param_1 == 1) {\n    if (param_2 == 0) {\n      return 1;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (int)~(param_2 - 2U | 2U - param_2) >> 0x1f;\n  }\n  if (param_1 != 2) {\n    if (param_2 == 0) {\n      return 0xffffffff;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (uint)(param_2 == 2);\n  }\n  if (param_2 == 0) {\n    return 0;\n  }\n  if (param_2 == 1) {\n    return 1;\n  }\n  return (int)(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f4f0",
+      "address": "0x8009F4F0",
+      "file_offset": "0x081210",
+      "signature": "uint FUN_8009f4f0(undefined4 param_1,int param_2);",
+      "decompiled_c": "\nuint FUN_8009f4f0(undefined4 param_1,int param_2)\n\n{\n  if (param_2 == 1) {\n    return 0xffffffff;\n  }\n  return (2U - param_2 | param_2 - 2U) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f500",
+      "address": "0x8009F500",
+      "file_offset": "0x081220",
+      "signature": "uint FUN_8009f500(undefined4 param_1,int param_2);",
+      "decompiled_c": "\nuint FUN_8009f500(undefined4 param_1,int param_2)\n\n{\n  return (2U - param_2 | param_2 - 2U) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f514",
+      "address": "0x8009F514",
+      "file_offset": "0x081234",
+      "signature": "uint FUN_8009f514(int param_1,int param_2);",
+      "decompiled_c": "\nuint FUN_8009f514(int param_1,int param_2)\n\n{\n  if (param_1 == 1) {\n    if (param_2 == 0) {\n      return 1;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (int)~(param_2 - 2U | 2U - param_2) >> 0x1f;\n  }\n  if (param_1 != 2) {\n    if (param_2 == 0) {\n      return 0xffffffff;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (uint)(param_2 == 2);\n  }\n  if (param_2 == 0) {\n    return 0;\n  }\n  if (param_2 == 1) {\n    return 1;\n  }\n  return (int)(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f52c",
+      "address": "0x8009F52C",
+      "file_offset": "0x08124C",
+      "signature": "int FUN_8009f52c(undefined4 param_1,int param_2);",
+      "decompiled_c": "\nint FUN_8009f52c(undefined4 param_1,int param_2)\n\n{\n  if (param_2 == 1) {\n    return 0;\n  }\n  return (int)~(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f53c",
+      "address": "0x8009F53C",
+      "file_offset": "0x08125C",
+      "signature": "int FUN_8009f53c(undefined4 param_1,int param_2);",
+      "decompiled_c": "\nint FUN_8009f53c(undefined4 param_1,int param_2)\n\n{\n  return (int)~(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f550",
+      "address": "0x8009F550",
+      "file_offset": "0x081270",
+      "signature": "uint FUN_8009f550(int param_1,int param_2);",
+      "decompiled_c": "\nuint FUN_8009f550(int param_1,int param_2)\n\n{\n  if (param_1 != 2) {\n    if (param_2 == 0) {\n      return 0xffffffff;\n    }\n    if (param_2 == 1) {\n      return 0;\n    }\n    return (uint)(param_2 == 2);\n  }\n  if (param_2 == 0) {\n    return 0;\n  }\n  if (param_2 == 1) {\n    return 1;\n  }\n  return (int)(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f568",
+      "address": "0x8009F568",
+      "file_offset": "0x081288",
+      "signature": "int FUN_8009f568(undefined4 param_1,int param_2);",
+      "decompiled_c": "\nint FUN_8009f568(undefined4 param_1,int param_2)\n\n{\n  if (param_2 == 1) {\n    return 1;\n  }\n  return (int)(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_8009f578",
+      "address": "0x8009F578",
+      "file_offset": "0x081298",
+      "signature": "int FUN_8009f578(undefined4 param_1,int param_2);",
+      "decompiled_c": "\nint FUN_8009f578(undefined4 param_1,int param_2)\n\n{\n  return (int)(param_2 - 2U | 2U - param_2) >> 0x1f;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800af2f0",
+      "address": "0x800AF2F0",
+      "file_offset": "0x091010",
+      "signature": "int FUN_800af2f0(uint param_1,uint param_2,undefined4 param_3,int param_4,int param_5);",
+      "decompiled_c": "\nint FUN_800af2f0(uint param_1,uint param_2,undefined4 param_3,int param_4,int param_5)\n\n{\n  int iVar1;\n  int in_CTR;\n  \n  while( true ) {\n    in_CTR = in_CTR + -1;\n    if (in_CTR == 0) {\n      return 0;\n    }\n    iVar1 = param_4 + ((param_5 + 1) * 0x100 & 0xff00U);\n    if ((*(byte *)(iVar1 + 0x280) == param_1) && (*(byte *)(iVar1 + 0x281) == param_2)) break;\n    param_5 = param_5 + 2;\n    iVar1 = param_4 + (param_5 * 0x100 & 0xff00U);\n    if ((*(byte *)(iVar1 + 0x280) == param_1) && (*(byte *)(iVar1 + 0x281) == param_2)) {\n      return iVar1 + 0x200;\n    }\n  }\n  return iVar1 + 0x200;\n}\n\n",
+      "disassembly": "0x800AF2F0: addi r7,r7,0x1\n0x800AF2F4: bdnz 0x800af294\n0x800AF2F8: li r3,0x0\n0x800AF2FC: blr\n"
+    },
+    {
+      "name": "FUN_800af300",
+      "address": "0x800AF300",
+      "file_offset": "0x091020",
+      "signature": "int FUN_800af300(uint param_1);",
+      "decompiled_c": "\nint FUN_800af300(uint param_1)\n\n{\n  int iVar1;\n  uint uVar2;\n  uint uVar3;\n  int iVar4;\n  uint uVar5;\n  int iVar6;\n  \n  uVar5 = 0;\n  do {\n    uVar3 = 0;\n    iVar6 = 0xb;\n    do {\n      iVar1 = (uVar3 & 0xff) * 0x100;\n      iVar4 = iVar1 + -0x7fae0858;\n      if ((*(byte *)(iVar1 + -0x7fae07d8) == param_1) &&\n         ((uint)*(byte *)(iVar1 + -0x7fae07d7) == (uVar5 & 0xff))) goto code_r0x800af37c;\n      uVar2 = (uVar3 + 1) * 0x100 & 0xff00;\n      iVar4 = uVar2 + 0x8051f7a8;\n      if ((*(byte *)(uVar2 + 0x8051f828) == param_1) &&\n         ((uint)*(byte *)(uVar2 + 0x8051f829) == (uVar5 & 0xff))) goto code_r0x800af37c;\n      uVar3 = uVar3 + 2;\n      iVar6 = iVar6 + -1;\n    } while (iVar6 != 0);\n    iVar4 = 0;\ncode_r0x800af37c:\n    if (*(short *)(iVar4 + 0x48) == 0) {\n      return iVar4;\n    }\n    uVar5 = uVar5 + 1;\n    if (10 < uVar5) {\n      return 0;\n    }\n  } while( true );\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800af390",
+      "address": "0x800AF390",
+      "file_offset": "0x0910B0",
+      "signature": "int FUN_800af390(uint param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined4 param_5,undefined4 param_6,uint param_7);",
+      "decompiled_c": "\nint FUN_800af390(uint param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined4 param_5,\n                undefined4 param_6,uint param_7)\n\n{\n  int in_r0;\n  int iVar1;\n  uint uVar2;\n  int iVar3;\n  int iVar4;\n  \n  do {\n    param_7 = param_7 + 1;\n    if (10 < param_7) {\n      return 0;\n    }\n    uVar2 = 0;\n    iVar4 = in_r0;\n    do {\n      iVar1 = param_4 + (uVar2 & 0xff) * 0x100;\n      iVar3 = iVar1 + 0x200;\n      if ((*(byte *)(iVar1 + 0x280) == param_1) &&\n         ((uint)*(byte *)(iVar1 + 0x281) == (param_7 & 0xff))) goto code_r0x800af37c;\n      iVar1 = param_4 + ((uVar2 + 1) * 0x100 & 0xff00);\n      iVar3 = iVar1 + 0x200;\n      if ((*(byte *)(iVar1 + 0x280) == param_1) &&\n         ((uint)*(byte *)(iVar1 + 0x281) == (param_7 & 0xff))) goto code_r0x800af37c;\n      uVar2 = uVar2 + 2;\n      iVar4 = iVar4 + -1;\n    } while (iVar4 != 0);\n    iVar3 = 0;\ncode_r0x800af37c:\n    if (*(short *)(iVar3 + 0x48) == 0) {\n      return iVar3;\n    }\n  } while( true );\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800af3a4",
+      "address": "0x800AF3A4",
+      "file_offset": "0x0910C4",
+      "signature": "void FUN_800af3a4(void);",
+      "decompiled_c": "\nvoid FUN_800af3a4(void)\n\n{\n  bool bVar1;\n  bool bVar2;\n  bool bVar3;\n  bool bVar4;\n  bool bVar5;\n  bool bVar6;\n  bool bVar7;\n  bool bVar8;\n  int iVar9;\n  uint uVar10;\n  int iVar11;\n  uint uVar12;\n  uint uVar13;\n  int iVar14;\n  undefined1 auStack_98 [4];\n  undefined1 auStack_94 [4];\n  char acStack_90 [24];\n  undefined4 auStack_78 [30];\n  \n  func_0x802b2648();\n  bVar6 = true;\n  bVar5 = true;\n  bVar4 = true;\n  bVar3 = true;\n  bVar2 = true;\n  bVar1 = true;\n  bVar7 = true;\n  if (iRam807ace14 != 10) {\n    bVar8 = false;\n    if ((iRam807ace14 == 9) && (iRam807ace18 == 10)) {\n      bVar8 = true;\n    }\n    if (!bVar8) {\n      bVar7 = false;\n    }\n  }\n  if (!bVar7) {\n    bVar7 = false;\n    if ((iRam807ace14 == 6) && (cRam807ace38 != '\\0')) {\n      bVar7 = true;\n    }\n    if (!bVar7) {\n      bVar1 = false;\n    }\n  }\n  if (!bVar1) {\n    bVar7 = false;\n    if ((iRam807ace14 - 0xbU < 3) && (cRam807ace39 != '\\0')) {\n      bVar7 = true;\n    }\n    if (!bVar7) {\n      bVar2 = false;\n    }\n  }\n  if (!bVar2) {\n    bVar7 = false;\n    if ((iRam807ace14 == 0xb) && (iRam807ace1c != 0)) {\n      bVar7 = true;\n    }\n    if (!bVar7) {\n      bVar3 = false;\n    }\n  }\n  if (!bVar3) {\n    bVar7 = false;\n    if ((iRam807ace14 == 0xd) && (iRam807ace1c != 0)) {\n      bVar7 = true;\n    }\n    if (!bVar7) {\n      bVar4 = false;\n    }\n  }\n  if ((!bVar4) && (iRam807ace14 != 0x14)) {\n    bVar5 = false;\n  }\n  if ((!bVar5) && (iRam807ace14 != 0x13)) {\n    bVar6 = false;\n  }\n  if ((!bVar6) && (iRam807ace14 != 8)) {\n    bVar7 = false;\n    if ((iRam807ace14 - 1U < 8) && ((1 << (iRam807ace14 - 1U & 0x3f) & 0xebU) != 0)) {\n      bVar7 = true;\n    }\n    if (((!bVar7) || (iRam807ace14 == 6)) || (6.0 < fRam807ace2c)) {\n      acStack_90[0] = '\\0';\n      auStack_78[0] = 0x46;\n      acStack_90[1] = 0;\n      auStack_78[1] = 0x46;\n      acStack_90[2] = 0;\n      auStack_78[2] = 0x46;\n      acStack_90[3] = 0;\n      auStack_78[3] = 0x46;\n      acStack_90[4] = 0;\n      auStack_78[4] = 0x46;\n      acStack_90[5] = 0;\n      auStack_78[5] = 0x46;\n      acStack_90[6] = 0;\n      auStack_78[6] = 0x46;\n      acStack_90[7] = 0;\n      auStack_78[7] = 0x46;\n      acStack_90[8] = 0;\n      auStack_78[8] = 0x46;\n      acStack_90[9] = 0;\n      auStack_78[9] = 0x46;\n      acStack_90[10] = 0;\n      auStack_78[10] = 0x46;\n      acStack_90[0xb] = 0;\n      auStack_78[0xb] = 0x46;\n      acStack_90[0xc] = 0;\n      auStack_78[0xc] = 0x46;\n      acStack_90[0xd] = 0;\n      auStack_78[0xd] = 0x46;\n      acStack_90[0xe] = 0;\n      auStack_78[0xe] = 0x46;\n      acStack_90[0xf] = 0;\n      auStack_78[0xf] = 0x46;\n      acStack_90[0x10] = 0;\n      auStack_78[0x10] = 0x46;\n      acStack_90[0x11] = 0;\n      auStack_78[0x11] = 0x46;\n      acStack_90[0x12] = 0;\n      auStack_78[0x12] = 0x46;\n      acStack_90[0x13] = 0;\n      auStack_78[0x13] = 0x46;\n      acStack_90[0x14] = 0;\n      auStack_78[0x14] = 0x46;\n      acStack_90[0x15] = 0;\n      auStack_78[0x15] = 0x46;\n      if (iRam807ace14 == 0) {\n        uVar13 = 0;\n        iVar14 = 0xb;\n        do {\n          iVar11 = (uVar13 & 0xff) * 4;\n          if (((0.0 < *(float *)(iVar11 + -0x7f854768)) || (0.0 < *(float *)(iVar11 + -0x7f854710)))\n             || (0.0 < *(float *)(iVar11 + -0x7f8546b8))) {\n            auStack_78[uVar13 & 0xff] = 100;\n            acStack_90[uVar13 & 0xff] = '\\x01';\n          }\n          uVar12 = (uVar13 + 1) * 4 & 0x3fc;\n          if (((0.0 < *(float *)(uVar12 + 0x807ab898)) || (0.0 < *(float *)(uVar12 + 0x807ab8f0)))\n             || (0.0 < *(float *)(uVar12 + 0x807ab948))) {\n            *(undefined4 *)((int)auStack_78 + uVar12) = 100;\n            acStack_90[uVar13 + 1 & 0xff] = '\\x01';\n          }\n          uVar13 = uVar13 + 2;\n          iVar14 = iVar14 + -1;\n        } while (iVar14 != 0);\n      }\n      else {\n        bVar7 = false;\n        if ((iRam807ace14 - 1U < 8) && ((1 << (iRam807ace14 - 1U & 0x3f) & 0xebU) != 0)) {\n          bVar7 = true;\n        }\n        if (!bVar7) goto code_r0x800af880;\n        uVar13 = 0;\n        do {\n          uVar12 = 0;\n          iVar14 = 0xb;\n          do {\n            iVar9 = (uVar12 & 0xff) * 0x100;\n            iVar11 = iVar9 + -0x7fae0858;\n            if (((uint)*(byte *)(iVar9 + -0x7fae07d5) == (uVar13 & 0xff)) ||\n               (uVar10 = (uVar12 + 1) * 0x100 & 0xff00, iVar11 = uVar10 + 0x8051f7a8,\n               (uint)*(byte *)(uVar10 + 0x8051f82b) == (uVar13 & 0xff))) break;\n            uVar12 = uVar12 + 2;\n            iVar14 = iVar14 + -1;\n            iVar11 = 0;\n          } while (iVar14 != 0);\n          if (iVar11 != 0) {\n            acStack_90[*(byte *)(iVar11 + 0x82)] = '\\x01';\n          }\n          uVar13 = uVar13 + 1;\n        } while (uVar13 < 4);\n      }\n      uVar13 = 0;\n      do {\n        if ((acStack_90[uVar13 & 0xff] != '\\0') && (7 < *(byte *)((uVar13 & 0xff) + 0x807acdbc))) {\n          iVar14 = (uVar13 & 0xff) * 0x100 + -0x7fae0858;\n          func_0x800ce9bc(iVar14,iVar14,0xffffffff,auStack_94,auStack_98,auStack_78[uVar13 & 0xff]);\n        }\n        uVar13 = uVar13 + 1;\n      } while (uVar13 < 0x16);\n    }\n  }\ncode_r0x800af880:\n  func_0x802b2694();\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800af898",
+      "address": "0x800AF898",
+      "file_offset": "0x0915B8",
+      "signature": "void FUN_800af898(void);",
+      "decompiled_c": "\nvoid FUN_800af898(void)\n\n{\n  float fVar1;\n  int iVar2;\n  uint uVar3;\n  int iVar4;\n  \n  uVar3 = 0;\n  iVar4 = 0x16;\n  do {\n    iVar2 = (uVar3 & 0xff) * 4;\n    if (0.0 < *(float *)(iVar2 + -0x7f8547c0)) {\n      fVar1 = *(float *)(iVar2 + -0x7f8547c0) - fRam809025e8;\n      *(float *)(iVar2 + -0x7f8547c0) = fVar1;\n      if (fVar1 <= 0.0) {\n        *(undefined4 *)(iVar2 + -0x7f8547c0) = 0xbf800000;\n      }\n    }\n    if (0.0 < *(float *)(iVar2 + -0x7f854768)) {\n      fVar1 = *(float *)(iVar2 + -0x7f854768) - fRam809025e8;\n      *(float *)(iVar2 + -0x7f854768) = fVar1;\n      if (fVar1 <= 0.0) {\n        *(undefined4 *)(iVar2 + -0x7f854768) = 0xbf800000;\n      }\n    }\n    if (0.0 < *(float *)(iVar2 + -0x7f854710)) {\n      fVar1 = *(float *)(iVar2 + -0x7f854710) - fRam809025e8;\n      *(float *)(iVar2 + -0x7f854710) = fVar1;\n      if (fVar1 <= 0.0) {\n        *(undefined4 *)(iVar2 + -0x7f854710) = 0xbf800000;\n      }\n    }\n    if (0.0 < *(float *)(iVar2 + -0x7f8546b8)) {\n      fVar1 = *(float *)(iVar2 + -0x7f8546b8) - fRam809025e8;\n      *(float *)(iVar2 + -0x7f8546b8) = fVar1;\n      if (fVar1 <= 0.0) {\n        *(undefined4 *)(iVar2 + -0x7f8546b8) = 0xbf800000;\n      }\n    }\n    if (0.0 < *(float *)(iVar2 + -0x7f854660)) {\n      fVar1 = *(float *)(iVar2 + -0x7f854660) - fRam809025e8;\n      *(float *)(iVar2 + -0x7f854660) = fVar1;\n      if (fVar1 <= 0.0) {\n        *(undefined4 *)(iVar2 + -0x7f854660) = 0xbf800000;\n      }\n    }\n    uVar3 = uVar3 + 1;\n    iVar4 = iVar4 + -1;\n  } while (iVar4 != 0);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800af9fc",
+      "address": "0x800AF9FC",
+      "file_offset": "0x09171C",
+      "signature": "void FUN_800af9fc(int param_1);",
+      "decompiled_c": "\nvoid FUN_800af9fc(int param_1)\n\n{\n  int iVar1;\n  int iVar2;\n  \n  *(undefined4 *)(param_1 + 0xe4) = 0;\n  iVar2 = (uint)*(byte *)(param_1 + 0x82) * 0x54;\n  *(undefined1 *)(param_1 + 0x92) = 0;\n  if (*(char *)(iVar2 + -0x7f855212) != '\\0') {\n    iVar1 = func_0x8033def8(*(undefined4 *)(iVar2 + -0x7f8551f0));\n    if (iVar1 != 0) {\n      func_0x8033da5c(*(undefined4 *)(iVar2 + -0x7f8551f0));\n    }\n    *(undefined1 *)(iVar2 + -0x7f855212) = 0;\n    func_0x8017ead8(*(undefined4 *)(iVar2 + -0x7f8551e8),*(undefined4 *)(iVar2 + -0x7f8551ec));\n  }\n  *(undefined1 *)(iVar2 + -0x7f855211) = 0;\n  func_0x800aac30(param_1,1);\n  func_0x800aac30(param_1,2);\n  func_0x800aac30(param_1,3);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800afab8",
+      "address": "0x800AFAB8",
+      "file_offset": "0x0917D8",
+      "signature": "double FUN_800afab8(int param_1);",
+      "decompiled_c": "\ndouble FUN_800afab8(int param_1)\n\n{\n  double dVar1;\n  double dVar2;\n  \n  dVar1 = 0.8999999761581421;\n  dVar2 = (double)(*(float *)(param_1 + 0xe4) -\n                  (float)((double)CONCAT44(0x43300000,(uint)*(byte *)(param_1 + 0x92)) -\n                         4503599627370496.0));\n  if ((dVar2 <= 0.8999999761581421) && (dVar1 = dVar2, dVar2 < 0.0)) {\n    dVar1 = 0.0;\n  }\n  return dVar1;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800afb0c",
+      "address": "0x800AFB0C",
+      "file_offset": "0x09182C",
+      "signature": "undefined1 FUN_800afb0c(int param_1);",
+      "decompiled_c": "\nundefined1 FUN_800afb0c(int param_1)\n\n{\n  return *(undefined1 *)(param_1 + 0x92);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800afb14",
+      "address": "0x800AFB14",
+      "file_offset": "0x091834",
+      "signature": "bool FUN_800afb14(int param_1);",
+      "decompiled_c": "\nbool FUN_800afb14(int param_1)\n\n{\n  return 0.0 < *(float *)(param_1 + 0xe4);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800afb2c",
+      "address": "0x800AFB2C",
+      "file_offset": "0x09184C",
+      "signature": "void FUN_800afb2c(void);",
+      "decompiled_c": "\n/* WARNING: Control flow encountered bad instruction data */\n\nvoid FUN_800afb2c(void)\n\n{\n                    /* WARNING: Bad instruction - Truncating control flow here */\n  halt_baddata();\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b7c00",
+      "address": "0x800B7C00",
+      "file_offset": "0x099920",
+      "signature": "void FUN_800b7c00(void);",
+      "decompiled_c": "\nvoid FUN_800b7c00(void)\n\n{\n  undefined4 in_r7;\n  undefined4 unaff_r29;\n  undefined4 unaff_r30;\n  \n  func_0x8007e458(1,&stack0x0000003c,&stack0x00000008,1,in_r7,unaff_r30,unaff_r29);\n  return;\n}\n\n",
+      "disassembly": "0x800B7C00: or r8,r30,r30\n0x800B7C04: or r9,r29,r29\n0x800B7C08: addi r4,r1,0x3c\n0x800B7C0C: addi r5,r1,0x8\n0x800B7C10: li r3,0x1\n0x800B7C14: li r6,0x1\n0x800B7C18: bl 0x8007e458\n0x800B7C1C: lwz r0,0x84(r1)\n0x800B7C20: lwz r31,0x7c(r1)\n0x800B7C24: lwz r30,0x78(r1)\n0x800B7C28: lwz r29,0x74(r1)\n0x800B7C2C: lwz r28,0x70(r1)\n0x800B7C30: mtspr LR,r0\n0x800B7C34: addi r1,r1,0x80\n0x800B7C38: blr\n"
+    },
+    {
+      "name": "FUN_800b7c3c",
+      "address": "0x800B7C3C",
+      "file_offset": "0x09995C",
+      "signature": "int FUN_800b7c3c(uint param_1,int param_2,int param_3);",
+      "decompiled_c": "\nint FUN_800b7c3c(uint param_1,int param_2,int param_3)\n\n{\n  int iVar1;\n  \n  iVar1 = (param_1 & 0xff) * 0x10;\n  if (param_2 == 0) {\n    return (int)*(short *)(iVar1 + -0x7f854ad8 + param_3 * 2);\n  }\n  if (param_2 == 1) {\n    return (int)*(short *)(iVar1 + -0x7f854ad2);\n  }\n  if (param_2 == 2) {\n    return (int)*(short *)(iVar1 + -0x7f854ad0);\n  }\n  if (param_3 == 3) {\n    return 0x9b;\n  }\n  return (int)*(short *)(iVar1 + -0x7f854ad8 + param_3 * 2 + 10);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b7c68",
+      "address": "0x800B7C68",
+      "file_offset": "0x099988",
+      "signature": "int FUN_800b7c68(int param_1,int param_2,int param_3);",
+      "decompiled_c": "\nint FUN_800b7c68(int param_1,int param_2,int param_3)\n\n{\n  if (param_2 == 1) {\n    return (int)*(short *)(param_1 + 6);\n  }\n  if (param_2 == 2) {\n    return (int)*(short *)(param_1 + 8);\n  }\n  if (param_3 == 3) {\n    return 0x9b;\n  }\n  return (int)*(short *)(param_1 + param_3 * 2 + 10);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b7c78",
+      "address": "0x800B7C78",
+      "file_offset": "0x099998",
+      "signature": "int FUN_800b7c78(int param_1,int param_2,int param_3);",
+      "decompiled_c": "\nint FUN_800b7c78(int param_1,int param_2,int param_3)\n\n{\n  if (param_2 == 2) {\n    return (int)*(short *)(param_1 + 8);\n  }\n  if (param_3 == 3) {\n    return 0x9b;\n  }\n  return (int)*(short *)(param_1 + param_3 * 2 + 10);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b7c88",
+      "address": "0x800B7C88",
+      "file_offset": "0x0999A8",
+      "signature": "int FUN_800b7c88(int param_1,undefined4 param_2,int param_3);",
+      "decompiled_c": "\nint FUN_800b7c88(int param_1,undefined4 param_2,int param_3)\n\n{\n  if (param_3 == 3) {\n    return 0x9b;\n  }\n  return (int)*(short *)(param_1 + param_3 * 2 + 10);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b7c98",
+      "address": "0x800B7C98",
+      "file_offset": "0x0999B8",
+      "signature": "int FUN_800b7c98(int param_1,undefined4 param_2,int param_3);",
+      "decompiled_c": "\nint FUN_800b7c98(int param_1,undefined4 param_2,int param_3)\n\n{\n  return (int)*(short *)(param_1 + param_3 * 2 + 10);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b7ca8",
+      "address": "0x800B7CA8",
+      "file_offset": "0x0999C8",
+      "signature": "void FUN_800b7ca8(uint param_1);",
+      "decompiled_c": "\nvoid FUN_800b7ca8(uint param_1)\n\n{\n  int iVar1;\n  int iVar2;\n  short sVar4;\n  int iVar3;\n  int iVar5;\n  short *psVar6;\n  short *psVar7;\n  \n  iVar1 = (param_1 & 0xff) * 0x100;\n  iVar2 = (param_1 & 0xff) * 0x10;\n  psVar7 = (short *)(iVar2 + -0x7f854ad8);\n  func_0x800be084((int)*(short *)(iVar1 + -0x7fae0814),(int)*(char *)(iVar1 + -0x7fae082a));\n  iVar5 = 0;\n  psVar6 = psVar7;\n  do {\n    sVar4 = func_0x800be434((int)*(short *)(iVar1 + -0x7fae0814),(int)*(char *)(iVar1 + -0x7fae082a)\n                            ,iVar5,0);\n    *psVar6 = sVar4;\n    if ((sVar4 != 0) &&\n       (iVar3 = func_0x800e2044((int)*(char *)(iVar1 + -0x7fae082a),\n                                (int)*(short *)(iVar1 + -0x7fae0814),(int)sVar4,0), iVar3 == 0)) {\n      *psVar6 = 0;\n    }\n    iVar5 = iVar5 + 1;\n    psVar6 = psVar6 + 1;\n  } while (iVar5 < 3);\n  iVar5 = 0;\n  do {\n    sVar4 = func_0x800be434((int)*(short *)(iVar1 + -0x7fae0814),(int)*(char *)(iVar1 + -0x7fae082a)\n                            ,iVar5,1);\n    *(short *)(iVar2 + -0x7f854ad2) = sVar4;\n    if (sVar4 != 0) {\n      iVar5 = func_0x800e2044((int)*(char *)(iVar1 + -0x7fae082a),\n                              (int)*(short *)(iVar1 + -0x7fae0814),\n                              (int)*(short *)(iVar2 + -0x7f854ad2),0);\n      if (iVar5 == 0) {\n        *(undefined2 *)(iVar2 + -0x7f854ad2) = 0;\n      }\n      break;\n    }\n    iVar5 = iVar5 + 1;\n  } while (iVar5 < 3);\n  iVar5 = 0;\n  do {\n    sVar4 = func_0x800be434((int)*(short *)(iVar1 + -0x7fae0814),(int)*(char *)(iVar1 + -0x7fae082a)\n                            ,iVar5,2);\n    *(short *)(iVar2 + -0x7f854ad0) = sVar4;\n    if (sVar4 != 0) {\n      iVar5 = func_0x800e2044((int)*(char *)(iVar1 + -0x7fae082a),\n                              (int)*(short *)(iVar1 + -0x7fae0814),\n                              (int)*(short *)(iVar2 + -0x7f854ad0),0);\n      if (iVar5 == 0) {\n        *(undefined2 *)(iVar2 + -0x7f854ad0) = 0;\n      }\n      break;\n    }\n    iVar5 = iVar5 + 1;\n  } while (iVar5 < 3);\n  iVar2 = 0;\n  do {\n    sVar4 = func_0x800be434((int)*(short *)(iVar1 + -0x7fae0814),(int)*(char *)(iVar1 + -0x7fae082a)\n                            ,iVar2,3);\n    psVar7[5] = sVar4;\n    if ((sVar4 != 0) &&\n       (iVar5 = func_0x800e2044((int)*(char *)(iVar1 + -0x7fae082a),\n                                (int)*(short *)(iVar1 + -0x7fae0814),(int)sVar4,0), iVar5 == 0)) {\n      psVar7[5] = 0;\n    }\n    iVar2 = iVar2 + 1;\n    psVar7 = psVar7 + 1;\n  } while (iVar2 < 3);\n  return;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b8bf0",
+      "address": "0x800B8BF0",
+      "file_offset": "0x09A910",
+      "signature": "undefined4 FUN_800b8bf0(undefined4 param_1,int param_2,int param_3);",
+      "decompiled_c": "\nundefined4 FUN_800b8bf0(undefined4 param_1,int param_2,int param_3)\n\n{\n  if (*(int *)(param_2 + 4) <= param_3) {\n    return param_1;\n  }\n  return 1;\n}\n\n",
+      "disassembly": "0x800B8BF0: lwz r0,0x4(r4)\n0x800B8BF4: cmpw r5,r0\n0x800B8BF8: bgelr\n0x800B8BFC: li r3,0x1\n0x800B8C00: blr\n"
+    },
+    {
+      "name": "FUN_800b8c04",
+      "address": "0x800B8C04",
+      "file_offset": "0x09A924",
+      "signature": "bool FUN_800b8c04(int param_1,int param_2);",
+      "decompiled_c": "\nbool FUN_800b8c04(int param_1,int param_2)\n\n{\n  byte bVar1;\n  int *piVar2;\n  int *piVar3;\n  int iVar4;\n  \n  bVar1 = *(byte *)(param_1 + 0x84);\n  piVar3 = piRam8051d650;\n  while( true ) {\n    if (*piVar3 == 0) goto code_r0x80046c44;\n    if (*piVar3 == (int)*(short *)(param_1 + 0x44)) break;\n    piVar3 = piVar3 + 0x11;\n  }\n  iVar4 = 8;\n  piVar2 = piVar3;\n  do {\n    if (param_2 == piVar2[1]) {\n      return bVar1 != 0;\n    }\n    piVar2 = piVar2 + 1;\n    iVar4 = iVar4 + -1;\n  } while (iVar4 != 0);\n  iVar4 = 8;\n  do {\n    if (param_2 == piVar3[9]) {\n      return 2 < bVar1;\n    }\n    piVar3 = piVar3 + 1;\n    iVar4 = iVar4 + -1;\n  } while (iVar4 != 0);\ncode_r0x80046c44:\n  if (bVar1 < 2) {\n    return false;\n  }\n  return true;\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_800b8c18",
+      "address": "0x800B8C18",
+      "file_offset": "0x09A938",
+      "signature": "void FUN_800b8c18(void);",
+      "decompiled_c": "\nvoid FUN_800b8c18(void)\n\n{\n  byte bVar1;\n  int iVar2;\n  int iVar3;\n  int iVar4;\n  int iVar5;\n  uint *puVar6;\n  int iVar7;\n  int iVar8;\n  int iVar9;\n  int iVar10;\n  int iVar11;\n  int iVar12;\n  int iVar13;\n  int iVar14;\n  \n  func_0x80004714(0x807acf00,0,0x3f2c);\n  uRam807acf02 = 1;\n  uRam807acf00 = 0x1f;\n  uRam807acf0c = 0xe;\n  uRam807adba8 = 0xe;\n  uRam807acf0e = 1;\n  uRam807adbaa = 2;\n  uRam807acf0f = 0;\n  uRam807adbab = 1;\n  uRam807ae892 = 1;\n  uRam807ae844 = 0;\n  uRam807ae848 = 0x19;\n  uRam807ae84c = 0x37;\n  uRam807acf10 = 0xca;\n  uRam807acf12 = 0xc6;\n  uRam807adbac = 0xc9;\n  uRam807adbae = 0xc3;\n  uRam807ae850 = 2;\n  uRam807ae85c = 2;\n  uRam807ae868 = 2;\n  uRam807ae880 = 0;\n  for (puVar6 = (uint *)0x804c8a90; 0 < (int)*puVar6; puVar6 = puVar6 + 1) {\n    uRam807ae880 = uRam807ae880 | 1 << (*puVar6 & 0x3f);\n  }\n  iVar14 = -0x7f853100;\n  uRam807ae884 = 0x37fff6;\n  iVar13 = -0x7f852f58;\n  iVar12 = -0x7f852f14;\n  iVar5 = 0;\n  do {\n    bVar1 = *(byte *)(iVar14 + 0xc);\n    iVar2 = func_0x800be938((uint)bVar1,0);\n    iVar4 = *(int *)((uint)bVar1 * 4 + -0x7fae113c);\n    iVar8 = iRam8051d5fc + (uint)*(byte *)(iVar14 + 0xe) * 0x38;\n    iVar7 = 0;\n    iVar11 = 0;\n    iVar9 = iVar12;\n    iVar10 = iVar13;\n    do {\n      iVar3 = *(int *)(iVar2 + 0x10) + iVar11;\n      if (*(short *)(iVar11 + *(int *)(iVar2 + 0x10)) == 0) break;\n      func_0x800043c4(iVar9,iVar4 + *(int *)(iVar3 + 8) * 0x14,0x14);\n      func_0x800043c4(iVar10,iVar3,0x44);\n      iVar7 = iVar7 + 1;\n      *(undefined4 *)(iVar10 + 4) = *(undefined4 *)(iVar8 + 0xc);\n      iVar11 = iVar11 + 0x44;\n      iVar10 = iVar10 + 0xb0;\n      iVar9 = iVar9 + 0xb0;\n      iVar8 = iVar8 + 4;\n    } while (iVar7 < 0x10);\n    iVar5 = iVar5 + 1;\n    iVar13 = iVar13 + 0xc9c;\n    iVar12 = iVar12 + 0xc9c;\n    iVar14 = iVar14 + 0xc9c;\n    if (1 < iVar5) {\n      iVar12 = -0x7f853100;\n      uRam807ae888 = 0xffffffff;\n      iVar13 = -0x7f8530e3;\n      iVar5 = 0;\n      do {\n        iVar14 = *(int *)(iRam8051f284 + (uint)*(byte *)(iVar12 + 0xc) * 100);\n        if (iVar14 < 1) {\n          iVar14 = 0;\n        }\n        else {\n          iVar14 = *(int *)(iRam805131c0 + iVar14 * 4);\n        }\n        if (iVar14 == 0) {\n          func_0x803346e0(iVar13,&STR_8049AE68);\n        }\n        else {\n          func_0x803346e0(iVar13);\n        }\n        iVar5 = iVar5 + 1;\n        iVar13 = iVar13 + 0xc9c;\n        iVar12 = iVar12 + 0xc9c;\n      } while (iVar5 < 2);\n      uRam807ae88c = 0;\n      uRam807ae878 = 1;\n      uRam807ae87c = *(undefined4 *)(iRam805131c0 + iRam804c6874 * 4);\n      func_0x800b9eb0(0,uRam807acf0c,0);\n      func_0x800b9eb0(1,uRam807adba8,0);\n      uRam807ae8ac = 1;\n      uRam807ae8ad = 2;\n      uRam807ae8ae = 3;\n      return;\n    }\n  } while( true );\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80330d00",
+      "address": "0x80330D00",
+      "file_offset": "0x312A20",
+      "signature": "void FUN_80330d00(undefined4 param_1,int param_2,int param_3);",
+      "decompiled_c": "\nvoid FUN_80330d00(undefined4 param_1,int param_2,int param_3)\n\n{\n  int in_r0;\n  \n  *(uint *)(param_2 + param_3) = *(uint *)(param_2 + param_3) ^ *(uint *)(param_2 + in_r0);\n  return;\n}\n\n",
+      "disassembly": "0x80330D00: lwzx r3,r4,r5\n0x80330D04: lwzx r0,r4,r0\n0x80330D08: xor r3,r3,r0\n0x80330D0C: stwx r3,r4,r5\n0x80330D10: blr\n"
+    },
+    {
+      "name": "FUN_80330d14",
+      "address": "0x80330D14",
+      "file_offset": "0x312A34",
+      "signature": "int FUN_80330d14(int param_1,int param_2);",
+      "decompiled_c": "\nint FUN_80330d14(int param_1,int param_2)\n\n{\n  uint uVar1;\n  uint uVar2;\n  int iVar3;\n  \n  if (param_1 == param_2) {\n    return param_1;\n  }\n  iRam8050e408 = iRam8050e408 + 1;\n  if (0x208 < iRam8050e408) {\n    iRam8050e408 = 0;\n  }\n  iVar3 = iRam8050e408 + -0x20;\n  if (iVar3 < 0) {\n    iVar3 = iRam8050e408 + 0x1e9;\n  }\n  uVar1 = (param_2 - param_1) + 1;\n  uVar2 = *(uint *)(iRam8050e408 * 4 + -0x7f6ff600) ^ *(uint *)(iVar3 * 4 + -0x7f6ff600);\n  *(uint *)(iRam8050e408 * 4 + -0x7f6ff600) = uVar2;\n  return param_1 + (uVar2 - (uVar2 / uVar1) * uVar1);\n}\n\n",
+      "disassembly": ""
+    },
+    {
+      "name": "FUN_80330d80",
+      "address": "0x80330D80",
+      "file_offset": "0x312AA0",
+      "signature": "double FUN_80330d80(double param_1,double param_2);",
+      "decompiled_c": "\ndouble FUN_80330d80(double param_1,double param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  \n  iRam8050e408 = iRam8050e408 + 1;\n  if (0x208 < iRam8050e408) {\n    iRam8050e408 = 0;\n  }\n  iVar2 = iRam8050e408 + -0x20;\n  if (iVar2 < 0) {\n    iVar2 = iRam8050e408 + 0x1e9;\n  }\n  uVar1 = *(uint *)(iRam8050e408 * 4 + -0x7f6ff600) ^ *(uint *)(iVar2 * 4 + -0x7f6ff600);\n  *(uint *)(iRam8050e408 * 4 + -0x7f6ff600) = uVar1;\n  return (double)(float)(param_1 +\n                        (double)(((float)((double)CONCAT44(0x43300000,uVar1) - 4503599627370496.0) *\n                                 (float)(param_2 - param_1)) / 4.2949673e+09));\n}\n\n",
+      "disassembly": ""
+    }
+  ]
+}
