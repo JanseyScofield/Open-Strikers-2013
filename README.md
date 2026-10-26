@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Architecture](https://img.shields.io/badge/Target-Linux%20x86__64%20%7C%20ARM64-lightgrey)](#)
 [![Tests](https://img.shields.io/badge/Tests-Passing-success)](#)
-[![License](https://img.shields.io/badge/License-MIT%20%2F%20Educational-yellow.svg)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Projeto de Engenharia Reversa (Reverse Engineering & Architecture — REA)** e reconstrução modular da engine de *Inazuma Eleven GO Strikers 2013* (Nintendo Wii, Level-5 / Shade) para arquiteturas modernas de 64 bits utilizando **C++20 estrito**, **SDL2** e um pipeline automatizado de ingestão de dados binários.
 
@@ -228,10 +228,6 @@ O executável de teste valida a inicialização do subsistema de input SDL2, car
 
 ---
 
-## ⚖️ Aviso Legal & Direitos Autorais
+## 📄 Licença
 
-Este projeto foi desenvolvido **estritamente para fins educacionais, de pesquisa em engenharia reversa e preservação da história dos videogames**. 
-
-- Nenhum código-fonte original protegido por direitos autorais nem binários proprietários (como imagens ISO ou arquivos `.dol` da Nintendo ou da Level-5) são distribuídos neste repositório.
-- Todos os nomes, marcas e propriedades intelectuais citados pertencem à **Level-5 Inc.** e **Nintendo Co., Ltd.**
-- O código-fonte deste repositório representa uma reimplementação limpa (*clean-room*) de estruturas e algoritmos baseados em dados publicamente extraídos de cópias legalmente adquiridas do software.
+Este projeto é disponibilizado sob a licença [MIT](LICENSE). Consulte o arquivo [LICENSE](LICENSE) para mais detalhes sobre os termos de uso do código e o aviso legal de engenharia reversa limpa (*clean-room*).
