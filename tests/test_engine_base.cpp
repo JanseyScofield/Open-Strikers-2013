@@ -7,6 +7,8 @@
 #include "physics/ball.hpp"
 #include "physics/kinematic_body.hpp"
 #include "render/camera.hpp"
+#include "render/mesh.hpp"
+#include "render/mesh_loader.hpp"
 
 #include <SDL2/SDL.h>
 #include <cmath>
@@ -399,7 +401,36 @@ int main() {
         );
         std::cout << "  - Hissatsu Command Battle               : resultado=" << cmd_battle << "\n";
 
-        std::cout << "\n[SUCESSO] Todos os testes de dominio, cinematica, bola e formulas de combate passaram!\n";
+        // ------------------------------------------------------------------
+        // Etapa H: Verificação do Carregamento de Modelos 3D (.obj) e Texturas (.png)
+        // ------------------------------------------------------------------
+        std::cout << "\n[7/7] Verificando ingestao de malhas 3D (.obj) e texturas (.png) (specs/MODELS_SCHEMA.md)...\n";
+        const auto ball_obj_path = ResolveRepoPath("output/models/ball.obj");
+        const auto endo_obj_path = ResolveRepoPath("output/models/endo_mamoru.obj");
+
+        const strikers::render::Mesh ball_mesh = strikers::render::MeshLoader::LoadObj(ball_obj_path);
+        const strikers::render::Mesh endo_mesh = strikers::render::MeshLoader::LoadObj(endo_obj_path);
+
+        std::cout << "  - Bola (ball.obj)          : " << ball_mesh.GetSubMeshCount()
+                  << " sub-malha, " << ball_mesh.GetTotalVertexCount() << " vertices, "
+                  << ball_mesh.GetTotalTriangleCount() << " triangulos\n";
+        std::cout << "  - Endo (endo_mamoru.obj)   : " << endo_mesh.GetSubMeshCount()
+                  << " sub-malhas, " << endo_mesh.GetTotalVertexCount() << " vertices, "
+                  << endo_mesh.GetTotalTriangleCount() << " triangulos\n";
+
+        if (ball_mesh.GetTotalVertexCount() != 540u || ball_mesh.GetTotalTriangleCount() != 180u) {
+            throw std::runtime_error("Contagem de vertices/triangulos da bola (ball.obj) diverge de specs/MODELS_SCHEMA.md.");
+        }
+        if (endo_mesh.GetTotalVertexCount() != 11550u || endo_mesh.GetTotalTriangleCount() != 3850u) {
+            throw std::runtime_error("Contagem de vertices/triangulos do Endo (endo_mamoru.obj) diverge de specs/MODELS_SCHEMA.md.");
+        }
+        for (const auto& sm : endo_mesh.GetSubMeshes()) {
+            if (!sm.GetTexture() || !sm.GetTexture()->IsLoaded()) {
+                throw std::runtime_error("Sub-malha '" + sm.GetGroupName() + "' de endo_mamoru.obj sem textura PNG carregada.");
+            }
+        }
+
+        std::cout << "\n[SUCESSO] Todos os testes de dominio, cinematica, bola, duelos e malhas 3D passaram!\n";
         return EXIT_SUCCESS;
 
     } catch (const std::exception& ex) {

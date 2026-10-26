@@ -32,8 +32,107 @@ physics::Vec3 Normalize(const physics::Vec3& v) noexcept {
 
 } // namespace
 
+Mat4 Mat4:: operator*(const Mat4& rhs) const noexcept {
+    Mat4 out{};
+    out.m.fill(0.0f);
+    for (int col = 0; col < 4; ++col) {
+        for (int row = 0; row < 4; ++row) {
+            float sum = 0.0f;
+            for (int k = 0; k < 4; ++k) {
+                sum += m[static_cast<std::size_t>(k * 4 + row)] *
+                       rhs.m[static_cast<std::size_t>(col * 4 + k)];
+            }
+            out.m[static_cast<std::size_t>(col * 4 + row)] = sum;
+        }
+    }
+    return out;
+}
+
 Mat4 Mat4::Identity() noexcept {
     return Mat4{};
+}
+
+Mat4 Mat4::Translate(const physics::Vec3& translation) noexcept {
+    Mat4 out = Identity();
+    out.m[12] = translation.x;
+    out.m[13] = translation.y;
+    out.m[14] = translation.z;
+    return out;
+}
+
+Mat4 Mat4::Scale(const physics::Vec3& scale) noexcept {
+    Mat4 out = Identity();
+    out.m[0]  = scale.x;
+    out.m[5]  = scale.y;
+    out.m[10] = scale.z;
+    return out;
+}
+
+Mat4 Mat4::RotateY(float angle_rad) noexcept {
+    const float c = std::cos(angle_rad);
+    const float s = std::sin(angle_rad);
+    Mat4 out = Identity();
+    out.m[0]  =  c;
+    out.m[2]  = -s;
+    out.m[8]  =  s;
+    out.m[10] =  c;
+    return out;
+}
+
+Mat4 Mat4::RotateAxisAngle(const physics::Vec3& axis, float angle_rad) noexcept {
+    const physics::Vec3 u = Normalize(axis);
+    const float c = std::cos(angle_rad);
+    const float s = std::sin(angle_rad);
+    const float omc = 1.0f - c;
+
+    Mat4 out = Identity();
+    out.m[0]  = c + u.x * u.x * omc;
+    out.m[1]  = u.y * u.x * omc + u.z * s;
+    out.m[2]  = u.z * u.x * omc - u.y * s;
+
+    out.m[4]  = u.x * u.y * omc - u.z * s;
+    out.m[5]  = c + u.y * u.y * omc;
+    out.m[6]  = u.z * u.y * omc + u.x * s;
+
+    out.m[8]  = u.x * u.z * omc + u.y * s;
+    out.m[9]  = u.y * u.z * omc - u.x * s;
+    out.m[10] = c + u.z * u.z * omc;
+    return out;
+}
+
+Mat4 Mat4::FromPositionDirectionScale(
+    const physics::Vec3& pos,
+    const physics::Vec3& facing_dir,
+    float uniform_scale
+) noexcept {
+    physics::Vec3 fwd{facing_dir.x, 0.0f, facing_dir.z};
+    const float len = fwd.LengthXZ();
+    if (len > 1e-5f) {
+        fwd.x /= len;
+        fwd.z /= len;
+    } else {
+        fwd = {1.0f, 0.0f, 0.0f};
+    }
+
+    // No espaço do modelo (.obj), o personagem olha para +Z (0, 0, 1) com +Y para cima.
+    // Right = Up x Forward = (0, 1, 0) x (fx, 0, fz) = (fz, 0, -fx).
+    Mat4 out = Identity();
+    out.m[0]  =  fwd.z * uniform_scale;
+    out.m[1]  =  0.0f;
+    out.m[2]  = -fwd.x * uniform_scale;
+
+    out.m[4]  =  0.0f;
+    out.m[5]  =  uniform_scale;
+    out.m[6]  =  0.0f;
+
+    out.m[8]  =  fwd.x * uniform_scale;
+    out.m[9]  =  0.0f;
+    out.m[10] =  fwd.z * uniform_scale;
+
+    out.m[12] =  pos.x;
+    out.m[13] =  pos.y;
+    out.m[14] =  pos.z;
+    return out;
 }
 
 Mat4 Mat4::Perspective(float fov_y_degrees, float aspect, float near_plane, float far_plane) noexcept {

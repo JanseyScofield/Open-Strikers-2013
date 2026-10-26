@@ -8,6 +8,9 @@
 #include "physics/kinematic_body.hpp"
 #include "render/camera.hpp"
 #include "render/debug_renderer.hpp"
+#include "render/mesh.hpp"
+#include "render/mesh_loader.hpp"
+#include "render/shader.hpp"
 #include "render/window.hpp"
 
 #include <SDL2/SDL.h>
@@ -186,6 +189,32 @@ int main(int argc, char* argv[]) {
         strikers::render::DebugRenderer debug_renderer;
         strikers::input::IInputSource& input_source = input_mgr;
 
+        // 4.1. Carrega Shaders GLSL e Modelos 3D Originais (.obj + .mtl + .png)
+        strikers::render::Shader model_shader;
+        if (window.HasOpenGLContext()) {
+            const auto vert_path = ResolveWorkspacePath("src/render/shaders/model.vert");
+            const auto frag_path = ResolveWorkspacePath("src/render/shaders/model.frag");
+            if (!model_shader.LoadDefaultModelShader(vert_path, frag_path)) {
+                std::cerr << "[ERRO] Falha ao compilar/vincular shaders GLSL.\n";
+                return EXIT_FAILURE;
+            }
+        }
+
+        const auto endo_obj_path = ResolveWorkspacePath("output/models/endo_mamoru.obj");
+        const auto ball_obj_path = ResolveWorkspacePath("output/models/ball.obj");
+
+        strikers::render::Mesh endo_mesh = strikers::render::MeshLoader::LoadObj(endo_obj_path);
+        strikers::render::Mesh ball_mesh = strikers::render::MeshLoader::LoadObj(ball_obj_path);
+
+        std::cout << "[Assets 3D] Modelo Atleta (Endo Mamoru): " << endo_mesh.GetSubMeshCount()
+                  << " sub-malhas, " << endo_mesh.GetTotalVertexCount() << " vertices, "
+                  << endo_mesh.GetTotalTriangleCount() << " triangulos.\n";
+        std::cout << "[Assets 3D] Modelo Bola (ball0000)     : " << ball_mesh.GetSubMeshCount()
+                  << " sub-malha, " << ball_mesh.GetTotalVertexCount() << " vertices, "
+                  << ball_mesh.GetTotalTriangleCount() << " triangulos.\n\n";
+
+        strikers::render::Mat4 ball_rotation_mtx = strikers::render::Mat4::Identity();
+
         // 5. Loop Principal a 60 FPS
         constexpr float kFixedDeltaSec = 1.0f / 60.0f;
         constexpr Uint64 kTargetFrameMs = 16;
@@ -231,6 +260,7 @@ int main(int argc, char* argv[]) {
             player_body.Update(p1.direction.x, p1.direction.y, is_dashing, kFixedDeltaSec);
 
             // c) Interação com a Bola (Domínio, Passe, Duelo 1v1 e Chute com Duelo)
+            const strikers::physics::Vec3 prev_ball_pos = ball.GetPosition();
             const strikers::physics::Vec3& p_pos = player_body.GetPosition();
             const strikers::physics::Vec3& b_pos = ball.GetPosition();
             const strikers::physics::Vec3 delta_to_ball = b_pos - p_pos;
@@ -358,6 +388,21 @@ int main(int argc, char* argv[]) {
             // Atualiza física e quiques da bola
             ball.Update(kFixedDeltaSec);
 
+            // Calcula rotação visual da bola proporcional ao deslocamento/velocidade de rolagem no solo
+            {
+                const strikers::physics::Vec3 curr_ball_pos = ball.GetPosition();
+                const float dx = curr_ball_pos.x - prev_ball_pos.x;
+                const float dz = curr_ball_pos.z - prev_ball_pos.z;
+                const float dist_xz = std::sqrt(dx * dx + dz * dz);
+                if (dist_xz > 1e-5f) {
+                    // Eixo de rolagem: Up (0, 1, 0) x Deslocamento (dx, 0, dz) = (dz, 0, -dx)
+                    const strikers::physics::Vec3 roll_axis{dz, 0.0f, -dx};
+                    const float roll_angle_rad = dist_xz / strikers::physics::Ball::kRadius;
+                    ball_rotation_mtx =
+                        strikers::render::Mat4::RotateAxisAngle(roll_axis, roll_angle_rad) * ball_rotation_mtx;
+                }
+            }
+
             // Se o goleiro venceu o duelo matemático, ele intercepta fisicamente a bola na linha da pequena área
             if (shot_pending_gk_save && ball.GetPosition().x >= (gk_body.GetPosition().x - 0.8f)) {
                 shot_pending_gk_save = false;
@@ -398,23 +443,56 @@ int main(int argc, char* argv[]) {
             // e) Renderização OpenGL
             window.BeginFrame();
             if (window.HasOpenGLContext()) {
-                camera.ApplyToOpenGL(window.GetAspectRatio());
+                const float aspect = window.GetAspectRatio();
+                camera.ApplyToOpenGL(aspect);
 
-                // Campo e Traves
+                // 1. DebugRenderer ativo apenas para traçar o campo (linhas brancas) e as traves
+                strikers::render::Shader::Unbind();
+                strikers::render::Texture::Unbind();
                 debug_renderer.RenderPitch();
                 debug_renderer.RenderGoals();
 
-                // Defensor 1v1 Kabeyama (Azul / Defensor)
-                debug_renderer.RenderAthlete(defender_body, {0.20f, 0.48f, 0.92f, 1.0f});
+                // 2. Renderização das Malhas 3D com Texturas e Iluminação Direcional Difusa via Shader
+                const strikers::render::Mat4 view_proj_mtx =
+                    camera.GetProjectionMatrix(aspect) * camera.GetViewMatrix();
+                const strikers::physics::Vec3 light_dir{0.35f, 0.85f, 0.40f};
+                constexpr float kAthleteModelScale = 1.85f;
+                // Raio nativo de ball.obj é ~0.1685m; escalamos para casar com Ball::kRadius (0.32m)
+                constexpr float kBallModelScale = strikers::physics::Ball::kRadius / 0.1685f;
 
-                // Goleiro Endo (Verde / Goleiro Raimon)
-                debug_renderer.RenderAthlete(gk_body, {0.18f, 0.72f, 0.35f, 1.0f});
+                // Jogador Controlado (Modelo 3D Endo Mamoru orientado na direção do movimento)
+                const strikers::render::Mat4 player_model_mtx =
+                    strikers::render::Mat4::FromPositionDirectionScale(
+                        player_body.GetPosition(),
+                        player_body.GetFacingDirection(),
+                        kAthleteModelScale
+                    );
+                endo_mesh.Draw(model_shader, player_model_mtx, view_proj_mtx, light_dir, 1.0f, 1.0f, 1.0f, 1.0f);
 
-                // Atacante Gouenji (Amarelo e Laranja / Chama Raimon)
-                debug_renderer.RenderAthlete(player_body, {1.0f, 0.65f, 0.12f, 1.0f});
+                // Defensor 1v1 (orientado em direção ao centro)
+                const strikers::render::Mat4 defender_model_mtx =
+                    strikers::render::Mat4::FromPositionDirectionScale(
+                        defender_body.GetPosition(),
+                        defender_body.GetFacingDirection(),
+                        kAthleteModelScale
+                    );
+                endo_mesh.Draw(model_shader, defender_model_mtx, view_proj_mtx, light_dir, 0.82f, 0.90f, 1.0f, 1.0f);
 
-                // Bola de futebol
-                debug_renderer.RenderBall(ball);
+                // Goleiro na Meta Direita
+                const strikers::render::Mat4 gk_model_mtx =
+                    strikers::render::Mat4::FromPositionDirectionScale(
+                        gk_body.GetPosition(),
+                        gk_body.GetFacingDirection(),
+                        kAthleteModelScale
+                    );
+                endo_mesh.Draw(model_shader, gk_model_mtx, view_proj_mtx, light_dir, 0.92f, 1.0f, 0.92f, 1.0f);
+
+                // Bola de Futebol 3D com Textura e Rotação de Rolagem
+                const strikers::render::Mat4 ball_model_mtx =
+                    strikers::render::Mat4::Translate(ball.GetPosition()) *
+                    ball_rotation_mtx *
+                    strikers::render::Mat4::Scale({kBallModelScale, kBallModelScale, kBallModelScale});
+                ball_mesh.Draw(model_shader, ball_model_mtx, view_proj_mtx, light_dir, 1.0f, 1.0f, 1.0f, 1.0f);
             }
             window.EndFrame();
 

@@ -97,6 +97,7 @@ void SDL_GL_ResetAttributes(void);
 SDL_GLContext SDL_GL_CreateContext(SDL_Window* window);
 void SDL_GL_DeleteContext(SDL_GLContext context);
 int SDL_GL_MakeCurrent(SDL_Window* window, SDL_GLContext context);
+SDL_GLContext SDL_GL_GetCurrentContext(void);
 int SDL_GL_SetSwapInterval(int interval);
 int SDL_GL_GetSwapInterval(void);
 void SDL_GL_SwapWindow(SDL_Window* window);

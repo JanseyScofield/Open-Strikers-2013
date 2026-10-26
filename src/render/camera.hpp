@@ -18,7 +18,18 @@ struct Mat4 {
         0.0f, 0.0f, 0.0f, 1.0f
     };
 
+    [[nodiscard]] Mat4 operator*(const Mat4& rhs) const noexcept;
+
     [[nodiscard]] static Mat4 Identity() noexcept;
+    [[nodiscard]] static Mat4 Translate(const physics::Vec3& translation) noexcept;
+    [[nodiscard]] static Mat4 Scale(const physics::Vec3& scale) noexcept;
+    [[nodiscard]] static Mat4 RotateY(float angle_rad) noexcept;
+    [[nodiscard]] static Mat4 RotateAxisAngle(const physics::Vec3& axis, float angle_rad) noexcept;
+    [[nodiscard]] static Mat4 FromPositionDirectionScale(
+        const physics::Vec3& pos,
+        const physics::Vec3& facing_dir,
+        float uniform_scale = 1.0f
+    ) noexcept;
     [[nodiscard]] static Mat4 Perspective(float fov_y_degrees, float aspect, float near_plane, float far_plane) noexcept;
     [[nodiscard]] static Mat4 LookAt(
         const physics::Vec3& eye,

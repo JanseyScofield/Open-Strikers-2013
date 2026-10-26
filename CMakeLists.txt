@@ -18,6 +18,7 @@ list(PREPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(SDL2 REQUIRED)
 set(OpenGL_GL_PREFERENCE LEGACY)
 find_package(OpenGL REQUIRED)
+find_package(ZLIB REQUIRED)
 
 find_package(nlohmann_json QUIET)
 if(NOT nlohmann_json_FOUND)
@@ -41,11 +42,16 @@ add_library(strikers_engine_core STATIC
     src/gameplay/duel_system.cpp
     src/render/window.cpp
     src/render/camera.cpp
+    src/render/shader.cpp
+    src/render/texture.cpp
+    src/render/mesh.cpp
+    src/render/mesh_loader.cpp
     src/render/debug_renderer.cpp
 )
 
 target_include_directories(strikers_engine_core PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party"
     ${SDL2_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIR}
 )
@@ -54,12 +60,14 @@ if(TARGET SDL2::SDL2)
     target_link_libraries(strikers_engine_core PUBLIC
         SDL2::SDL2
         OpenGL::GL
+        ZLIB::ZLIB
         nlohmann_json::nlohmann_json
     )
 else()
     target_link_libraries(strikers_engine_core PUBLIC
         ${SDL2_LIBRARIES}
         OpenGL::GL
+        ZLIB::ZLIB
         nlohmann_json::nlohmann_json
     )
 endif()
