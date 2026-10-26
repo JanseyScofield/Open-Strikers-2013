@@ -163,7 +163,7 @@ cmake --build build -j$(nproc)
 
 ### Execução dos Testes de Integração
 
-O executável de teste valida a inicialização do subsistema de input SDL2, carrega e valida os 411 personagens e 476 técnicas, e simula um loop de amostragem de frames com entradas de teclado e gamepad:
+O executável de teste valida a inicialização do subsistema de input SDL2, o catálogo de 411 personagens e 476 técnicas, simula amostragem de frames com teclado/gamepad, e verifica as rotinas de cinemática do atleta, física da bola, resolução matemática de duelos e ingestão de malhas 3D/texturas:
 
 ```bash
 # Executar a suíte de testes
@@ -189,9 +189,25 @@ O executável de teste valida a inicialização do subsistema de input SDL2, car
 
 [3/3] Executando mini loop de polling da SDL2 (8 quadros)...
   [Frame 1] P1 Axis=( 0.71, -0.71) | Held=0x1281 | Pressed=0x1281 [+PASS]
-  [Frame 2] P1 Axis=( 0.71, -0.71) | Held=0x130e | Pressed=0x010e [+SHOOT] [+DRIBBLE] [+DASH]
+  [Frame 2] P1 Axis=( 0.71, -0.71) | Held=0x120e | Pressed=0x000e [+SHOOT] [+DRIBBLE] [+DASH]
 
-[SUCESSO] Todos os testes de dominio e subsistema de entrada SDL2 passaram sem erros!
+[4/6] Verificando cinematica (KinematicBody) e limites do gramado (105m x 68m)...
+  - Posicao apos corrida diagonal longa : (52.50m, -34.00m)
+
+[5/6] Verificando fisica, estados e quique da bola (Ball)...
+
+[6/6] Verificando formulas de confronto e resolucao (specs/BATTLE_FORMULAS.md)...
+  - Chute de Gouenji (Fire Tornado) : P_chute=83
+  - Defesa de Endo (God Hand)       : P_def=74
+  - Resultado da Finalizacao        : [GOL!] Chute de 豪炎寺 修也 superou 円堂 守! (P_chute=83 vs P_def=74 | Residual=59)
+  - Duelo Terrestre 1v1 (Gouenji vs Endo) : [DESARME LIMPO] 円堂 守 desarmou 豪炎寺 修也 (Bote=60 vs Drible=45, Chance=45%, RNG=47)
+  - Hissatsu Command Battle               : resultado=-1
+
+[7/7] Verificando ingestao de malhas 3D (.obj) e texturas (.png) (specs/MODELS_SCHEMA.md)...
+  - Bola (ball.obj)          : 2 sub-malhas, 540 vertices, 180 triangulos
+  - Endo (endo_mamoru.obj)   : 9 sub-malhas, 11550 vertices, 3850 triangulos
+
+[SUCESSO] Todos os testes de dominio, cinematica, bola, duelos e malhas 3D passaram!
 ```
 
 ---
@@ -207,7 +223,9 @@ O executável de teste valida a inicialização do subsistema de input SDL2, car
 
 ---
 
-## 🗺️ Roadmap de Desenvolvimento
+## 🗺️ Roadmap de Desenvolvimento e Cronograma
+
+### 📌 Fases Concluídas e Núcleo Atual
 
 - [x] **Fase 1: Extração e Decodificação de Contêineres**
   - [x] Descompressor LZSS/RLE proprietário da Shade Engine.
@@ -221,10 +239,24 @@ O executável de teste valida a inicialização do subsistema de input SDL2, car
   - [x] Catálogo e carregador assíncrono em memória.
   - [x] Sistema de abstração de entrada multi-jogador SDL2 com bindings JSON.
   - [x] Suíte de testes de integração automatizada.
-- [ ] **Fase 4: Lógica de Partida e Inteligência Artificial (Próximos Passos)**
-  - [ ] Implementação das fórmulas matemáticas de duelo de chute vs defesa e divididas.
-  - [ ] Máquina de estados finitos (FSM) de movimentação tática dos atletas.
-  - [ ] Simulação de física 3D simplificada da bola em campo.
+- [x] **Fase 4: Lógica de Partida, Física e Sandbox Gráfica**
+  - [x] Fórmulas matemáticas de confronto descompiladas (`specs/BATTLE_FORMULAS.md`): ciclo de elementos, chute vs goleiro, duelos 1v1 e comandos de Hissatsu.
+  - [x] Cinemática do atleta (`KinematicBody`) e delimitação do gramado oficial (105m x 68m).
+  - [x] Física da bola (`Ball`): gravidade, amortecimento/quique, posse, mecânica de passe e chute balístico.
+  - [x] Renderização 3D e ingestão de malhas/texturas (`.obj` / `.png`) com shaders GLSL e janela SDL2/OpenGL.
+
+### 📅 Cronograma de Entregas Futuras (Fases 5 a 7)
+
+O desenvolvimento segue a metodologia de **Spec-Driven Development (SDD)** com atribuição formal de responsabilidades entre os papéis técnicos definidos em [`specs/AGENTS.md`](specs/AGENTS.md):
+
+| Fase | Foco Técnico | Responsável | Entregáveis Principais |
+| :--- | :--- | :--- | :--- |
+| **Fase 5.1** | Animações Esqueléticas | `@format-parser`<br>`@reconstructor` | Parser de ossos/keyframes dos contêineres originais; skinning nos shaders para poses de corrida, drible, chute e defesa. |
+| **Fase 5.2** | Inteligência Artificial (IA) | `@reconstructor` | Máquina de estados (FSM/Behavior Trees) para os outros 21 jogadores: suporte ofensivo, recomposição e marcação do homem da bola. |
+| **Fase 5.3** | Árbitro e Regras de Partida | `@reconstructor` | Ciclo formal de jogo: apito inicial, contagem de gols, lateral, escanteio, tiro de meta e encerramento de tempo regulamentar. |
+| **Fase 6.1** | Interface de Usuário (HUD/UI) | `@reconstructor` | Placar em tela, cronômetro de jogo, barras de TP/Inazuma, radar 2D no rodapé e menu de seleção de times. |
+| **Fase 6.2** | Subsistema de Áudio | `@format-parser`<br>`@reconstructor` | Conversão e reprodução de fluxos `.brstm` / bancos de efeitos (SFX de chute, apito, narração e BGM) via `SDL_mixer`. |
+| **Fase 7** | Polimento e Hissatsus Completas | Time Completo | Efeitos visuais de técnicas especiais, cinemáticas curtas de ativação de poder e empacotamento standalone do executável. |
 
 ---
 
