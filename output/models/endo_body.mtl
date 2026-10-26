@@ -1,0 +1,65 @@
+# Gerado por scripts/extract_models.py (Inazuma Eleven Strikers 2013)
+
+newmtl body_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/body_00.png
+
+newmtl body_01
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/body_01.png
+
+newmtl foot_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/foot_00.png
+
+newmtl hada_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/hada_00.png
+
+newmtl mark_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/mark_00.png
+
+newmtl numb_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/numb_011.png
+
+newmtl sock_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/sock_00.png
+
+newmtl symb_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/symb_00.png

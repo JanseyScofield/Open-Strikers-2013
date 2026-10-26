@@ -1,0 +1,601 @@
+{
+  "container": "extracted/files/grp.bin",
+  "model_table_source": "extracted/files/dat.bin (idx=75 / 0x9C8B)",
+  "total_grp_entries": 4973,
+  "total_model_defs": 4133,
+  "total_tex_sets": 1706,
+  "extracted_models": [
+    {
+      "asset_key": "ball",
+      "description": "Bola de Futebol Padrão (ball0000_normal)",
+      "model_def": {
+        "model_def_id": 3889,
+        "mdl_file_id": 1117,
+        "tex_set_index": 37,
+        "bound_radius": 0.19,
+        "bound_height": 0.19,
+        "scale": 1.0
+      },
+      "tex_set_def": {
+        "tex_set_id": 37,
+        "tex_file_ids": [
+          15
+        ]
+      },
+      "mdl_grp_index": 1116,
+      "mdl_name": "ball0000_normal",
+      "bone_count": 3,
+      "submesh_count": 2,
+      "exported_vertices": 540,
+      "exported_triangles": 180,
+      "obj_file": "output/models/ball.obj",
+      "mtl_file": "output/models/ball.mtl",
+      "textures": [
+        {
+          "name": "BALL01",
+          "grp_file_id": 15,
+          "grp_index": 14,
+          "width": 256,
+          "height": 256,
+          "format_code": "0x4",
+          "format_name": "RGB565",
+          "png_path": "output/models/textures/BALL01.png"
+        },
+        {
+          "name": "falloff",
+          "grp_file_id": 15,
+          "grp_index": 14,
+          "width": 128,
+          "height": 128,
+          "format_code": "0x1",
+          "format_name": "I8",
+          "png_path": "output/models/textures/falloff.png"
+        },
+        {
+          "name": "shading",
+          "grp_file_id": 15,
+          "grp_index": 14,
+          "width": 128,
+          "height": 128,
+          "format_code": "0xe",
+          "format_name": "CMPR",
+          "png_path": "output/models/textures/shading.png"
+        },
+        {
+          "name": "BALL_edge",
+          "grp_file_id": 15,
+          "grp_index": 14,
+          "width": 128,
+          "height": 128,
+          "format_code": "0x5",
+          "format_name": "RGB5A3",
+          "png_path": "output/models/textures/BALL_edge.png"
+        }
+      ]
+    },
+    {
+      "asset_key": "endo_head",
+      "description": "Endo Mamoru - Cabeça (0001_endo)",
+      "model_def": {
+        "model_def_id": 2481,
+        "mdl_file_id": 3436,
+        "tex_set_index": 1346,
+        "bound_radius": 0.72,
+        "bound_height": 1.49,
+        "scale": 1.0
+      },
+      "tex_set_def": {
+        "tex_set_id": 1346,
+        "tex_file_ids": [
+          4328,
+          3943
+        ]
+      },
+      "mdl_grp_index": 3435,
+      "mdl_name": "0001_endo",
+      "bone_count": 1,
+      "submesh_count": 1,
+      "exported_vertices": 2496,
+      "exported_triangles": 832,
+      "obj_file": "output/models/endo_head.obj",
+      "mtl_file": "output/models/endo_head.mtl",
+      "textures": [
+        {
+          "name": "face_0001",
+          "grp_file_id": 4328,
+          "grp_index": 4327,
+          "width": 256,
+          "height": 256,
+          "format_code": "0x5",
+          "format_name": "RGB5A3",
+          "png_path": "output/models/textures/face_0001.png"
+        },
+        {
+          "name": "_falloff",
+          "grp_file_id": 3943,
+          "grp_index": 3942,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x1",
+          "format_name": "I8",
+          "png_path": "output/models/textures/_falloff.png"
+        }
+      ]
+    },
+    {
+      "asset_key": "endo_body",
+      "description": "Endo Mamoru - Corpo Uniforme GK Raimon (RAI_GKH_CHIBI_00)",
+      "model_def": {
+        "model_def_id": 400,
+        "mdl_file_id": 1140,
+        "tex_set_index": 115,
+        "bound_radius": 0.48,
+        "bound_height": 1.4,
+        "scale": 1.0
+      },
+      "tex_set_def": {
+        "tex_set_id": 115,
+        "tex_file_ids": [
+          72,
+          66,
+          3827
+        ]
+      },
+      "mdl_grp_index": 1139,
+      "mdl_name": "RAI_GKH_CHIBI_00",
+      "bone_count": 23,
+      "submesh_count": 8,
+      "exported_vertices": 9054,
+      "exported_triangles": 3018,
+      "obj_file": "output/models/endo_body.obj",
+      "mtl_file": "output/models/endo_body.mtl",
+      "textures": [
+        {
+          "name": "body_00",
+          "grp_file_id": 72,
+          "grp_index": 71,
+          "width": 256,
+          "height": 256,
+          "format_code": "0x4",
+          "format_name": "RGB565",
+          "png_path": "output/models/textures/body_00.png"
+        },
+        {
+          "name": "body_01",
+          "grp_file_id": 66,
+          "grp_index": 65,
+          "width": 128,
+          "height": 128,
+          "format_code": "0xe",
+          "format_name": "CMPR",
+          "png_path": "output/models/textures/body_01.png"
+        },
+        {
+          "name": "foot_00",
+          "grp_file_id": 66,
+          "grp_index": 65,
+          "width": 128,
+          "height": 128,
+          "format_code": "0xe",
+          "format_name": "CMPR",
+          "png_path": "output/models/textures/foot_00.png"
+        },
+        {
+          "name": "mark_00",
+          "grp_file_id": 66,
+          "grp_index": 65,
+          "width": 32,
+          "height": 64,
+          "format_code": "0xe",
+          "format_name": "CMPR",
+          "png_path": "output/models/textures/mark_00.png"
+        },
+        {
+          "name": "sock_00",
+          "grp_file_id": 66,
+          "grp_index": 65,
+          "width": 128,
+          "height": 128,
+          "format_code": "0xe",
+          "format_name": "CMPR",
+          "png_path": "output/models/textures/sock_00.png"
+        },
+        {
+          "name": "symb_00",
+          "grp_file_id": 66,
+          "grp_index": 65,
+          "width": 64,
+          "height": 128,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/symb_00.png"
+        },
+        {
+          "name": "hada_00",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 128,
+          "height": 128,
+          "format_code": "0xe",
+          "format_name": "CMPR",
+          "png_path": "output/models/textures/hada_00.png"
+        },
+        {
+          "name": "numb_001",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_001.png"
+        },
+        {
+          "name": "numb_002",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_002.png"
+        },
+        {
+          "name": "numb_003",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_003.png"
+        },
+        {
+          "name": "numb_004",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_004.png"
+        },
+        {
+          "name": "numb_005",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_005.png"
+        },
+        {
+          "name": "numb_006",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_006.png"
+        },
+        {
+          "name": "numb_007",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_007.png"
+        },
+        {
+          "name": "numb_008",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_008.png"
+        },
+        {
+          "name": "numb_009",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_009.png"
+        },
+        {
+          "name": "numb_010",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_010.png"
+        },
+        {
+          "name": "numb_011",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_011.png"
+        },
+        {
+          "name": "numb_012",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_012.png"
+        },
+        {
+          "name": "numb_013",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_013.png"
+        },
+        {
+          "name": "numb_014",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_014.png"
+        },
+        {
+          "name": "numb_015",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_015.png"
+        },
+        {
+          "name": "numb_016",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_016.png"
+        },
+        {
+          "name": "numb_017",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_017.png"
+        },
+        {
+          "name": "numb_018",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_018.png"
+        },
+        {
+          "name": "numb_019",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_019.png"
+        },
+        {
+          "name": "numb_020",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_020.png"
+        },
+        {
+          "name": "numb_021",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_021.png"
+        },
+        {
+          "name": "numb_022",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_022.png"
+        },
+        {
+          "name": "numb_023",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_023.png"
+        },
+        {
+          "name": "numb_024",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_024.png"
+        },
+        {
+          "name": "numb_025",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_025.png"
+        },
+        {
+          "name": "numb_026",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_026.png"
+        },
+        {
+          "name": "numb_027",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_027.png"
+        },
+        {
+          "name": "numb_028",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_028.png"
+        },
+        {
+          "name": "numb_029",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_029.png"
+        },
+        {
+          "name": "numb_030",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_030.png"
+        },
+        {
+          "name": "numb_078",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_078.png"
+        },
+        {
+          "name": "numb_096",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_096.png"
+        },
+        {
+          "name": "numb_097",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_097.png"
+        },
+        {
+          "name": "numb_098",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_098.png"
+        },
+        {
+          "name": "numb_099",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x2",
+          "format_name": "IA4",
+          "png_path": "output/models/textures/numb_099.png"
+        },
+        {
+          "name": "_falloff",
+          "grp_file_id": 3827,
+          "grp_index": 3826,
+          "width": 64,
+          "height": 64,
+          "format_code": "0x1",
+          "format_name": "I8",
+          "png_path": "output/models/textures/_falloff.png"
+        }
+      ]
+    },
+    {
+      "asset_key": "endo_mamoru",
+      "description": "Endo Mamoru Completo (Corpo RAI_GKH_CHIBI_00 + Cabeça 0001_endo acoplada ao osso head)",
+      "head_attach_bone": "head",
+      "head_bone_translation": [
+        0.0,
+        0.9382959604263306,
+        0.0
+      ],
+      "submesh_count": 9,
+      "exported_vertices": 11550,
+      "exported_triangles": 3850,
+      "obj_file": "output/models/endo_mamoru.obj",
+      "mtl_file": "output/models/endo_mamoru.mtl"
+    }
+  ]
+}

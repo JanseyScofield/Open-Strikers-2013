@@ -1,0 +1,9 @@
+# Gerado por scripts/extract_models.py (Inazuma Eleven Strikers 2013)
+
+newmtl all_00
+Ka 1.0000 1.0000 1.0000
+Kd 1.0000 1.0000 1.0000
+Ks 0.0000 0.0000 0.0000
+d 1.0
+illum 1
+map_Kd textures/face_0001.png
