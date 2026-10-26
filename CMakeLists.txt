@@ -37,6 +37,8 @@ add_library(strikers_engine_core STATIC
     src/core/character.cpp
     src/loader/character_loader.cpp
     src/physics/kinematic_body.cpp
+    src/physics/ball.cpp
+    src/gameplay/duel_system.cpp
     src/render/window.cpp
     src/render/camera.cpp
     src/render/debug_renderer.cpp

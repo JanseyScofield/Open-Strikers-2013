@@ -1,6 +1,7 @@
 #ifndef STRIKERS_RENDER_DEBUG_RENDERER_HPP_
 #define STRIKERS_RENDER_DEBUG_RENDERER_HPP_
 
+#include "physics/ball.hpp"
 #include "physics/kinematic_body.hpp"
 
 namespace strikers::render {
@@ -45,6 +46,11 @@ public:
         const physics::KinematicBody& body,
         const ColorRGBA& primary_color = {1.0f, 0.72f, 0.10f, 1.0f}
     ) const noexcept;
+
+    /**
+     * Renderiza a bola no espaço 3D com padrão visual esférico e sombra projetada no gramado.
+     */
+    void RenderBall(const physics::Ball& ball) const noexcept;
 
 private:
     static void DrawGroundRectOutline(float x_min, float z_min, float x_max, float z_max, float y) noexcept;

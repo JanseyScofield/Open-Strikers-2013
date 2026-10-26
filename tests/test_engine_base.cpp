@@ -1,8 +1,10 @@
 #include "core/character.hpp"
+#include "gameplay/duel_system.hpp"
 #include "input/config_loader.hpp"
 #include "input/input_manager.hpp"
 #include "input/input_state.hpp"
 #include "loader/character_loader.hpp"
+#include "physics/ball.hpp"
 #include "physics/kinematic_body.hpp"
 #include "render/camera.hpp"
 
@@ -275,7 +277,7 @@ int main() {
         // ------------------------------------------------------------------
         // Etapa E: Verificação Determinística de Cinemática e Limites de Campo
         // ------------------------------------------------------------------
-        std::cout << "\n[4/4] Verificando cinematica (KinematicBody) e limites do gramado (105m x 68m)...\n";
+        std::cout << "\n[4/6] Verificando cinematica (KinematicBody) e limites do gramado (105m x 68m)...\n";
         strikers::physics::KinematicBody endo_body({0.0f, 0.0f, 0.0f}, 20);
         constexpr float kDt = 1.0f / 60.0f;
         for (int i = 0; i < 600; ++i) {
@@ -289,7 +291,115 @@ int main() {
             throw std::runtime_error("Falha no clamping de limites do gramado (105m x 68m).");
         }
 
-        std::cout << "\n[SUCESSO] Todos os testes de dominio, cinematica e entrada SDL2 passaram sem erros!\n";
+        // ------------------------------------------------------------------
+        // Etapa F: Verificação da Física da Bola (Ball)
+        // ------------------------------------------------------------------
+        std::cout << "\n[5/6] Verificando fisica, estados e quique da bola (Ball)...\n";
+        strikers::physics::Ball ball({0.0f, 2.5f, 0.0f});
+        if (!ball.IsFree()) {
+            throw std::runtime_error("Bola inicial deve comecar no estado Free.");
+        }
+        // Simula queda livre com quique
+        for (int i = 0; i < 60; ++i) {
+            ball.Update(kDt);
+        }
+        if (ball.GetPosition().y < strikers::physics::Ball::kRadius) {
+            throw std::runtime_error("Bola afundou abaixo do raio minimo de contato com o solo.");
+        }
+
+        // Simula posse, passe (com cooldown de re-captura) e desprendimento em chute
+        ball.AttachToPlayer(1, {10.0f, 0.0f, 5.0f}, {1.0f, 0.0f, 0.0f});
+        if (!ball.IsPossessed() || ball.GetPossessorId() != 1) {
+            throw std::runtime_error("Falha ao associar posse da bola ao jogador.");
+        }
+        ball.Pass({1.0f, 0.0f, 0.0f}, 18.0f);
+        if (!ball.IsFree() || ball.CanBePickedUp()) {
+            throw std::runtime_error("Bola apos passe deve estar Free mas com cooldown de re-captura ativo.");
+        }
+        for (int i = 0; i < 30; ++i) {
+            ball.Update(kDt);
+        }
+        if (!ball.CanBePickedUp()) {
+            throw std::runtime_error("Cooldown de re-captura da bola deve expirar apos 0.35s.");
+        }
+        ball.AttachToPlayer(1, {15.0f, 0.0f, 5.0f}, {1.0f, 0.0f, 0.0f});
+        ball.Shoot({52.5f, 1.2f, 0.0f}, 25.0f, 0.5f);
+        if (!ball.IsInFlight()) {
+            throw std::runtime_error("Bola deve estar no estado InFlight apos chute.");
+        }
+
+        // ------------------------------------------------------------------
+        // Etapa G: Verificação das Fórmulas de Duelo (DuelSystem)
+        // ------------------------------------------------------------------
+        std::cout << "\n[6/6] Verificando formulas de confronto e resolucao (specs/BATTLE_FORMULAS.md)...\n";
+        strikers::gameplay::DuelSystem duel_sys(20130920u);
+
+        // 1. Ciclo Elemental: Floresta(1) > Vento(0) > Terra(3) > Fogo(2) > Floresta(1)
+        using strikers::gameplay::BattleElement;
+        if (strikers::gameplay::DuelSystem::CompareElements(BattleElement::Wood, BattleElement::Wind) != +1 ||
+            strikers::gameplay::DuelSystem::CompareElements(BattleElement::Wind, BattleElement::Mountain) != +1 ||
+            strikers::gameplay::DuelSystem::CompareElements(BattleElement::Mountain, BattleElement::Fire) != +1 ||
+            strikers::gameplay::DuelSystem::CompareElements(BattleElement::Fire, BattleElement::Wood) != +1 ||
+            strikers::gameplay::DuelSystem::CompareElements(BattleElement::Wind, BattleElement::Wood) != -1 ||
+            strikers::gameplay::DuelSystem::CompareElements(BattleElement::Neutral, BattleElement::Fire) != 0) {
+            throw std::runtime_error("Falha na matriz de comparacao elemental.");
+        }
+
+        // 2. Chute vs Goleiro com dados reais de catálogo
+        const auto* gouenji_char = catalog.FindCharacterById(23); // Gouenji (Fire, FW, Kick 30)
+        const auto* endo_char    = catalog.FindCharacterById(1);  // Endo (Mountain, GK, Catch 30)
+        if (!gouenji_char || !endo_char) {
+            throw std::runtime_error("Falha ao carregar Gouenji ou Endo para teste de duelo.");
+        }
+
+        auto gouenji_view = strikers::gameplay::PlayerBattleView::FromCharacter(*gouenji_char);
+        auto endo_view    = strikers::gameplay::PlayerBattleView::FromCharacter(*endo_char);
+
+        const auto* fire_tornado_tech = catalog.FindHissatsuById(337); // Fire Tornado (Lv1, Fire, Power 40)
+        const auto* god_hand_tech     = catalog.FindHissatsuById(95);  // God Hand (Lv1, Mountain, Power 30)
+
+        auto fire_tornado_param = strikers::gameplay::WazaBattleParam::FromHissatsu(*fire_tornado_tech);
+        auto god_hand_param     = strikers::gameplay::WazaBattleParam::FromHissatsu(*god_hand_tech);
+
+        const int shoot_power = duel_sys.ComputeShootPower(
+            gouenji_view,
+            &fire_tornado_param,
+            0.9f,  // Carga máxima (+20)
+            18.0f, // Distância ao gol (18m <= 25m, sem penalidade)
+            18.0f  // Distância ao GK (à queima roupa)
+        );
+
+        auto defense_res = duel_sys.ResolveShotVsGoalkeeper(
+            gouenji_view,
+            &fire_tornado_param,
+            shoot_power,
+            endo_view,
+            &god_hand_param,
+            0.9f,
+            true
+        );
+
+        std::cout << "  - Chute de Gouenji (Fire Tornado) : P_chute=" << shoot_power << "\n"
+                  << "  - Defesa de Endo (God Hand)       : P_def=" << defense_res.defense_power << "\n"
+                  << "  - Resultado da Finalizacao        : " << defense_res.summary << "\n";
+
+        if (shoot_power <= 0 || defense_res.defense_power <= 0) {
+            throw std::runtime_error("Poderes calculados de chute/defesa devem ser estritamente positivos.");
+        }
+
+        // 3. Duelo terrestre 1v1 e Hissatsu Command Battle
+        auto tackle_res = duel_sys.ResolveNormalTackle(gouenji_view, endo_view);
+        std::cout << "  - Duelo Terrestre 1v1 (Gouenji vs Endo) : " << tackle_res.summary << "\n";
+
+        if (strikers::gameplay::DuelSystem::GetEffectiveStat(gouenji_view, strikers::gameplay::StatIndex::Kick) != gouenji_view.kick) {
+            throw std::runtime_error("Falha em DuelSystem::GetEffectiveStat.");
+        }
+        const int cmd_battle = strikers::gameplay::DuelSystem::ResolveHissatsuCommandBattle(
+            gouenji_view, &fire_tornado_param, endo_view, &god_hand_param
+        );
+        std::cout << "  - Hissatsu Command Battle               : resultado=" << cmd_battle << "\n";
+
+        std::cout << "\n[SUCESSO] Todos os testes de dominio, cinematica, bola e formulas de combate passaram!\n";
         return EXIT_SUCCESS;
 
     } catch (const std::exception& ex) {

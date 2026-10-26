@@ -1,6 +1,7 @@
 #include "render/debug_renderer.hpp"
 
 #include <GL/gl.h>
+#include <algorithm>
 #include <cmath>
 
 namespace strikers::render {
@@ -294,6 +295,69 @@ void DebugRenderer::RenderAthlete(
     glVertex3f(0.0f, 1.15f, 0.0f);
     glVertex3f(1.65f, 1.15f, 0.0f);
     glEnd();
+
+    glPopMatrix();
+}
+
+void DebugRenderer::RenderBall(const physics::Ball& ball) const noexcept {
+    const physics::Vec3& pos = ball.GetPosition();
+    const float r = physics::Ball::kRadius;
+
+    // 1. Sombra projetada no gramado (escala e esmaece conforme a altura da bola)
+    const float shadow_scale = std::clamp(1.0f - (pos.y - r) * 0.15f, 0.35f, 1.0f);
+    const float shadow_alpha = std::clamp(0.55f - (pos.y - r) * 0.08f, 0.12f, 0.55f);
+    glColor4f(0.04f, 0.08f, 0.04f, shadow_alpha);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(pos.x, 0.015f, pos.z);
+    constexpr int kShadowSegments = 24;
+    for (int i = 0; i <= kShadowSegments; ++i) {
+        const float angle = (2.0f * kPi * static_cast<float>(i)) / static_cast<float>(kShadowSegments);
+        glVertex3f(
+            pos.x + std::cos(angle) * (r * 1.35f * shadow_scale),
+            0.015f,
+            pos.z + std::sin(angle) * (r * 1.35f * shadow_scale)
+        );
+    }
+    glEnd();
+
+    // 2. Esfera 3D da bola com gomos e anéis (Inazuma ball / clássica branca e azul)
+    glPushMatrix();
+    glTranslatef(pos.x, pos.y, pos.z);
+
+    constexpr int kLats = 12;
+    constexpr int kLons = 16;
+    for (int i = 0; i < kLats; ++i) {
+        const float lat0 = kPi * (-0.5f + static_cast<float>(i) / static_cast<float>(kLats));
+        const float z0  = std::sin(lat0) * r;
+        const float zr0 = std::cos(lat0) * r;
+
+        const float lat1 = kPi * (-0.5f + static_cast<float>(i + 1) / static_cast<float>(kLats));
+        const float z1  = std::sin(lat1) * r;
+        const float zr1 = std::cos(lat1) * r;
+
+        glBegin(GL_QUAD_STRIP);
+        for (int j = 0; j <= kLons; ++j) {
+            const float lng = 2.0f * kPi * static_cast<float>(j) / static_cast<float>(kLons);
+            const float x = std::cos(lng);
+            const float y = std::sin(lng);
+
+            // Alternância de cores dos gomos (branco perolado e azul escuro)
+            if ((i + j) % 2 == 0) {
+                glColor4f(0.98f, 0.98f, 1.0f, 1.0f);
+            } else {
+                glColor4f(0.12f, 0.28f, 0.65f, 1.0f);
+            }
+
+            glVertex3f(x * zr0, z0, y * zr0);
+            glVertex3f(x * zr1, z1, y * zr1);
+        }
+        glEnd();
+    }
+
+    // Contorno sutil da bola para contraste perfeito no gramado
+    glLineWidth(1.6f);
+    glColor4f(0.10f, 0.15f, 0.25f, 0.90f);
+    DrawGroundCircle(0.0f, 0.0f, r * 1.02f, 24, 0.0f);
 
     glPopMatrix();
 }
